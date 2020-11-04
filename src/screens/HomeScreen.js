@@ -6,12 +6,19 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
 } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+
 const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.top}>
         <Text style={styles.topText}>Subscripto</Text>
       </View>
+
+      <View style={styles.searchBox}>
+        <TextInput style={styles.searchBar} placeholder="Hello World"></TextInput>
+      </View>
+
 
       {/* Items */}
       <View style={styles.items}>
@@ -35,8 +42,8 @@ const styles = StyleSheet.create({
   top: {
     flex: 1,
     backgroundColor: "#63A69A",
-    borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
   },
 
   topText: {
@@ -44,6 +51,18 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: 'center',
     marginTop: '10%',
+  },
+
+  searchBox:{
+    marginTop:-25,
+  },
+
+  searchBar:{
+    width:"70%",
+    marginLeft:'auto',
+    marginRight:'auto',
+    borderRadius:10,
+    backgroundColor:"#fff",
   },
 
   items: {
@@ -55,10 +74,10 @@ const styles = StyleSheet.create({
     bottom:0,
     right:0,
     backgroundColor:"#63A69A",
-    color:"white",
-    padding:30,
     borderTopLeftRadius:80,
+    padding:30,
     fontSize:20,
+    color:"white",
   }
 
 });
