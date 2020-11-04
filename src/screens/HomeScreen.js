@@ -14,12 +14,12 @@ import Item from '../components/Item';
 const HomeScreen = ({ navigation }) => {
 
     const [items, setItems] = useState([
-        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
-        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
-        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
-        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
-        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
-        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" }
+        { name: "Netflix odeme", amount: "12", billing_date: "11 may", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", billing_date: "11 may", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", billing_date: "11 may", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", billing_date: "11 may", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", billing_date: "11 may", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", billing_date: "11 may", billing_period: "week", color: "red" }
     ])
 
     return (
@@ -36,12 +36,12 @@ const HomeScreen = ({ navigation }) => {
             {/* Items */}
             <View style={styles.items}>
                 <Text style={styles.itemsHeader}>Subscriptions</Text>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                 {items.map((item) =>
                     <Item
                         name={item.name}
                         amount={item.amount}
-                        biling_data={item.biling_data}
+                        billing_date={item.billing_date}
                         billing_period={item.billing_period}
                         color={item.color}
                     />
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         flex: 2,
         margin:20,
         marginTop:10,
+        marginBottom:0,
 
     },
 
