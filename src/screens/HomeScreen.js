@@ -1,84 +1,116 @@
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  SafeAreaView,
+    View,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    SafeAreaView,
+    TextInput
 } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
+import { color } from 'react-native-reanimated';
+import Item from '../components/Item';
 
 const HomeScreen = ({ navigation }) => {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.top}>
-        <Text style={styles.topText}>Subscripto</Text>
-      </View>
 
-      <View style={styles.searchBox}>
-        <TextInput style={styles.searchBar} placeholder="Hello World"></TextInput>
-      </View>
+    const [items, setItems] = useState([
+        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" },
+        { name: "Netflix odeme", amount: "12", biling_data: "2020-04-11", billing_period: "week", color: "red" }
+    ])
+
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.top}>
+                <Text style={styles.topText}>Subscripto</Text>
+            </View>
+
+            <View style={styles.searchBox}>
+                <TextInput style={styles.searchBar} placeholder="Hello World"></TextInput>
+            </View>
 
 
-      {/* Items */}
-      <View style={styles.items}>
+            {/* Items */}
+            <View style={styles.items}>
+                <Text style={styles.itemsHeader}>Subscriptions</Text>
+                <ScrollView>
+                {items.map((item) =>
+                    <Item
+                        name={item.name}
+                        amount={item.amount}
+                        biling_data={item.biling_data}
+                        billing_period={item.billing_period}
+                        color={item.color}
+                    />
+                )}
+                </ScrollView>
+            </View>
 
-      </View>
 
 
-
-      <TouchableWithoutFeedback
-        onPress={() => {
-          navigation.navigate('Add');
-        }}
-      >
-        <Text style={styles.addButton}>Add</Text>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
-  );
+            <TouchableWithoutFeedback
+                onPress={() => {
+                    navigation.navigate('Add');
+                }}
+            >
+                <Text style={styles.addButton}>Add</Text>
+            </TouchableWithoutFeedback>
+        </SafeAreaView>
+    );
 };
 
 const styles = StyleSheet.create({
-  top: {
-    flex: 1,
-    backgroundColor: "#63A69A",
-    borderBottomEndRadius: 25,
-    borderBottomStartRadius: 25,
-  },
+    top: {
+        flex: 1,
+        backgroundColor: "#63A69A",
+        borderBottomEndRadius: 25,
+        borderBottomStartRadius: 25,
+    },
 
-  topText: {
-    fontSize: 40,
-    color: "white",
-    textAlign: 'center',
-    marginTop: '10%',
-  },
+    topText: {
+        fontSize: 40,
+        color: "white",
+        textAlign: 'center',
+        marginTop: '10%',
+    },
 
-  searchBox:{
-    marginTop:-25,
-  },
+    searchBox: {
+        marginTop: -25,
+    },
 
-  searchBar:{
-    width:"70%",
-    marginLeft:'auto',
-    marginRight:'auto',
-    borderRadius:10,
-    backgroundColor:"#fff",
-  },
+    searchBar: {
+        width: "70%",
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        borderRadius: 10,
+        backgroundColor: "#fff",
+    },
 
-  items: {
-    flex: 2
-  },
+    items: {
+        flex: 2,
+        margin:20,
+        marginTop:10,
 
-  addButton:{
-    position:'absolute',
-    bottom:0,
-    right:0,
-    backgroundColor:"#63A69A",
-    borderTopLeftRadius:80,
-    padding:30,
-    fontSize:20,
-    color:"white",
-  }
+    },
+
+    itemsHeader:{
+        fontSize:25,
+        fontWeight:'bold'
+    },
+
+    addButton: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        backgroundColor: "#63A69A",
+        borderTopLeftRadius: 80,
+        padding: 30,
+        fontSize: 20,
+        color: "white",
+    }
 
 });
 export default HomeScreen;
