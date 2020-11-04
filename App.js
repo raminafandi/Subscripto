@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Add" component={AddScreen} />
     </Stack.Navigator>
