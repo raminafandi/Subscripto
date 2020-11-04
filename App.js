@@ -4,22 +4,25 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import AddScreen from './src/screens/AddScreen';
+import DebugScreen from './src/screens/DebugScreen';
+import {WidgetContext, WidgetProvider} from './src/context/WidgetContext';
 
 const Stack = createStackNavigator();
 
-function MyStack() {
-  return (
-    <Stack.Navigator headerMode={'none'}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Add" component={AddScreen} />
-    </Stack.Navigator>
-  );
-}
+const MyStack = () => (
+  <Stack.Navigator headerMode={'none'}>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Debug" component={DebugScreen} />
+    <Stack.Screen name="Add" component={AddScreen} />
+  </Stack.Navigator>
+);
 
-export default function App() {
+export default React.memo(function App() {
   return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
+    <WidgetProvider>
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
+    </WidgetProvider>
   );
-}
+});
