@@ -6,6 +6,8 @@ import HomeScreen from './src/screens/HomeScreen';
 import AddScreen from './src/screens/AddScreen';
 import DebugScreen from './src/screens/DebugScreen';
 import {WidgetContext, WidgetProvider} from './src/context/WidgetContext';
+import {ThemeContext, ThemeProvider} from './src/context/ThemeContext';
+import {AppearanceProvider} from 'react-native-appearance';
 
 const Stack = createStackNavigator();
 
@@ -19,10 +21,14 @@ const MyStack = () => (
 
 export default React.memo(function App() {
   return (
-    <WidgetProvider>
-      <NavigationContainer>
-        <MyStack />
-      </NavigationContainer>
-    </WidgetProvider>
+    <AppearanceProvider>
+      <ThemeProvider>
+        <WidgetProvider>
+          <NavigationContainer>
+            <MyStack />
+          </NavigationContainer>
+        </WidgetProvider>
+      </ThemeProvider>
+    </AppearanceProvider>
   );
 });

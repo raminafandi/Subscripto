@@ -25,13 +25,42 @@ const DebugScreen = ({navigation}) => {
         <Button
           title="getElement"
           onPress={() => {
-            widgetContext.getWidgetById('');
+            widgetContext.getWidgetById(
+              '3d380758-ec08-615a-0bdf-75a58e581604501766938',
+            );
           }}
         />
         <Button
           title="createwidget"
           onPress={() => {
-            widgetContext.createWidget();
+            widgetContext.createWidget(
+              'test',
+              'test',
+              'test',
+              'test',
+              'test',
+              'test',
+              'test',
+              'test',
+              'test',
+            );
+          }}
+        />
+        <Button
+          title="updatewidget"
+          onPress={() => {
+            widgetContext.updateWidgetById(
+              'ca077cd8-0c99-6d16-6e69-aae73c341604587494440',
+              'pey',
+              'updated',
+              'updated',
+              'updated',
+              'updated',
+              'updated',
+              'updated',
+              'updated',
+              'updated',
+            );
           }}
         />
         <Button

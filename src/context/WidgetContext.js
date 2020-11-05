@@ -6,6 +6,8 @@ const WidgetContext = React.createContext({
   getWidgetById: () => {},
   createWidget: () => {},
   clearStorage: () => {},
+  updateWidgetById: () => {},
+  deleteWidgetById: () => {},
 });
 
 //   updateWidgetById: () => {},
@@ -55,15 +57,15 @@ const WidgetProvider = ({children, ...props}) => {
   };
 
   const createWidget = async (
-    name = 'test',
-    amount = 'test',
-    currency = 'test',
-    billingDate = 'test',
-    billingPeriod = 'test',
-    color = 'test',
-    description = 'test',
-    paymentMethod = 'test',
-    note = 'test',
+    name,
+    amount,
+    currency,
+    billingDate,
+    billingPeriod,
+    color,
+    description,
+    paymentMethod,
+    note,
   ) => {
     try {
       let id = guidGenerator();
@@ -92,6 +94,51 @@ const WidgetProvider = ({children, ...props}) => {
       alert('Failed to create data ');
     }
   };
+  const updateWidgetById = async (
+    id,
+    name,
+    amount,
+    currency,
+    billingDate,
+    billingPeriod,
+    color,
+    description,
+    paymentMethod,
+    note,
+  ) => {
+    try {
+      let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
+      for (var elem in arr) {
+        if (arr[elem].id === id) {
+          arr[elem].name = name;
+          arr[elem].amount = amount;
+          arr[elem].currency = currency;
+          arr[elem].billingDate = billingDate;
+          arr[elem].billingPeriod = billingPeriod;
+          arr[elem].color = color;
+          arr[elem].description = description;
+          arr[elem].paymentMethod = paymentMethod;
+          arr[elem].note = note;
+        }
+      }
+      console.log('elem', arr);
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      return arr;
+    } catch (e) {
+      alert('Failed to update data from storage');
+    }
+  };
+  const deleteWidgetById = async (idToRemove) => {
+    try {
+      let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY)).filter(
+        (item) => item.id !== idToRemove,
+      );
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      alert("You've deleted data from storage");
+    } catch (e) {
+      alert('Failed to delete data from storage');
+    }
+  };
   const clearStorage = async () => {
     try {
       await AsyncStorage.clear();
@@ -106,7 +153,9 @@ const WidgetProvider = ({children, ...props}) => {
       value={{
         getAllWidgets: getAllWidgets,
         getWidgetById: getWidgetById,
+        updateWidgetById: updateWidgetById,
         createWidget: createWidget,
+        deleteWidgetById: deleteWidgetById,
         clearStorage: clearStorage,
       }}>
       {children}
