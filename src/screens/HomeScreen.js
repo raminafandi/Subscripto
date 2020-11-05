@@ -8,10 +8,11 @@ import {
   TextInput,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {color} from 'react-native-reanimated';
 import Item from '../components/Item';
+import {useTheme} from '../context/ThemeContext';
 
 const HomeScreen = ({navigation}) => {
+  const {colors, isDark} = useTheme();
   const [items, setItems] = useState([
     {
       name: 'Netflix odeme',
@@ -58,7 +59,7 @@ const HomeScreen = ({navigation}) => {
   ]);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
       <View style={styles.top}>
         <Text style={styles.topText}>Subscripto</Text>
       </View>

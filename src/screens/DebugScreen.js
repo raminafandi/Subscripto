@@ -7,14 +7,20 @@ import {
   Button,
   StyleSheet,
   ScrollView,
+  Switch,
   SafeAreaView,
 } from 'react-native';
 import {WidgetContext} from '../context/WidgetContext';
+import {useTheme} from '../context/ThemeContext';
 
 const DebugScreen = ({navigation}) => {
+  const {setScheme, colors, isDark} = useTheme();
   const widgetContext = useContext(WidgetContext);
+  const toggleScheme = () => {
+    isDark ? setScheme('light') : setScheme('dark');
+  };
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
       <ScrollView style={styles.container}>
         <Button
           title="getAll"
@@ -69,6 +75,8 @@ const DebugScreen = ({navigation}) => {
             widgetContext.clearStorage();
           }}
         />
+        <Text style={{color: colors.text}}>Change theme</Text>
+        <Switch value={isDark} onValueChange={toggleScheme} />
       </ScrollView>
     </SafeAreaView>
   );
