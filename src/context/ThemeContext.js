@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import {useColorScheme} from 'react-native-appearance';
 import {lightColors, darkColors} from '../constants/colors';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ThemeContext = createContext({
   isDark: false,
@@ -9,10 +10,29 @@ const ThemeContext = createContext({
 });
 
 const ThemeProvider = ({children, ...props}) => {
-  const colorScheme = useColorScheme(); // getting system color
+  const STORAGE_KEY = '@theme';
+
+  const [colorScheme, setColorScheme] = useState(useColorScheme());
+
+  const getColor = async () => {
+    let cs = colorScheme;
+    if (
+      (await AsyncStorage.getItem(STORAGE_KEY)) === 'dark' ||
+      (await AsyncStorage.getItem(STORAGE_KEY)) === 'light'
+    ) {
+      cs = await AsyncStorage.getItem(STORAGE_KEY);
+    } else {
+      await AsyncStorage.setItem(STORAGE_KEY, cs);
+    }
+    return cs;
+  };
+
   const [isDark, setIsDark] = useState(colorScheme === 'dark');
 
   useEffect(() => {
+    getColor().then((cs) => {
+      setColorScheme(cs);
+    });
     setIsDark(colorScheme === 'dark');
   }, [colorScheme]);
 
@@ -20,7 +40,11 @@ const ThemeProvider = ({children, ...props}) => {
     isDark,
     colors: isDark ? darkColors : lightColors,
     // Overrides the isDark value will cause re-render inside the context.
-    setScheme: (scheme) => setIsDark(scheme === 'dark'),
+    setScheme: async (scheme) => {
+      setIsDark(scheme === 'dark');
+      console.log('scheme', scheme);
+      await AsyncStorage.setItem(STORAGE_KEY, scheme);
+    },
   };
 
   return (
