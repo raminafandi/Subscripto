@@ -60,7 +60,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
-      <View style={styles.top}>
+      <View style={[styles.top, {backgroundColor: colors.primary}]}>
         <Text style={styles.topText}>Subscripto</Text>
       </View>
 
@@ -76,6 +76,7 @@ const HomeScreen = ({navigation}) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {items.map((item) => (
             <Item
+              colorStyle={{backgroundColor: colors.widgetBackground}}
               name={item.name}
               amount={item.amount}
               billing_date={item.billing_date}
@@ -90,14 +91,19 @@ const HomeScreen = ({navigation}) => {
         onPress={() => {
           navigation.navigate('Debug');
         }}>
-        <Text style={styles.settingsButton}>Set</Text>
+        <Text
+          style={[styles.settingsButton, {backgroundColor: colors.primary}]}>
+          Set
+        </Text>
       </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback
         onPress={() => {
           navigation.navigate('Add');
         }}>
-        <Text style={styles.addButton}>Add</Text>
+        <Text style={[styles.addButton, {backgroundColor: colors.primary}]}>
+          Add
+        </Text>
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );
@@ -106,7 +112,6 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   top: {
     flex: 1,
-    backgroundColor: '#63A69A',
     borderBottomEndRadius: 25,
     borderBottomStartRadius: 25,
   },
@@ -146,7 +151,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: '#63A69A',
     borderTopLeftRadius: 80,
     padding: 30,
     fontSize: 20,
@@ -157,7 +161,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    backgroundColor: '#63A69A',
     borderTopRightRadius: 80,
     padding: 30,
     fontSize: 20,
