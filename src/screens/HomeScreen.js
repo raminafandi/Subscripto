@@ -66,13 +66,16 @@ const HomeScreen = ({navigation}) => {
 
       <View style={styles.searchBox}>
         <TextInput
-          style={styles.searchBar}
-          placeholder="Hello World"></TextInput>
+          style={[styles.searchBar, {backgroundColor: colors.widgetBackground}]}
+          placeholder="Hello World"
+          placeholderTextColor={colors.placeholderColor}></TextInput>
       </View>
 
       {/* Items */}
       <View style={styles.items}>
-        <Text style={styles.itemsHeader}>Subscriptions</Text>
+        <Text style={[styles.itemsHeader, {color: colors.text}]}>
+          Subscriptions
+        </Text>
         <ScrollView showsVerticalScrollIndicator={false}>
           {items.map((item) => (
             <Item
