@@ -8,6 +8,7 @@ import DebugScreen from './src/screens/DebugScreen';
 import {WidgetContext, WidgetProvider} from './src/context/WidgetContext';
 import {ThemeContext, ThemeProvider} from './src/context/ThemeContext';
 import {AppearanceProvider} from 'react-native-appearance';
+import AnimatedSplash from 'react-native-animated-splash-screen';
 
 const Stack = createStackNavigator();
 
@@ -20,15 +21,30 @@ const MyStack = () => (
 );
 
 export default React.memo(function App() {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
+  }, []);
   return (
-    <AppearanceProvider>
-      <ThemeProvider>
-        <WidgetProvider>
-          <NavigationContainer>
-            <MyStack />
-          </NavigationContainer>
-        </WidgetProvider>
-      </ThemeProvider>
-    </AppearanceProvider>
+    <AnimatedSplash
+      translucent={true}
+      isLoaded={isLoaded}
+      logoImage={require('./src/assets/logos/main.png')}
+      backgroundColor={'#262626'}
+      logoHeight={260}
+      logoWidth={260}>
+      <AppearanceProvider>
+        <ThemeProvider>
+          <WidgetProvider>
+            <NavigationContainer>
+              <MyStack screenProps={{}} />
+            </NavigationContainer>
+          </WidgetProvider>
+        </ThemeProvider>
+      </AppearanceProvider>
+    </AnimatedSplash>
   );
 });
