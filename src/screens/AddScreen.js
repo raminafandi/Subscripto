@@ -35,9 +35,9 @@ const AddScreen = ({ navigation }) => {
         
 
         if (!amountErr && !nameErr && !dateErr && !periodErr) {
-            widgetContext.createWidget(name, amount, currency, billing_date,
-                billing_period, color, description, pmethod, note)
-            // navigation.navigate('Home');
+            widgetContext.createWidget(name.field, amount.field, currency.field, billing_date.field,
+                billing_period.field, color.field, description.field, pmethod.field, note.field)
+            navigation.navigate('Home');
         }
 
     }
