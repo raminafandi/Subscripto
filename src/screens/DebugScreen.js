@@ -12,6 +12,11 @@ import {
 } from 'react-native';
 import {WidgetContext} from '../context/WidgetContext';
 import {useTheme} from '../context/ThemeContext';
+import {
+  handlelocalNotification,
+  handleCancel,
+  handlelocalNotificationScheduled,
+} from '../services/notificationHandlers';
 
 const DebugScreen = ({navigation}) => {
   const {setScheme, colors, isDark} = useTheme();
@@ -19,6 +24,7 @@ const DebugScreen = ({navigation}) => {
   const toggleScheme = () => {
     isDark ? setScheme('light') : setScheme('dark');
   };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
       <ScrollView style={styles.container}>
@@ -74,6 +80,18 @@ const DebugScreen = ({navigation}) => {
           onPress={() => {
             widgetContext.clearStorage();
           }}
+        />
+        <Button
+          title="Instant Notification"
+          onPress={() => handlelocalNotification('Hi', 'Hello')}
+        />
+        <Button
+          title="Notification after 5 sec scheduled"
+          onPress={() => handlelocalNotificationScheduled('Hi', 'Hello')}
+        />
+        <Button
+          title="Cancel all notifications"
+          onPress={() => handleCancel()}
         />
         <Text style={{color: colors.text}}>Change theme</Text>
         <Switch value={isDark} onValueChange={toggleScheme} />
