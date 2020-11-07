@@ -19,6 +19,9 @@ const AddScreen = ({ navigation }) => {
     const [billing_date, setDate] = useState({ field: "", error: "" })
     const [billing_period, setPeriod] = useState({ field: "", error: "" })
     const [color, setColor] = useState({ field: "red", error: "" })
+    const [pmethod,setMethod] = useState({field:'',error:''})
+    const [currency,setCurrency] = useState({field:'',error:''})
+    const [note,setNote] = useState({field:'',error:''})
 
     const handleForm = () => {
         const amountErr = validateForm('amount', amount.field)
@@ -29,10 +32,13 @@ const AddScreen = ({ navigation }) => {
         setDate({ error: dateErr })
         const periodErr = validateForm('period', billing_period.field)
         setPeriod({ error: periodErr })
+        
 
-        if (!amountErr && !nameErr && !dateErr && !periodErr)
-            widgetContext.createWidget(name,amount,"currency",billing_date,
-                billing_period,color,description,"paymentMethod", "note")
+        if (!amountErr && !nameErr && !dateErr && !periodErr) {
+            widgetContext.createWidget(name, amount, currency, billing_date,
+                billing_period, color, description, pmethod, note)
+            // navigation.navigate('Home');
+        }
 
     }
 
@@ -46,13 +52,18 @@ const AddScreen = ({ navigation }) => {
                     <Input name="Billing period" placeholder="Monthly" setFunction={setPeriod} error={billing_period.error} />
                     <Input name="Description (optional)" placeholder="Premium subs" setFunction={setDesc} />
                     <Input name="Color (optional)" placeholder="Blue" setFunction={setColor} />
+                    <Input name="Currency (optional)" placeholder="Blue" setFunction={setCurrency} />
+                    <Input name="Payment Method (optional)" placeholder="Blue" setFunction={setMethod} />
+                    <Input name="Note (optional)" placeholder="Blue" setFunction={setNote} />
                 </ScrollView>
 
             </View>
 
             <View style={styles.buttonCantainer}>
                 <TouchableWithoutFeedback onPress={handleForm}>
-                    <Text style={styles.addButton}>Add</Text>
+                    <View>
+                        <Text style={styles.addButton}>Add</Text>
+                    </View>
                 </TouchableWithoutFeedback>
             </View>
         </SafeAreaView>

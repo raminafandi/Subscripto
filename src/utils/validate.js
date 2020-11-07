@@ -9,4 +9,6 @@ export default function validateForm(fieldName, value) {
         if(count > 2)
             return validation[fieldName].other.message
     }
+
+    return false
 }
