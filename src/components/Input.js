@@ -5,10 +5,12 @@ const Input = ({ colorStyle, ...props }) => {
     return (
         <View>
             <Text style={styles.label}>{props.name}</Text>
+            <Text style={styles.error}>{props.error ? props.error:""}</Text>
             <TextInput
+                keyboardType={props.type}
                 style={styles.input}
                 placeholder={props.placeholder}
-                onChangeText={(val)=>{props.setFunction(val)}}
+                onChangeText={(val)=>{props.setFunction({field:val})}}
             />
         </View>
     );
@@ -31,6 +33,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#fff',
     },
+    
+    error:{
+        color:'#fff',
+        marginLeft:'10%',
+    }
 
 });
 export default Input;

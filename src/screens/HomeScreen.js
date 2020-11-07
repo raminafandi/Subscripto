@@ -6,8 +6,8 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
   TextInput,
+  ScrollView
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import Item from '../components/Item';
 import { useTheme } from '../context/ThemeContext';
 
