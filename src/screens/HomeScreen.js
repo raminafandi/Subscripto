@@ -1,147 +1,131 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  SafeAreaView,
-  TextInput,
-  ScrollView,
-  StatusBar
+    View,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    SafeAreaView,
+    TextInput,
+    ScrollView,
+    StatusBar
 } from 'react-native';
 import Item from '../components/Item';
 import { WidgetContext } from '../context/WidgetContext'
 import { useTheme } from '../context/ThemeContext';
+import Icon from 'react-native-vector-icons/Entypo'
 
 const HomeScreen = ({ navigation }) => {
-  const { colors, isDark } = useTheme();
-  const widgetContext = useContext(WidgetContext)
-  const [items, setItems] = useState([])
+    const { colors, isDark } = useTheme();
+    const widgetContext = useContext(WidgetContext)
+    const [items, setItems] = useState([])
 
-  useEffect(() => {
-    widgetContext.getAllWidgets().then((items) => setItems(items))
-  }, [items])
+    useEffect(() => {
+        widgetContext.getAllWidgets().then((items) => setItems(items))
+    }, [items])
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#00BCD4" translucent={true} />
-      <View style={[styles.top, { backgroundColor: colors.primary }]}>
-        <Text style={styles.topText}>Subscripto</Text>
-        <TextInput
-          style={[styles.searchBar, { backgroundColor: colors.widgetBackground }]}
-          placeholder="Hello World"
-          placeholderTextColor={colors.placeholderColor}></TextInput>
+    return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.background, position: 'relative' }}>
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor={colors.primary} translucent={true} />
 
-        <TouchableWithoutFeedback
-          onPress={() => {
-            navigation.navigate('Add');
-          }}>
-          <Text style={[styles.addButton, { backgroundColor: colors.primary, borderColor: colors.background }]}>
-            Add
-          </Text>
-        </TouchableWithoutFeedback>
-
-      </View>
+            {/* Top */}
+            <View style={[styles.top, { backgroundColor: colors.primary }]}>
+                <Text style={styles.topText}>Subscripto</Text>
+            </View>
 
 
-      {/* Items */}
-      <View style={styles.items}>
-        <Text style={[styles.itemsHeader, { color: colors.text }]}>
-          Subscriptions
-        </Text>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {items.map((item) => (
-            <Item
-              colorStyle={{ backgroundColor: colors.widgetBackground }}
-              name={item.name}
-              amount={item.amount}
-              billing_date={item.billingDate}
-              billing_period={item.billingPeriod}
-              color={item.color}
-            />
-          ))}
-        </ScrollView>
-      </View>
+            {/* Items */}
+            <View style={[styles.items,{backgroundColor:colors.background}]}>
+                <Text style={[styles.itemsHeader, { color: colors.text }]}>
+                    Subscriptions
+                </Text>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    {items.map((item,i) => (
+                        <Item
+                            lastChild = {items.length-1 == i ? true:false}
+                            colorStyle={{ backgroundColor: colors.widgetBackground }}
+                            name={item.name}
+                            amount={item.amount}
+                            billing_date={item.billingDate}
+                            billing_period={item.billingPeriod}
+                            color={item.color}
+                        />
+                    ))}
+                </ScrollView>
+            </View>
 
-      <TouchableWithoutFeedback
-        onPress={() => {
-          navigation.navigate('Debug');
-        }}>
-        <Text
-          style={[styles.settingsButton, { backgroundColor: colors.primary }]}>
-          Set
-        </Text>
-      </TouchableWithoutFeedback>
+            {/* Buttons */}
+            <TouchableWithoutFeedback
+                onPress={() => {
+                    navigation.navigate('Add');
+                }}>
+                <View style={[styles.addButton,{backgroundColor: colors.primary}]}>
+                    <Icon name="plus" size={40} color='#fff' />
+                </View>
+            </TouchableWithoutFeedback>
 
+            <TouchableWithoutFeedback
+                onPress={() => {
+                    navigation.navigate('Debug');
+                }}>
+                <Text
+                    style={[styles.settingsButton, { backgroundColor: colors.primary }]}>
+                    Set
+                </Text>
+            </TouchableWithoutFeedback>
 
-    </SafeAreaView>
-  );
+        </SafeAreaView>
+    );
 };
 
 const styles = StyleSheet.create({
-  top: {
-    flex: 2,
-    borderBottomEndRadius: 25,
-    borderBottomStartRadius: 25,
-  },
+    top: {
+        flex: 2,
+        zIndex: -1
+    },
 
-  topText: {
-    position: 'relative',
-    fontSize: 40,
-    color: 'white',
-    textAlign: 'center',
-    marginTop: '10%',
-  },
+    topText: {
+        position: 'relative',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 40,
+        color: 'white',
+        marginTop: '10%',
+    },
 
+    items: {
+        flex: 5,
+        marginTop: 10,
+        borderTopLeftRadius: 50,
+        marginTop: -100,
+    },
 
-  searchBar: {
-    opacity: 0,
-    position: 'absolute',
-    alignSelf: 'center',
-    textAlign: 'center',
-    bottom: 70,
-    width: '70%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-  },
+    itemsHeader: {
+        marginLeft: 30,
+        marginTop: 30,
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
 
-  items: {
-    flex: 5,
-    margin: 20,
-    marginTop: 10,
-    marginBottom: 0,
-  },
+    addButton: {
+        width: 65,
+        height: 65,
+        position: 'absolute',
+        bottom: 15,
+        right: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 50,
+    },
 
-  itemsHeader: {
-    marginTop: 20,
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-
-  addButton: {
-    position: 'absolute',
-    bottom: -40,
-    width: 80,
-    height: 80,
-    padding: 20,
-    fontSize: 20,
-    alignSelf: 'center',
-    textAlign: 'center',
-    color: 'white',
-    borderRadius: 40,
-    borderWidth: 10,
-  },
-
-  settingsButton: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    borderTopRightRadius: 80,
-    padding: 30,
-    fontSize: 20,
-    color: 'white',
-  },
+    settingsButton: {
+        opacity: 0,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        borderTopRightRadius: 80,
+        padding: 30,
+        fontSize: 20,
+        color: 'white',
+    },
 });
 export default HomeScreen;
