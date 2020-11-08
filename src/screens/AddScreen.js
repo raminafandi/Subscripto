@@ -20,7 +20,7 @@ const AddScreen = ({ navigation }) => {
     const [billing_period, setPeriod] = useState({ field: "", error: "" })
     const [color, setColor] = useState({ field: "red", error: "" })
     const [pmethod,setMethod] = useState({field:'',error:''})
-    const [currency,setCurrency] = useState({field:'',error:''})
+    const [currency,setCurrency] = useState({field:'$',error:''})
     const [note,setNote] = useState({field:'',error:''})
 
     const handleForm = () => {
@@ -35,7 +35,7 @@ const AddScreen = ({ navigation }) => {
         
 
         if (!amountErr && !nameErr && !dateErr && !periodErr) {
-            widgetContext.createWidget(name.field, amount.field, currency.field, billing_date.field,
+            widgetContext.createWidget(name.field, Number(amount.field), currency.field, billing_date.field,
                 billing_period.field, color.field, description.field, pmethod.field, note.field)
             navigation.navigate('Home');
         }
@@ -54,7 +54,6 @@ const AddScreen = ({ navigation }) => {
                     <Input name="Color (optional)" placeholder="Blue" setFunction={setColor} />
                     <Input name="Currency (optional)" placeholder="Blue" setFunction={setCurrency} />
                     <Input name="Payment Method (optional)" placeholder="Blue" setFunction={setMethod} />
-                    <Input name="Note (optional)" placeholder="Blue" setFunction={setNote} />
                 </ScrollView>
 
             </View>
