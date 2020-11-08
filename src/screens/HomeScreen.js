@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,16 +6,20 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
   TextInput,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import Item from '../components/Item';
-import {WidgetContext} from '../context/WidgetContext'
+import { WidgetContext } from '../context/WidgetContext'
 import { useTheme } from '../context/ThemeContext';
 
 const HomeScreen = ({ navigation }) => {
   const { colors, isDark } = useTheme();
   const widgetContext = useContext(WidgetContext)
-  const [items, setItems] = useState([widgetContext.getAllWidgets()]);
+  const [items,setItems] = useState([])
+
+  useEffect(()=>{
+    widgetContext.getAllWidgets().then((items)=>setItems(items))
+  },[items])
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
@@ -44,17 +48,16 @@ const HomeScreen = ({ navigation }) => {
           Subscriptions
         </Text>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {Array(widgetContext.getAllWidgets()).map((item) => (
-            console.log(widgetContext.getAllWidgets())
-            // <Item
-            //   colorStyle={{ backgroundColor: colors.widgetBackground }}
-            //   name={item.name}
-            //   amount={item.amount}
-            //   billing_date={item.billingDate}
-            //   billing_period={item.billingPeriod}
-            //   color={item.color}
-            // />
-          ))}
+          {items.map((item) => (
+              <Item
+                colorStyle={{ backgroundColor: colors.widgetBackground }}
+                name={item.name}
+                amount={item.amount}
+                billing_date={item.billingDate}
+                billing_period={item.billingPeriod}
+                color={item.color}
+              />
+            ))}
         </ScrollView>
       </View>
 
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
   },
 
   topText: {
-    position:'relative',
+    position: 'relative',
     fontSize: 40,
     color: 'white',
     textAlign: 'center',
@@ -90,11 +93,11 @@ const styles = StyleSheet.create({
 
 
   searchBar: {
-    opacity:0,
+    opacity: 0,
     position: 'absolute',
-    alignSelf:'center',
-    textAlign:'center',
-    bottom:70,
+    alignSelf: 'center',
+    textAlign: 'center',
+    bottom: 70,
     width: '70%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -116,8 +119,8 @@ const styles = StyleSheet.create({
   },
 
   addButton: {
-    position:'absolute',
-    bottom:-40,
+    position: 'absolute',
+    bottom: -40,
     width: 80,
     height: 80,
     padding: 20,

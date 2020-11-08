@@ -33,7 +33,7 @@ export default React.memo(function App() {
       translucent={true}
       isLoaded={isLoaded}
       logoImage={require('./src/assets/logos/main.png')}
-      backgroundColor={'#262626'}
+      backgroundColor={'#ffffff'}
       logoHeight={260}
       logoWidth={260}>
       <AppearanceProvider>

@@ -26,13 +26,13 @@ const AddScreen = ({ navigation }) => {
     const handleForm = () => {
         console.log(amount.field)
         const amountErr = validateForm('amount', amount.field)
-        setAmount({ error: amountErr })
+        setAmount(amount,{ error: amountErr })
         const nameErr = validateForm('name', name.field)
-        setName({ error: nameErr })
+        setName(name,{ error: nameErr })
         const dateErr = validateForm('date', billing_date.field)
-        setDate({ error: dateErr })
+        setDate(billing_date,{ error: dateErr })
         const periodErr = validateForm('period', billing_period.field)
-        setPeriod({ error: periodErr })
+        setPeriod(billing_period,{ error: periodErr })
         
 
         if (!amountErr && !nameErr && !dateErr && !periodErr) {
@@ -51,9 +51,9 @@ const AddScreen = ({ navigation }) => {
                     <Input name="Name" placeholder="Netflix" setFunction={setName} error={name.error} />
                     <Input name="Billing date" placeholder="23-08-2020" setFunction={setDate} error={billing_date.error} />
                     <Input name="Billing period" placeholder="Monthly" setFunction={setPeriod} error={billing_period.error} />
+                    <Input name="Currency" placeholder="Blue" setFunction={setCurrency} />
                     <Input name="Description (optional)" placeholder="Premium subs" setFunction={setDesc} />
-                    <Input name="Color (optional)" placeholder="Blue" setFunction={setColor} />
-                    <Input name="Currency (optional)" placeholder="Blue" setFunction={setCurrency} />
+                    {/* <Input name="Color (optional)" placeholder="Blue" setFunction={setColor} /> */}
                     <Input name="Payment Method (optional)" placeholder="Blue" setFunction={setMethod} />
                 </ScrollView>
 

@@ -27,7 +27,7 @@ const DebugScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container,{marginTop:50}]}>
         <Button
           title="getAll"
           onPress={() => {

@@ -37,8 +37,9 @@ const WidgetProvider = ({children, ...props}) => {
   const getAllWidgets = async () => {
     try {
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
-      // console.log(arr);
-      return arr;
+      if(arr != null)
+        return arr;
+      return []
     } catch (e) {
       alert('Failed to fetch the data from storage');
     }
@@ -88,7 +89,7 @@ const WidgetProvider = ({children, ...props}) => {
         arr = [newWidget];
       }
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-      console.log(arr);
+      // console.log(arr);
       return newWidget;
     } catch (e) {
       alert('Failed to create data ');

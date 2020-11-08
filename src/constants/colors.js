@@ -1,5 +1,5 @@
 export const lightColors = {
-  background: '#FFFFFF',
+  background: '#F2F2F2',
   primary: '#63A69A',
   widgetBackground: '#fff',
   placeholderColor: '#495057',
