@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TextInput,
   ScrollView,
+  StatusBar
 } from 'react-native';
 import Item from '../components/Item';
 import { WidgetContext } from '../context/WidgetContext'
@@ -15,14 +16,15 @@ import { useTheme } from '../context/ThemeContext';
 const HomeScreen = ({ navigation }) => {
   const { colors, isDark } = useTheme();
   const widgetContext = useContext(WidgetContext)
-  const [items,setItems] = useState([])
+  const [items, setItems] = useState([])
 
-  useEffect(()=>{
-    widgetContext.getAllWidgets().then((items)=>setItems(items))
-  },[items])
+  useEffect(() => {
+    widgetContext.getAllWidgets().then((items) => setItems(items))
+  }, [items])
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#00BCD4" translucent={true} />
       <View style={[styles.top, { backgroundColor: colors.primary }]}>
         <Text style={styles.topText}>Subscripto</Text>
         <TextInput
@@ -49,15 +51,15 @@ const HomeScreen = ({ navigation }) => {
         </Text>
         <ScrollView showsVerticalScrollIndicator={false}>
           {items.map((item) => (
-              <Item
-                colorStyle={{ backgroundColor: colors.widgetBackground }}
-                name={item.name}
-                amount={item.amount}
-                billing_date={item.billingDate}
-                billing_period={item.billingPeriod}
-                color={item.color}
-              />
-            ))}
+            <Item
+              colorStyle={{ backgroundColor: colors.widgetBackground }}
+              name={item.name}
+              amount={item.amount}
+              billing_date={item.billingDate}
+              billing_period={item.billingPeriod}
+              color={item.color}
+            />
+          ))}
         </ScrollView>
       </View>
 
