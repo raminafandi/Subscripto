@@ -24,6 +24,7 @@ const AddScreen = ({ navigation }) => {
     const [note,setNote] = useState({field:'',error:''})
 
     const handleForm = () => {
+        console.log(amount.field)
         const amountErr = validateForm('amount', amount.field)
         setAmount({ error: amountErr })
         const nameErr = validateForm('name', name.field)

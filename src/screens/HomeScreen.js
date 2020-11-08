@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -9,54 +9,13 @@ import {
   ScrollView
 } from 'react-native';
 import Item from '../components/Item';
+import {WidgetContext} from '../context/WidgetContext'
 import { useTheme } from '../context/ThemeContext';
 
 const HomeScreen = ({ navigation }) => {
   const { colors, isDark } = useTheme();
-  const [items, setItems] = useState([
-    {
-      name: 'Netflix odeme',
-      amount: '12',
-      billing_date: '11 may',
-      billing_period: 'week',
-      color: 'red',
-    },
-    {
-      name: 'Netflix odeme',
-      amount: '12',
-      billing_date: '11 may',
-      billing_period: 'week',
-      color: 'red',
-    },
-    {
-      name: 'Netflix odeme',
-      amount: '12',
-      billing_date: '11 may',
-      billing_period: 'week',
-      color: 'red',
-    },
-    {
-      name: 'Netflix odeme',
-      amount: '12',
-      billing_date: '11 may',
-      billing_period: 'week',
-      color: 'red',
-    },
-    {
-      name: 'Netflix odeme',
-      amount: '12',
-      billing_date: '11 may',
-      billing_period: 'week',
-      color: 'red',
-    },
-    {
-      name: 'Netflix odeme',
-      amount: '12',
-      billing_date: '11 may',
-      billing_period: 'week',
-      color: 'red',
-    },
-  ]);
+  const widgetContext = useContext(WidgetContext)
+  const [items, setItems] = useState([widgetContext.getAllWidgets()]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
@@ -85,15 +44,16 @@ const HomeScreen = ({ navigation }) => {
           Subscriptions
         </Text>
         <ScrollView showsVerticalScrollIndicator={false}>
-          {items.map((item) => (
-            <Item
-              colorStyle={{ backgroundColor: colors.widgetBackground }}
-              name={item.name}
-              amount={item.amount}
-              billing_date={item.billing_date}
-              billing_period={item.billing_period}
-              color={item.color}
-            />
+          {Array(widgetContext.getAllWidgets()).map((item) => (
+            console.log(widgetContext.getAllWidgets())
+            // <Item
+            //   colorStyle={{ backgroundColor: colors.widgetBackground }}
+            //   name={item.name}
+            //   amount={item.amount}
+            //   billing_date={item.billingDate}
+            //   billing_period={item.billingPeriod}
+            //   color={item.color}
+            // />
           ))}
         </ScrollView>
       </View>

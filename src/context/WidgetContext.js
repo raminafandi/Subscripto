@@ -37,7 +37,7 @@ const WidgetProvider = ({children, ...props}) => {
   const getAllWidgets = async () => {
     try {
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
-      console.log(arr);
+      // console.log(arr);
       return arr;
     } catch (e) {
       alert('Failed to fetch the data from storage');
