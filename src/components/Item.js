@@ -18,7 +18,7 @@ const Item = ({ colorStyle, ...props }) => {
         </Text>
       </View>
       <View style={styles.progessDate}>
-        <ProgressCircle
+        {/* <ProgressCircle
           percent={80}
           radius={30}
           borderWidth={8}
@@ -26,7 +26,7 @@ const Item = ({ colorStyle, ...props }) => {
           shadowColor="#246890"
           bgColor={colors.widgetBackground}>
           <Text style={{ fontSize: 18, color: colors.text }}>{'24d'}</Text>
-        </ProgressCircle>
+        </ProgressCircle> */}
       </View>
     </View>
   );
@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
     marginTop: 7,
     marginBottom:8,
     flexDirection: 'row',
-    borderRadius: 20,
+    borderRadius: 10,
     elevation:3,
     zIndex:2
   },
   icons: {
     width: 50,
     height: 50,
-    borderRadius: 15,
+    borderRadius: 25,
     alignSelf: 'center',
     margin: 20,
   },

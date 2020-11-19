@@ -29,19 +29,22 @@ const HomeScreen = ({ navigation }) => {
 
             {/* Top */}
             <View style={[styles.top, { backgroundColor: colors.primary }]}>
-                <Text style={styles.topText}>Subscripto</Text>
+                <Text style={styles.header}>Subscripto</Text>
+                <View style={[styles.topInfo,{backgroundColor:colors.topInfo}]}>
+                    <Text style={{textAlign:'center',fontSize:30,fontWeight:'bold',color:colors.text}}>Total Amount 22.5$</Text>
+                </View>
             </View>
 
 
             {/* Items */}
-            <View style={[styles.items,{backgroundColor:colors.background}]}>
+            <View style={[styles.items, { backgroundColor: colors.background }]}>
                 <Text style={[styles.itemsHeader, { color: colors.text }]}>
                     Subscriptions
                 </Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    {items.map((item,i) => (
+                    {items.map((item, i) => (
                         <Item
-                            lastChild = {items.length-1 == i ? true:false}
+                            lastChild={items.length - 1 == i ? true : false}
                             colorStyle={{ backgroundColor: colors.widgetBackground }}
                             name={item.name}
                             amount={item.amount}
@@ -58,8 +61,8 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => {
                     navigation.navigate('Add');
                 }}>
-                <View style={[styles.addButton,{backgroundColor: colors.primary}]}>
-                    <Icon name="plus" size={40} color='#fff' />
+                <View style={[styles.addButton, { backgroundColor: colors.button }]}>
+                    <Icon name="plus" size={40} color={colors.icon} />
                 </View>
             </TouchableWithoutFeedback>
 
@@ -68,7 +71,7 @@ const HomeScreen = ({ navigation }) => {
                     navigation.navigate('Debug');
                 }}>
                 <Text
-                    style={[styles.settingsButton, { backgroundColor: colors.primary }]}>
+                    style={[styles.settingsButton, { backgroundColor: colors.button }]}>
                     Set
                 </Text>
             </TouchableWithoutFeedback>
@@ -79,29 +82,35 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     top: {
-        flex: 2,
-        zIndex: -1
+        flex: 3,
+        zIndex:1
     },
 
-    topText: {
+    topInfo: {
+        width: '90%',
+        height: 170,
+        alignSelf: 'center',
+        marginTop: 35,
+        borderRadius: 12,
+        justifyContent:'center',
+    },
+
+    header: {
         position: 'relative',
-        textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 40,
         color: 'white',
-        marginTop: '10%',
+        marginTop: 20,
+        textAlign: 'center',
     },
 
     items: {
-        flex: 5,
-        marginTop: 10,
-        borderTopLeftRadius: 50,
-        marginTop: -100,
+        flex: 7,
     },
 
     itemsHeader: {
         marginLeft: 30,
-        marginTop: 30,
+        marginTop: 60,
         fontSize: 20,
         fontWeight: 'bold',
     },

@@ -1,17 +1,23 @@
 export const lightColors = {
-  background: '#EEEEEE',
-  primary:'#2428C1', 
-  widgetBackground: '#fff',
+  background: '#F6F4F4',
+  primary:'#C50E03', 
+  widgetBackground: '#FFFFFF',
   placeholderColor: '#495057',
   text: '#121212',
   error: '#D32F2F',
+  button: '#3A3232',
+  icon:'#fff',
+  topInfo:'#fff'
 };
 
 export const darkColors = {
-  background: '#1D1D27',
-  primary:'#13B294',
-  widgetBackground: '#22222D',
+  background: '#3C4042',
+  primary:'#C50E03',
+  widgetBackground: '#202124',
   placeholderColor: '#adb5bd',
   text: '#FFFFFF',
   error: '#EF9A9A',
+  button: '#000',
+  icon:'#fff',
+  topInfo:'#202124'
 };
