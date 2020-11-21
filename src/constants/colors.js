@@ -1,12 +1,12 @@
 export const lightColors = {
-  background: '#F6F4F4',
-  primary:'#C50E03', 
-  widgetBackground: '#FFFFFF',
+  background: '#FEFEFE',
+  primary:'#000219', 
+  widgetBackground: '#F8F8F8',
   placeholderColor: '#495057',
   text: '#121212',
   error: '#D32F2F',
-  button: '#3A3232',
-  icon:'#fff',
+  button: '#000219',
+  icon:'#FDD12C',
   topInfo:'#fff'
 };
 
