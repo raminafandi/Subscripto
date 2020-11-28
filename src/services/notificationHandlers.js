@@ -14,6 +14,9 @@ export const handlelocalNotificationScheduled = (title, message) => {
     message: message,
     date: new Date(Date.now() + 5 * 1000), // in 60 secs
   });
+  // .then((pn) => {
+  //   console.log(pn);
+  // });
 };
 
 export const handleCancel = () => {

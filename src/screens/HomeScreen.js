@@ -6,7 +6,8 @@ import {
     TouchableWithoutFeedback,
     SafeAreaView,
     ScrollView,
-    StatusBar
+    StatusBar,
+    Modal
 } from 'react-native';
 import Item from '../components/Item';
 import { WidgetContext } from '../context/WidgetContext'
@@ -51,9 +52,11 @@ const HomeScreen = ({ navigation }) => {
                                 amount={item.amount}
                                 billing_date={item.billingDate}
                                 billing_period={item.billingPeriod}
-                                color={item.color}
-                            />
-                        ))}
+                                color={item.color}/>
+                          
+                        )
+                        )
+                        }
                     </ScrollView>
                 </View>
             </View>
