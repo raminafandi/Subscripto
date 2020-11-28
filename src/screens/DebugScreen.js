@@ -15,6 +15,7 @@ import {useTheme} from '../context/ThemeContext';
 import {
   handlelocalNotification,
   handleCancel,
+  handleCancelLocalNotificationScheduled,
   handlelocalNotificationScheduled,
 } from '../services/notificationHandlers';
 
@@ -27,7 +28,7 @@ const DebugScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
-      <ScrollView style={[styles.container,{marginTop:50}]}>
+      <ScrollView style={[styles.container, {marginTop: 50}]}>
         <Button
           title="getAll"
           onPress={() => {
@@ -87,7 +88,17 @@ const DebugScreen = ({navigation}) => {
         />
         <Button
           title="Notification after 5 sec scheduled"
-          onPress={() => handlelocalNotificationScheduled('Hi', 'Hello')}
+          onPress={() => handlelocalNotificationScheduled('Hi', 'Hello', '123')}
+        />
+        <Button
+          title="Notification after 5 sec scheduled"
+          onPress={() =>
+            handlelocalNotificationScheduled('Hi', 'Hello', '1234')
+          }
+        />
+        <Button
+          title="Cancel all notifications"
+          onPress={() => handleCancelLocalNotificationScheduled()}
         />
         <Button
           title="Cancel all notifications"
