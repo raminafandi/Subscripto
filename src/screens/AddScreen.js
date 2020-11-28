@@ -1,104 +1,153 @@
-import React, { useState, useEffect, useContext } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    SafeAreaView,
-    TouchableWithoutFeedback,
-    ScrollView,
-} from 'react-native';
-import Input from '../components/Input'
-import { WidgetContext } from '../context/WidgetContext';
-import validateForm from '../utils/validate';
+import * as yup from 'yup'
+import { Formik } from 'formik'
+
+import React, { Fragment, useState } from 'react';
+import { TextInput, Text, Button, Alert, StyleSheet, SafeAreaView } from 'react-native';
+import DatePicker from 'react-native-datepicker'
+import DropDownPicker from 'react-native-dropdown-picker';
+
+
 
 const AddScreen = ({ navigation }) => {
-    const widgetContext = useContext(WidgetContext);
-    const [amount, setAmount] = useState({ field: "", error: "" })
-    const [name, setName] = useState({ field: "", error: "" })
-    const [description, setDesc] = useState({ field: "", error: "" })
-    const [billing_date, setDate] = useState({ field: "", error: "" })
-    const [billing_period, setPeriod] = useState({ field: "", error: "" })
-    const [color, setColor] = useState({ field: "red", error: "" })
-    const [pmethod,setMethod] = useState({field:'',error:''})
-    const [currency,setCurrency] = useState({field:'$',error:''})
-    const [note,setNote] = useState({field:'',error:''})
-
-    const handleForm = () => {
-        console.log(amount.field)
-        const amountErr = validateForm('amount', amount.field)
-        setAmount(amount,{ error: amountErr })
-        const nameErr = validateForm('name', name.field)
-        setName(name,{ error: nameErr })
-        const dateErr = validateForm('date', billing_date.field)
-        setDate(billing_date,{ error: dateErr })
-        const periodErr = validateForm('period', billing_period.field)
-        setPeriod(billing_period,{ error: periodErr })
-        
-
-        if (!amountErr && !nameErr && !dateErr && !periodErr) {
-            widgetContext.createWidget(name.field, Number(amount.field), currency.field, billing_date.field,
-                billing_period.field, color.field, description.field, pmethod.field, note.field)
-            navigation.navigate('Home');
-        }
-
-    }
-
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.formContainer}>
-                <ScrollView style={{ marginTop: 50 }} showsVerticalScrollIndicator={false}>
-                    <Input name="Amount" type='numeric' placeholder="10$" setFunction={setAmount} error={amount.error} />
-                    <Input name="Name" placeholder="Netflix" setFunction={setName} error={name.error} />
-                    <Input name="Billing date" placeholder="23-08-2020" setFunction={setDate} error={billing_date.error} />
-                    <Input name="Billing period" placeholder="Monthly" setFunction={setPeriod} error={billing_period.error} />
-                    <Input name="Currency" placeholder="Blue" setFunction={setCurrency} />
-                    <Input name="Description (optional)" placeholder="Premium subs" setFunction={setDesc} />
-                    {/* <Input name="Color (optional)" placeholder="Blue" setFunction={setColor} /> */}
-                    <Input name="Payment Method (optional)" placeholder="Blue" setFunction={setMethod} />
-                </ScrollView>
+        <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+            <Formik
+                initialValues={{ amount: '', name: '', billingDate: new Date().toISOString().slice(0, 10),period:'',periodType:'m' ,description: '', method: 'card', currency: 'dollar' }}
+                onSubmit={values => console.log(JSON.stringify(values))}
+                validationSchema={yup.object().shape({
+                    amount: yup
+                        .number()
+                        .required(),
+                    name: yup
+                        .string()
+                        .required(),
+                    period: yup
+                        .number()
+                        .required(),
+                })}
+            >
+                {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit, setFieldValue }) => (
+                    <Fragment>
+                        <TextInput
+                            value={values.amount}
+                            onChangeText={handleChange('amount')}
+                            onBlur={() => setFieldTouched('amount')}
+                            placeholder="Amount"
+                        />
+                        {touched.amount && errors.amount &&
+                            <Text style={{ fontSize: 10, color: 'red' }}>{errors.amount}</Text>
+                        }
+                        <TextInput
+                            value={values.name}
+                            onChangeText={handleChange('name')}
+                            placeholder="Name"
+                            onBlur={() => setFieldTouched('name')}
+                        />
+                        {touched.name && errors.name &&
+                            <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
+                        }
 
-            </View>
+                        <TextInput
+                            value={values.description}
+                            onChangeText={handleChange('description')}
+                            placeholder="Description"
+                            onBlur={() => setFieldTouched('description')}
+                        />
 
-            <View style={styles.buttonCantainer}>
-                <TouchableWithoutFeedback onPress={handleForm}>
-                    <View>
-                        <Text style={styles.addButton}>Add</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-            </View>
+                        <DropDownPicker
+                            items={[
+                                { label: 'Monthly', value: 'm' },
+                                { label: 'Yearly', value: 'y' },
+                                { label: 'Weekly', value: 'w' },
+
+                            ]}
+                            defaultValue={values.periodType}
+                            containerStyle={{ height: 40 }}
+                            style={{ backgroundColor: '#fafafa' }}
+                            itemStyle={{
+                                justifyContent: 'flex-start'
+                            }}
+                            dropDownStyle={{ backgroundColor: '#fafafa' }}
+                            onChangeItem={(item) => setFieldValue('periodType', item.value)}
+                        />
+
+                        <TextInput
+                            value={values.period}
+                            onChangeText={handleChange('period')}
+                            placeholder="Period"
+                            onBlur={() => setFieldTouched('period')}
+                        />
+                        {touched.period && errors.period &&
+                            <Text style={{ fontSize: 10, color: 'red' }}>{errors.period}</Text>
+                        }
+
+                        <DatePicker
+                            style={{ width: 200 }}
+                            mode="date"
+                            date={values.billingDate}
+                            placeholder="select date"
+                            format="YYYY-MM-DD"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 4,
+                                    marginLeft: 0
+                                },
+                                dateInput: {
+                                    marginLeft: 36
+                                }
+                            }}
+                            onDateChange={handleChange('billingDate')}
+                        />
+
+                        <DropDownPicker
+                            items={[
+                                { label: 'By card', value: 'card' },
+                                { label: 'By cash', value: 'cash' },
+
+                            ]}
+                            defaultValue={values.method}
+                            containerStyle={{ height: 40 }}
+                            style={{ backgroundColor: '#fafafa' }}
+                            itemStyle={{
+                                justifyContent: 'flex-start'
+                            }}
+                            dropDownStyle={{ backgroundColor: '#fafafa' }}
+                            onChangeItem={(item) => setFieldValue('method', item.value)}
+                        />
+
+                        <DropDownPicker
+                            items={[
+                                { label: 'Dollar', value: 'dollar' },
+                                { label: 'Azn', value: 'azn' },
+
+                            ]}
+                            defaultValue={values.currency}
+                            containerStyle={{ height: 40 }}
+                            style={{ backgroundColor: '#fafafa' }}
+                            itemStyle={{
+                                justifyContent: 'flex-start'
+                            }}
+                            dropDownStyle={{ backgroundColor: '#fafafa' }}
+                            onChangeItem={(item) => setFieldValue('currency', item.value)}
+                        />
+
+                        <Button
+                            title='Sign In'
+                            disabled={!isValid}
+                            onPress={handleSubmit}
+                        />
+                    </Fragment>
+                )}
+            </Formik>
         </SafeAreaView>
     );
 };
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
 
-    formContainer: {
-        flex: 4,
-        backgroundColor: '#FF3855',
-        borderBottomEndRadius: 25,
-        borderBottomLeftRadius: 25,
-
-    },
-
-    buttonCantainer: {
-        flex: 1,
-        justifyContent: 'center'
-    },
-
-    addButton: {
-        width: 80,
-        height: 80,
-        textAlignVertical: 'center',
-        alignSelf: 'center',
-        textAlign: 'center',
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#fff',
-        backgroundColor: "#FF3851",
-        borderRadius: 40,
-    }
 
 });
 export default AddScreen;
