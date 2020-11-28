@@ -87,17 +87,17 @@ const DebugScreen = ({navigation}) => {
           onPress={() => handlelocalNotification('Hi', 'Hello')}
         />
         <Button
-          title="Notification after 5 sec scheduled"
+          title="Notification after 5 sec scheduled id:123"
           onPress={() => handlelocalNotificationScheduled('Hi', 'Hello', '123')}
         />
         <Button
-          title="Notification after 5 sec scheduled"
+          title="Notification after 5 sec scheduled id:1234"
           onPress={() =>
             handlelocalNotificationScheduled('Hi', 'Hello', '1234')
           }
         />
         <Button
-          title="Cancel all notifications"
+          title="Cancel notification id = 123"
           onPress={() => handleCancelLocalNotificationScheduled()}
         />
         <Button
