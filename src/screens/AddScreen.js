@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { useState } from 'react';
 import {
   TextInput,
   Text,
@@ -9,17 +9,40 @@ import {
 } from 'react-native';
 
 import * as yup from 'yup';
-import {Formik} from 'formik';
-import DatePicker from 'react-native-datepicker';
+import { Formik } from 'formik';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {currencies} from '../utils/currencies';
+import { currencies } from '../utils/currencies';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const AddScreen = ({navigation}) => {
+const AddScreen = ({ navigation }) => {
   const [opened, setOpened] = useState();
 
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
   return (
-    <SafeAreaView style={{flex: 1, marginTop: 20}}>
+    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
       <Formik
         initialValues={{
           amount: '',
@@ -47,127 +70,115 @@ const AddScreen = ({navigation}) => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <Fragment>
-            <TextInput
-              value={values.amount}
-              onChangeText={handleChange('amount')}
-              onBlur={() => setFieldTouched('amount')}
-              placeholder="Amount"
-            />
-            {touched.amount && errors.amount && (
-              <Text style={{fontSize: 10, color: 'red'}}>{errors.amount}</Text>
-            )}
-            <TextInput
-              value={values.name}
-              onChangeText={handleChange('name')}
-              placeholder="Name"
-              onBlur={() => setFieldTouched('name')}
-            />
-            {touched.name && errors.name && (
-              <Text style={{fontSize: 10, color: 'red'}}>{errors.name}</Text>
-            )}
+            <>
+              <TextInput
+                value={values.amount}
+                onChangeText={handleChange('amount')}
+                onBlur={() => setFieldTouched('amount')}
+                placeholder="Amount"
+              />
+              {touched.amount && errors.amount && (
+                <Text style={{ fontSize: 10, color: 'red' }}>{errors.amount}</Text>
+              )}
+              <TextInput
+                value={values.name}
+                onChangeText={handleChange('name')}
+                placeholder="Name"
+                onBlur={() => setFieldTouched('name')}
+              />
+              {touched.name && errors.name && (
+                <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
+              )}
 
-            <TextInput
-              value={values.description}
-              onChangeText={handleChange('description')}
-              placeholder="Description"
-              onBlur={() => setFieldTouched('description')}
-            />
+              <TextInput
+                value={values.description}
+                onChangeText={handleChange('description')}
+                placeholder="Description"
+                onBlur={() => setFieldTouched('description')}
+              />
 
-            <DatePicker
-              style={{width: 200}}
-              mode="date"
-              date={values.billingDate}
-              placeholder="select date"
-              useNativeDriver
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0,
-                },
-                dateInput: {
-                  marginLeft: 36,
-                },
-              }}
-              onDateChange={handleChange('billingDate')}
-            />
+              {show && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode={mode}
+                  is24Hour={true}
+                  display="default"
+                  onChange={onChange}
+                />
+              )}
 
-            <TextInput
-              value={values.period}
-              onChangeText={handleChange('period')}
-              placeholder="Period"
-              onBlur={() => setFieldTouched('period')}
-            />
-            {touched.period && errors.period && (
-              <Text style={{fontSize: 10, color: 'red'}}>{errors.period}</Text>
-            )}
+              <TextInput
+                value={values.period}
+                onChangeText={handleChange('period')}
+                placeholder="Period"
+                onBlur={() => setFieldTouched('period')}
+              />
+              {touched.period && errors.period && (
+                <Text style={{ fontSize: 10, color: 'red' }}>{errors.period}</Text>
+              )}
 
-            <DropDownPicker
-              items={[
-                {label: 'Monthly', value: 'm'},
-                {label: 'Yearly', value: 'y'},
-                {label: 'Weekly', value: 'w'},
-              ]}
-              defaultValue={values.periodType}
-              useNativeDriver
-              containerStyle={{height: 40}}
-              isVisible={opened == 'Period'}
-              onOpen={() => setOpened('Period')}
-              customArrowDown={() => <Icon name="arrow-drop-down" size={35} />}
-              customArrowUp={() => <Icon name="arrow-drop-up" size={35} />}
-              style={{backgroundColor: '#fafafa'}}
-              itemStyle={{
-                justifyContent: 'flex-start',
-              }}
-              dropDownStyle={{backgroundColor: '#fafafa'}}
-              onChangeItem={(item) => setFieldValue('periodType', item.value)}
-            />
+              <DropDownPicker
+                items={[
+                  { label: 'Monthly', value: 'm' },
+                  { label: 'Yearly', value: 'y' },
+                  { label: 'Weekly', value: 'w' },
+                ]}
+                defaultValue={values.periodType}
+                useNativeDriver
+                containerStyle={{ height: 40 }}
+                isVisible={opened == 'Period'}
+                onOpen={() => setOpened('Period')}
+                customArrowDown={() => <Icon name="arrow-drop-down" size={35} />}
+                customArrowUp={() => <Icon name="arrow-drop-up" size={35} />}
+                style={{ backgroundColor: '#fafafa' }}
+                itemStyle={{
+                  justifyContent: 'flex-start',
+                }}
+                dropDownStyle={{ backgroundColor: '#fafafa' }}
+                onChangeItem={(item) => setFieldValue('periodType', item.value)}
+              />
 
-            <DropDownPicker
-              items={currencies}
-              defaultValue={values.currency}
-              containerStyle={{height: 40}}
-              useNativeDriver
-              style={{backgroundColor: '#fafafa'}}
-              isVisible={opened == 'Currency'}
-              customArrowDown={() => <Icon name="arrow-drop-down" size={35} />}
-              customArrowUp={() => <Icon name="arrow-drop-up" size={35} />}
-              onOpen={() => setOpened('Currency')}
-              itemStyle={{
-                justifyContent: 'flex-start',
-              }}
-              dropDownStyle={{backgroundColor: '#fafafa'}}
-              onChangeItem={(item) => setFieldValue('currency', item.value)}
-            />
+              {/* <DropDownPicker
+                items={currencies}
+                defaultValue={values.currency}
+                containerStyle={{ height: 40 }}
+                useNativeDriver
+                style={{ backgroundColor: '#fafafa' }}
+                isVisible={opened == 'Currency'}
+                customArrowDown={() => <Icon name="arrow-drop-down" size={35} />}
+                customArrowUp={() => <Icon name="arrow-drop-up" size={35} />}
+                onOpen={() => setOpened('Currency')}
+                itemStyle={{
+                  justifyContent: 'flex-start',
+                }}
+                dropDownStyle={{ backgroundColor: '#fafafa' }}
+                onChangeItem={(item) => setFieldValue('currency', item.value)}
+              /> */}
 
-            <DropDownPicker
-              items={[
-                {label: 'By card', value: 'card'},
-                {label: 'By cash', value: 'cash'},
-              ]}
-              defaultValue={values.method}
-              isVisible={opened == 'Method'}
-              useNativeDriver
-              customArrowDown={() => <Icon name="arrow-drop-down" size={35} />}
-              customArrowUp={() => <Icon name="arrow-drop-up" size={35} />}
-              onOpen={() => setOpened('Method')}
-              containerStyle={{height: 40}}
-              style={{backgroundColor: '#fafafa'}}
-              itemStyle={{
-                justifyContent: 'flex-start',
-              }}
-              dropDownStyle={{backgroundColor: '#fafafa'}}
-              onChangeItem={(item) => setFieldValue('method', item.value)}
-            />
+              {/* <DropDownPicker
+                items={[
+                  { label: 'By card', value: 'card' },
+                  { label: 'By cash', value: 'cash' },
+                ]}
+                defaultValue={values.method}
+                isVisible={opened == 'Method'}
+                useNativeDriver
+                customArrowDown={() => <Icon name="arrow-drop-down" size={35} />}
+                customArrowUp={() => <Icon name="arrow-drop-up" size={35} />}
+                onOpen={() => setOpened('Method')}
+                containerStyle={{ height: 40 }}
+                style={{ backgroundColor: '#fafafa' }}
+                itemStyle={{
+                  justifyContent: 'flex-start',
+                }}
+                dropDownStyle={{ backgroundColor: '#fafafa' }}
+                onChangeItem={(item) => setFieldValue('method', item.value)}
+              /> */}
 
-            <Button title="Add" disabled={!isValid} onPress={handleSubmit} />
-          </Fragment>
-        )}
+              <Button title="Add" disabled={!isValid} onPress={handleSubmit} />
+            </>
+          )}
       </Formik>
     </SafeAreaView>
   );
