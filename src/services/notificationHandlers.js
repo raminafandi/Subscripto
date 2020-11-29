@@ -14,6 +14,7 @@ export const handlelocalNotificationScheduled = (title, message, id) => {
     title: title,
     message: message,
     date: new Date(Date.now() + 5 * 1000), // in 60 secs
+    repeatType: 'month',
   });
   // .then((pn) => {
   //   console.log(pn);

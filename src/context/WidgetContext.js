@@ -37,9 +37,8 @@ const WidgetProvider = ({children, ...props}) => {
   const getAllWidgets = async () => {
     try {
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
-      if(arr != null)
-        return arr;
-      return []
+      if (arr != null) return arr;
+      return [];
     } catch (e) {
       alert('Failed to fetch the data from storage');
     }
@@ -63,10 +62,9 @@ const WidgetProvider = ({children, ...props}) => {
     currency,
     billingDate,
     billingPeriod,
-    color,
+    iconName,
     description,
     paymentMethod,
-    note,
   ) => {
     try {
       let id = guidGenerator();
@@ -77,10 +75,9 @@ const WidgetProvider = ({children, ...props}) => {
         currency,
         billingDate,
         billingPeriod,
-        color,
+        iconName,
         description,
         paymentMethod,
-        note,
       };
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
       if (arr) {
@@ -102,10 +99,9 @@ const WidgetProvider = ({children, ...props}) => {
     currency,
     billingDate,
     billingPeriod,
-    color,
+    iconName,
     description,
     paymentMethod,
-    note,
   ) => {
     try {
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
@@ -116,10 +112,9 @@ const WidgetProvider = ({children, ...props}) => {
           arr[elem].currency = currency;
           arr[elem].billingDate = billingDate;
           arr[elem].billingPeriod = billingPeriod;
-          arr[elem].color = color;
+          arr[elem].iconName = iconName;
           arr[elem].description = description;
           arr[elem].paymentMethod = paymentMethod;
-          arr[elem].note = note;
         }
       }
       console.log('elem', arr);
