@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Modal,
@@ -10,11 +10,11 @@ import {
   Alert,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
-import {useTheme} from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Item = ({colorStyle, ...props}) => {
-  const {colors, isDark} = useTheme();
+const Item = ({ colorStyle, ...props }) => {
+  const { colors, isDark } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -52,7 +52,7 @@ const Item = ({colorStyle, ...props}) => {
               fontSize: 20,
               color: colors.text,
             }}>
-            {props.amount}$ / {props.billing_period}
+            {props.amount} {props.currency} / {props.billing_period}
           </Text>
         </View>
         <View style={styles.progessDate}>
@@ -107,11 +107,11 @@ const Item = ({colorStyle, ...props}) => {
             </View>
             <View style={styles.modalButtons}>
               <TouchableOpacity
-                style={[styles.modalButton, {backgroundColor: 'orange'}]}>
+                style={[styles.modalButton, { backgroundColor: 'orange' }]}>
                 <Icon name="edit" size={32} color="black" />
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.modalButton, {backgroundColor: 'red'}]}>
+                style={[styles.modalButton, { backgroundColor: 'red' }]}>
                 <Icon name="delete" size={32} color="black" />
               </TouchableOpacity>
             </View>

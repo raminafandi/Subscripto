@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation }) => {
 
             {/* Top */}
             <View style={[styles.top, { backgroundColor: colors.primary }]}>
-                <Icon style={{marginTop:40,textAlign:'center'}} name='wallet' size={70} color='#FDD12C' />
+                <Icon style={{ marginTop: 40, textAlign: 'center' }} name='wallet' size={70} color='#FDD12C' />
                 <View style={styles.textInfo}>
                     <Text style={styles.textAmount}>Total Amount</Text>
                     <Text style={styles.textNumber}>22.5$</Text>
@@ -44,16 +44,17 @@ const HomeScreen = ({ navigation }) => {
                         Subscriptions
                 </Text>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        {items.map((item, i) => (
+                        {items.reverse().map((item, i) => (
                             <Item
                                 lastChild={items.length - 1 == i ? true : false}
                                 colorStyle={{ backgroundColor: colors.widgetBackground }}
+                                currency={item.currency}
                                 name={item.name}
                                 amount={item.amount}
                                 billing_date={item.billingDate}
                                 billing_period={item.billingPeriod}
-                                color={item.color}/>
-                          
+                                color={item.color} />
+
                         )
                         )
                         }
