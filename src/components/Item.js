@@ -29,7 +29,7 @@ const Item = ({ colorStyle, ...props }) => {
         onPress={() => {
           setModalVisible(true);
         }}>
-        <Icon2  name='amazon' size={30} style={styles.icons} color='#fff'/>
+        <Icon2  name='amazon' size={30} style={styles.icons} color='#000'/>
         <View
           style={{
             flexDirection: 'column',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     textAlignVertical:'center',
     margin:20,
     borderRadius:10,
-    backgroundColor:'#2EC3E4'
+    backgroundColor:'#fff'
   },
   progessDate: {
     position: 'absolute',

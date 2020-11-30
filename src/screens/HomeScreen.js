@@ -28,19 +28,28 @@ const HomeScreen = ({ navigation }) => {
 
             {/* Top */}
             <View style={[styles.top, { backgroundColor: colors.primary }]}>
-                <Text style={styles.appName}>Subscripto</Text>
-
-                <View style={{width: '80%', height: 160, backgroundColor: colors.widgetBackground, alignSelf: 'center',borderRadius:10,justifyContent:'center' }}>
-                    <Text style={{fontSize:40,color:colors.text,textAlign:'center'}}>Total Amount</Text>
+                <View style={{ width: '70%', height: 140, backgroundColor: colors.widgetBackground, alignSelf: 'center', borderBottomRightRadius: 30, borderTopLeftRadius: 30, justifyContent: 'center', borderColor: 'red', elevation: 50 }}>
+                    <Text style={{ fontSize: 55, color: colors.text, textAlign: 'center', fontWeight: 'bold' }}>18.5$</Text>
+                    <Text style={{ fontSize: 20, color: colors.text, textAlign: 'center' }}>Total Amount</Text>
                 </View>
-
+                <View style={{ position: 'absolute', bottom: 0, backgroundColor: '#000', width: '40%', borderTopRightRadius: 30 }}>
+                    <Text style={{ padding: 15, fontWeight: 'bold', fontSize: 17, color: '#fff' }}>Subscriptions</Text>
+                </View>
             </View>
 
             {/* Items */}
             <View style={[styles.items, { backgroundColor: colors.primary }]}>
-                <View style={{ flex: 1, backgroundColor: colors.background, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
-                    <Text style={{padding:15,fontWeight:'bold',fontSize:15,color:colors.text}}>Subscriptions</Text>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{ flex: 1, backgroundColor: colors.background, borderTopRightRadius: 30,position:'relative' }}>
+                    {/* Button */}
+                    <TouchableWithoutFeedback
+                        onPress={() => {
+                            navigation.navigate('Add');
+                        }}>
+                        <View style={[styles.addButton, { backgroundColor: colors.button }]}>
+                            <Icon name="plus" size={40} color={colors.icon} />
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 10, paddingTop: 30 }}>
                         {items.reverse().map((item, i) => (
                             <Item
                                 colorStyle={{ backgroundColor: colors.widgetBackground }}
@@ -57,16 +66,6 @@ const HomeScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
             </View>
-
-            {/* Buttons */}
-            <TouchableWithoutFeedback
-                onPress={() => {
-                    navigation.navigate('Add');
-                }}>
-                <View style={styles.addButton}>
-                    <Icon name="plus" size={40} color={colors.icon} />
-                </View>
-            </TouchableWithoutFeedback>
 
             <TouchableWithoutFeedback
                 onPress={() => {
@@ -85,6 +84,8 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     top: {
         flex: 1.3,
+        position: 'relative',
+        justifyContent: 'center'
     },
 
     appName: {
@@ -103,8 +104,10 @@ const styles = StyleSheet.create({
         height: 65,
         padding: 10,
         position: 'absolute',
-        top: 25,
-        right: 0,
+        top: -35,
+        right:50,
+        borderRadius: 20,
+        zIndex:2
     },
 
     settingsButton: {
