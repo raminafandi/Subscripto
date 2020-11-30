@@ -46,8 +46,8 @@ const AddScreen = ({ navigation }) => {
                     navigation.navigate('Home')
                 }}
                 validationSchema={yup.object().shape({
-                    amount: yup.number().required(),
-                    name: yup.string().required(),
+                    amount: yup.number().typeError('Amount must be a number').required('Amount is a required field'),
+                    name: yup.string().required('Name is a required field'),
                 })}>
                 {({
                     values,
