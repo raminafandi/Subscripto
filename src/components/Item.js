@@ -7,11 +7,11 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Alert,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import { useTheme } from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/Fontisto'
 
 const Item = ({ colorStyle, ...props }) => {
   const { colors, isDark } = useTheme();
@@ -24,17 +24,12 @@ const Item = ({ colorStyle, ...props }) => {
           styles.container,
           {
             backgroundColor: colors.widgetBackground,
-          },
-          props.lastChild && {
-            marginBottom: 85,
-          },
+          }
         ]}
         onPress={() => {
           setModalVisible(true);
         }}>
-        <Image
-          style={styles.icons}
-          source={require('../assets/logos/netflix.png')}></Image>
+        <Icon2  name='amazon' size={30} style={styles.icons} color='#fff'/>
         <View
           style={{
             flexDirection: 'column',
@@ -138,15 +133,17 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     flexDirection: 'row',
     borderRadius: 10,
-    elevation: 3,
     zIndex: 2,
   },
   icons: {
     width: 50,
     height: 50,
-    borderRadius: 25,
     alignSelf: 'center',
-    margin: 20,
+    textAlign:'center',
+    textAlignVertical:'center',
+    margin:20,
+    borderRadius:10,
+    backgroundColor:'#2EC3E4'
   },
   progessDate: {
     position: 'absolute',

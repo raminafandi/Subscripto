@@ -7,7 +7,6 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
-    Modal
 } from 'react-native';
 import Item from '../components/Item';
 import { WidgetContext } from '../context/WidgetContext'
@@ -29,24 +28,21 @@ const HomeScreen = ({ navigation }) => {
 
             {/* Top */}
             <View style={[styles.top, { backgroundColor: colors.primary }]}>
-                <Icon style={{ marginTop: 40, textAlign: 'center' }} name='wallet' size={70} color='#FDD12C' />
-                <View style={styles.textInfo}>
-                    <Text style={styles.textAmount}>Total Amount</Text>
-                    <Text style={styles.textNumber}>22.5$</Text>
-                </View>
-            </View>
+                <Text style={styles.appName}>Subscripto</Text>
 
+                <View style={{width: '80%', height: 160, backgroundColor: colors.widgetBackground, alignSelf: 'center',borderRadius:10,justifyContent:'center' }}>
+                    <Text style={{fontSize:40,color:colors.text,textAlign:'center'}}>Total Amount</Text>
+                </View>
+
+            </View>
 
             {/* Items */}
             <View style={[styles.items, { backgroundColor: colors.primary }]}>
-                <View style={{ flex: 1, backgroundColor: colors.background, borderTopLeftRadius: 80 }}>
-                    <Text style={[styles.itemsHeader, { color: colors.text }]}>
-                        Subscriptions
-                </Text>
+                <View style={{ flex: 1, backgroundColor: colors.background, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                    <Text style={{padding:15,fontWeight:'bold',fontSize:15,color:colors.text}}>Subscriptions</Text>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         {items.reverse().map((item, i) => (
                             <Item
-                                lastChild={items.length - 1 == i ? true : false}
                                 colorStyle={{ backgroundColor: colors.widgetBackground }}
                                 currency={item.currency}
                                 name={item.name}
@@ -67,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => {
                     navigation.navigate('Add');
                 }}>
-                <View style={[styles.addButton, { backgroundColor: colors.button }]}>
+                <View style={styles.addButton}>
                     <Icon name="plus" size={40} color={colors.icon} />
                 </View>
             </TouchableWithoutFeedback>
@@ -88,61 +84,27 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     top: {
-        flex: 3,
-        zIndex: 1,
-        borderBottomRightRadius: 80,
+        flex: 1.3,
     },
 
-    header: {
-        position: 'relative',
-        fontWeight: 'bold',
+    appName: {
+        margin: 22,
         fontSize: 40,
-        color: 'white',
-        marginTop: 10,
-        marginLeft: 10,
-    },
-
-    textInfo: {
-        position: 'absolute',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: '90%',
-        bottom: 50,
-        left: 10,
-    },
-
-    textAmount: {
-        fontSize: 35,
-        fontWeight: 'bold',
         color: '#fff',
-    },
-    textNumber: {
-        fontSize: 35,
         fontWeight: 'bold',
-        color: '#FDD12C',
     },
 
     items: {
-        flex: 7,
-    },
-
-    itemsHeader: {
-        marginLeft: 30,
-        marginTop: 40,
-        marginBottom: 10,
-        fontSize: 20,
-        fontWeight: 'bold',
+        flex: 2,
     },
 
     addButton: {
         width: 65,
         height: 65,
+        padding: 10,
         position: 'absolute',
-        bottom: 15,
-        right: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 50,
+        top: 25,
+        right: 0,
     },
 
     settingsButton: {
