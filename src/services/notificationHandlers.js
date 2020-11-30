@@ -9,6 +9,7 @@ export const handlelocalNotification = (title, message) => {
 };
 
 export const handlelocalNotificationScheduled = (title, message, id) => {
+  console.log(title);
   PushNotification.localNotificationSchedule({
     id: id,
     title: title,
@@ -16,9 +17,6 @@ export const handlelocalNotificationScheduled = (title, message, id) => {
     date: new Date(Date.now() + 5 * 1000), // in 60 secs
     repeatType: 'month',
   });
-  // .then((pn) => {
-  //   console.log(pn);
-  // });
 };
 
 export const handleCancelLocalNotificationScheduled = (title, message) => {

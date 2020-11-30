@@ -1,5 +1,11 @@
 import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import {
+  handlelocalNotification,
+  handleCancel,
+  handleCancelLocalNotificationScheduled,
+  handlelocalNotificationScheduled,
+} from '../services/notificationHandlers';
 
 const WidgetContext = React.createContext({
   getAllWidgets: () => {},
@@ -68,6 +74,7 @@ const WidgetProvider = ({children, ...props}) => {
   ) => {
     try {
       let id = guidGenerator();
+      let notificationId = Math.floor(Math.random() * 90000) + 1000;
       const newWidget = {
         id,
         name,
@@ -78,7 +85,14 @@ const WidgetProvider = ({children, ...props}) => {
         iconName,
         description,
         paymentMethod,
+        notificationId,
       };
+      handlelocalNotificationScheduled(
+        name,
+        'Your subscription will be renewed in 1 days.',
+        notificationId,
+      );
+      // console.log(newWidget);
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
       if (arr) {
         await arr.push(newWidget);
@@ -102,6 +116,7 @@ const WidgetProvider = ({children, ...props}) => {
     iconName,
     description,
     paymentMethod,
+    notificationId,
   ) => {
     try {
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
@@ -115,6 +130,7 @@ const WidgetProvider = ({children, ...props}) => {
           arr[elem].iconName = iconName;
           arr[elem].description = description;
           arr[elem].paymentMethod = paymentMethod;
+          arr[elem].notificationId = notificationId;
         }
       }
       console.log('elem', arr);
