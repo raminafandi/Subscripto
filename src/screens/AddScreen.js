@@ -113,7 +113,7 @@ const AddScreen = ({ navigation }) => {
                                 selectedValue={values.iconName}
                                 style={{ height: 50, width: '100%' }}
                                 onValueChange={(itemValue, itemIndex) => setFieldValue('iconName', itemValue)}>
-                                <Picker.Item label={'Neflix'} value={'Neflix'} />
+                                <Picker.Item label={'Netflix'} value={'Netflix'} />
                                 <Picker.Item label={'Spotify'} value={'Spotify'} />
                                 <Picker.Item label={'Amazon Prime'} value={'Amazon Prime'} />
                                 <Picker.Item label={'Other'} value={'Other'} />

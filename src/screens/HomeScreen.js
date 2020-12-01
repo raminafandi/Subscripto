@@ -121,6 +121,7 @@ const HomeScreen = ({navigation}) => {
                 billing_date={item.billingDate}
                 billing_period={item.billingPeriod}
                 color={item.color}
+                iconName={item.iconName}
               />
             ))}
           </ScrollView>

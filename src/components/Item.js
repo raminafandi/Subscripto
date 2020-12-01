@@ -29,7 +29,7 @@ const Item = ({ colorStyle, ...props }) => {
         onPress={() => {
           setModalVisible(true);
         }}>
-        <Icon2  name='amazon' size={30} style={styles.icons} color='#000'/>
+        <Icon2  name={props.iconName.toLowerCase()} size={30} style={styles.icons} color='#000'/>
         <View
           style={{
             flexDirection: 'column',
