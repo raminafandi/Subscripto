@@ -136,14 +136,14 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   icons: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     alignSelf: 'center',
     textAlign:'center',
     textAlignVertical:'center',
-    margin:20,
+    margin:10,
     borderRadius:10,
-    backgroundColor:'#fff'
+    backgroundColor:'#F7F7F9'
   },
   progessDate: {
     position: 'absolute',

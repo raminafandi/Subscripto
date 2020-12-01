@@ -43,7 +43,8 @@ const HomeScreen = ({navigation}) => {
       <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}
-        colors={['#ff5f6d', '#ffc371']}
+        // colors={['#ff5f6d', '#ffc371']}
+        colors={['#FF5357', '#F56E44']}
         style={styles.top}>
         <View
           style={{
@@ -74,7 +75,7 @@ const HomeScreen = ({navigation}) => {
           style={{
             position: 'absolute',
             bottom: 0,
-            backgroundColor: '#272d31',
+            backgroundColor: '#202835',
             width: '40%',
             borderTopRightRadius: 30,
           }}>
@@ -92,7 +93,7 @@ const HomeScreen = ({navigation}) => {
       {/* </View> */}
 
       {/* Items */}
-      <View style={[styles.items, {backgroundColor: '#ffc371'}]}>
+      <View style={[styles.items, {backgroundColor: '#F56E44'}]}>
         <View
           style={{
             flex: 1,
@@ -105,7 +106,7 @@ const HomeScreen = ({navigation}) => {
             onPress={() => {
               navigation.navigate('Add');
             }}
-            style={[styles.addButton, {backgroundColor: '#272d31'}]}>
+            style={[styles.addButton, {backgroundColor: '#202835'}]}>
             <Icon name="plus" size={40} color={colors.icon} />
           </TouchableOpacity>
           <ScrollView
@@ -165,6 +166,8 @@ const styles = StyleSheet.create({
     right: 50,
     borderRadius: 20,
     zIndex: 2,
+    justifyContent:'center',
+    alignItems:'center'
   },
 
   settingsButton: {
