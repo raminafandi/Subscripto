@@ -1,31 +1,29 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import {
-  TextInput,
   Text,
-  Button,
   StyleSheet,
   ImageBackground,
   SafeAreaView,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useTheme} from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import ActionButton from 'react-native-action-button';
 
-const DetailsScreen = ({route,navigation}) => {
-  const {colors, isDark} = useTheme();
+const DetailsScreen = ({ route, navigation }) => {
+  const { colors, isDark } = useTheme();
+
   const pressHandler = () => {
     navigation.goBack();
   };
 
-
   const uris = {
-    'Netflix':'https://file.mk.co.kr/meet/2020/01/image_listtop_2020_53348_1579145243.jpg',
-    'Spotify':'https://www.scdn.co/i/_global/open-graph-default.png '
+    'Netflix': 'https://file.mk.co.kr/meet/2020/01/image_listtop_2020_53348_1579145243.jpg',
+    'Spotify': 'https://www.scdn.co/i/_global/open-graph-default.png '
   }
 
-  const { name, amount,currency,billing_date,billing_period,iconName,description,method } = route.params;
+
+  const { name, amount, currency, billing_date, billing_period, iconName, description, method } = route.params;
   return (
     <SafeAreaView
       style={{
@@ -36,10 +34,10 @@ const DetailsScreen = ({route,navigation}) => {
       <View>
         <ImageBackground
           source={{
-            uri:uris[iconName]
+            uri: uris[iconName]
           }}
           style={styles.imgBack}>
-          <View style={{backgroundColor: 'rgba(0,0,0,0.6)', height: 250}}>
+          <View style={{ backgroundColor: 'rgba(0,0,0,0.6)', height: 250 }}>
             <Text style={styles.name}>{name}</Text>
             <TouchableOpacity
               onPress={pressHandler}
@@ -53,6 +51,19 @@ const DetailsScreen = ({route,navigation}) => {
               }}>
               <Icon name="arrow-back-outline" size={20} color="white" />
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{
+                position: 'absolute',
+                right: '5%',
+                top: '5%',
+                backgroundColor: '#ff6200',
+                borderRadius: 40,
+                padding: 10,
+              }}>
+              <Icon name="settings-outline" size={20} color="white" />
+            </TouchableOpacity>
+
           </View>
         </ImageBackground>
         <View style={styles.tab}>
@@ -72,7 +83,7 @@ const DetailsScreen = ({route,navigation}) => {
 
         <View style={styles.tab}>
           <Text style={styles.tabText1}>Billing date</Text>
-          <Text style={styles.tabText2}>{new Date(billing_date).toISOString().slice(0,10)}</Text>
+          <Text style={styles.tabText2}>{new Date(billing_date).toISOString().slice(0, 10)}</Text>
         </View>
 
         <View style={styles.tab}>
@@ -80,7 +91,7 @@ const DetailsScreen = ({route,navigation}) => {
           <Text style={styles.tabText2}>{billing_period}</Text>
         </View>
 
-        
+
         {/* <View style={styles.buttonBottom}> */}
         {/* <View> */}
         <TouchableOpacity
@@ -139,10 +150,10 @@ const styles = StyleSheet.create({
   tab: {
     flexDirection: 'column',
     borderBottomWidth: 1,
-    justifyContent:'space-around',
+    justifyContent: 'space-around',
     borderBottomColor: 'grey',
-    height:65,
-    padding:5
+    height: 65,
+    padding: 5
   },
   tabText1: {
     color: 'white',

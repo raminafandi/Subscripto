@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import { useTheme } from '../context/ThemeContext';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
 const Item = ({ navigation, colorStyle, ...props }) => {

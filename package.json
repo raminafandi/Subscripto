@@ -26,6 +26,7 @@
     "react-native-dropdown-picker": "^3.7.1",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-paper": "^4.5.0",
     "react-native-progress-circle": "^2.1.0",
     "react-native-push-notification": "^6.1.2",
     "react-native-reanimated": "^1.13.1",
