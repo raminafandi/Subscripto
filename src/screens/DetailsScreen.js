@@ -11,13 +11,21 @@ import {
 } from 'react-native';
 import {useTheme} from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ActionButton from 'react-native-action-button';
+// import ActionButton from 'react-native-action-button';
 
-const DetailsScreen = ({navigation}) => {
+const DetailsScreen = ({route,navigation}) => {
   const {colors, isDark} = useTheme();
   const pressHandler = () => {
     navigation.goBack();
   };
+
+
+  const uris = {
+    'Netflix':'https://file.mk.co.kr/meet/2020/01/image_listtop_2020_53348_1579145243.jpg',
+    'Spotify':'https://www.scdn.co/i/_global/open-graph-default.png '
+  }
+
+  const { name, amount,currency,billing_date,billing_period,iconName,description,method } = route.params;
   return (
     <SafeAreaView
       style={{
@@ -28,14 +36,11 @@ const DetailsScreen = ({navigation}) => {
       <View>
         <ImageBackground
           source={{
-            uri:
-              'https://sm.pcmag.com/pcmag_in/review/a/amazon-pri/amazon-prime-video_12d1.jpg',
+            uri:uris[iconName]
           }}
           style={styles.imgBack}>
           <View style={{backgroundColor: 'rgba(0,0,0,0.6)', height: 250}}>
-            <Text style={styles.name}>amazon prime</Text>
-            <Text style={styles.price}>13$/month</Text>
-
+            <Text style={styles.name}>{name}</Text>
             <TouchableOpacity
               onPress={pressHandler}
               style={{
@@ -51,13 +56,31 @@ const DetailsScreen = ({navigation}) => {
           </View>
         </ImageBackground>
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Billing Period:</Text>
-          <Text style={styles.tabText2}>every month</Text>
+          <Text style={styles.tabText1}>Amount</Text>
+          <Text style={styles.tabText2}>{amount} {currency}</Text>
         </View>
+
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Billing Period:</Text>
-          <Text style={styles.tabText2}>every month</Text>
+          <Text style={styles.tabText1}>Method</Text>
+          <Text style={styles.tabText2}>{method}</Text>
         </View>
+
+        <View style={styles.tab}>
+          <Text style={styles.tabText1}>Description</Text>
+          <Text style={styles.tabText2}>{description}</Text>
+        </View>
+
+        <View style={styles.tab}>
+          <Text style={styles.tabText1}>Billing date</Text>
+          <Text style={styles.tabText2}>{new Date(billing_date).toISOString().slice(0,10)}</Text>
+        </View>
+
+        <View style={styles.tab}>
+          <Text style={styles.tabText1}>Billing period</Text>
+          <Text style={styles.tabText2}>{billing_period}</Text>
+        </View>
+
+        
         {/* <View style={styles.buttonBottom}> */}
         {/* <View> */}
         <TouchableOpacity
@@ -91,7 +114,7 @@ const styles = StyleSheet.create({
   },
   name: {
     color: 'white',
-    marginTop: 180,
+    marginTop: 200,
     marginVertical: 10,
     marginLeft: 10,
     fontSize: 20,
@@ -109,37 +132,28 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
-  price: {
-    color: 'white',
-    marginTop: 5,
-    marginVertical: 10,
-    marginBottom: 10,
-    marginLeft: 10,
-    fontSize: 16,
-    paddingHorizontal: 14,
-  },
   imgBack: {
     width: '100%',
     height: 250,
   },
   tab: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 50,
+    flexDirection: 'column',
     borderBottomWidth: 1,
-    borderBottomColor: 'white',
+    justifyContent:'space-around',
+    borderBottomColor: 'grey',
+    height:65,
+    padding:5
   },
   tabText1: {
     color: 'white',
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginLeft: 20,
+    fontSize: 14,
+    marginLeft: 10,
   },
   tabText2: {
     color: 'white',
-    fontSize: 13,
+    fontSize: 17,
     fontWeight: 'bold',
-    marginLeft: 20,
+    marginLeft: 10,
   },
 });
 export default DetailsScreen;

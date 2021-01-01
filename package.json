@@ -19,6 +19,7 @@
     "formik": "^2.2.5",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-action-button": "^2.8.5",
     "react-native-animated-splash-screen": "^2.0.5",
     "react-native-appearance": "^0.3.4",
     "react-native-datepicker": "^1.7.2",

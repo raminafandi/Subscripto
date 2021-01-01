@@ -44,7 +44,7 @@ const AddScreen = ({ navigation }) => {
                         values.period,
                         values.iconName,
                         values.description,
-                        values.paymentMethod)
+                        values.method)
                     navigation.navigate('Home')
                 }}
                 validationSchema={yup.object().shape({

@@ -122,6 +122,8 @@ const HomeScreen = ({navigation}) => {
                 billing_period={item.billingPeriod}
                 color={item.color}
                 iconName={item.iconName}
+                description={item.description}
+                method={item.paymentMethod}
                 navigation={navigation}
               />
             ))}
