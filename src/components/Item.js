@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Modal,
@@ -9,17 +9,16 @@ import {
   Dimensions,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
-import {useTheme} from '../context/ThemeContext';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useTheme } from '../context/ThemeContext';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
-const Item = ({navigation, colorStyle, ...props}) => {
-  const {colors, isDark} = useTheme();
+const Item = ({ navigation, colorStyle, ...props }) => {
+  const { colors, isDark } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   // const { } = route.params;
   return (
     <View>
-      <TouchableOpacity
+        <TouchableOpacity
         style={[
           styles.container,
           {
@@ -27,8 +26,18 @@ const Item = ({navigation, colorStyle, ...props}) => {
           },
         ]}
         onPress={() => {
-          navigation.navigate('Details');
-          // setModalVisible(true);
+          navigation.navigate('Details', {
+            currency: props.currency,
+            name: props.name,
+            amount: props.amount,
+            billing_date: props.billing_date,
+            billing_period: props.billing_period,
+            color: props.color,
+            iconName: props.iconName,
+            description: props.description,
+            method: props.method,
+            id: props.id
+          });
         }}>
         <Icon2
           name={props.iconName.toLowerCase()}

@@ -115,6 +115,7 @@ const HomeScreen = ({navigation}) => {
             {items.reverse().map((item, i) => (
               <Item
                 colorStyle={{backgroundColor: colors.widgetBackground}}
+                id={item.id}
                 currency={item.currency}
                 name={item.name}
                 amount={item.amount}
@@ -122,6 +123,8 @@ const HomeScreen = ({navigation}) => {
                 billing_period={item.billingPeriod}
                 color={item.color}
                 iconName={item.iconName}
+                description={item.description}
+                method={item.paymentMethod}
                 navigation={navigation}
               />
             ))}

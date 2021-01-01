@@ -146,7 +146,6 @@ const WidgetProvider = ({children, ...props}) => {
         (item) => item.id !== idToRemove,
       );
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-      alert("You've deleted data from storage");
     } catch (e) {
       alert('Failed to delete data from storage');
     }
