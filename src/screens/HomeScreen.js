@@ -115,6 +115,7 @@ const HomeScreen = ({navigation}) => {
             {items.reverse().map((item, i) => (
               <Item
                 colorStyle={{backgroundColor: colors.widgetBackground}}
+                id={item.id}
                 currency={item.currency}
                 name={item.name}
                 amount={item.amount}

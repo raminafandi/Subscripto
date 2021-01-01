@@ -6,16 +6,37 @@ import {
   SafeAreaView,
   TouchableOpacity,
   View,
+  Alert
 } from 'react-native';
 import { useTheme } from '../context/ThemeContext';
+import { WidgetContext } from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/AntDesign';
 
 const DetailsScreen = ({ route, navigation }) => {
   const { colors, isDark } = useTheme();
+  const widgetContext = useContext(WidgetContext);
 
   const pressHandler = () => {
     navigation.goBack();
   };
+
+  const deleteWidget = (id) => {
+    Alert.alert(
+      'Delete',
+      'Do you want to delete this?', // <- this part is optional, you can pass an empty string
+      [
+        {
+          text: 'Yes', onPress: () => {
+            widgetContext.deleteWidgetById(id)
+            navigation.goBack();
+          }
+        },
+        { text: 'Cancel' },
+      ],
+      { cancelable: true },
+    );
+  }
 
   const uris = {
     'Netflix': 'https://file.mk.co.kr/meet/2020/01/image_listtop_2020_53348_1579145243.jpg',
@@ -23,7 +44,7 @@ const DetailsScreen = ({ route, navigation }) => {
   }
 
 
-  const { name, amount, currency, billing_date, billing_period, iconName, description, method } = route.params;
+  const { name, amount, currency, billing_date, billing_period, iconName, description, method, id } = route.params;
   return (
     <SafeAreaView
       style={{
@@ -49,10 +70,11 @@ const DetailsScreen = ({ route, navigation }) => {
                 borderRadius: 40,
                 padding: 10,
               }}>
-              <Icon name="arrow-back-outline" size={20} color="white" />
+              <Icon name="arrow-back-outline" size={25} color="white" />
             </TouchableOpacity>
 
             <TouchableOpacity
+              onPress={() => deleteWidget(id)}
               style={{
                 position: 'absolute',
                 right: '5%',
@@ -61,7 +83,7 @@ const DetailsScreen = ({ route, navigation }) => {
                 borderRadius: 40,
                 padding: 10,
               }}>
-              <Icon name="settings-outline" size={20} color="white" />
+              <Icon2 name="delete" size={25} color="white" />
             </TouchableOpacity>
 
           </View>
@@ -90,27 +112,18 @@ const DetailsScreen = ({ route, navigation }) => {
           <Text style={styles.tabText1}>Billing period</Text>
           <Text style={styles.tabText2}>{billing_period}</Text>
         </View>
-
-
-        {/* <View style={styles.buttonBottom}> */}
-        {/* <View> */}
-        <TouchableOpacity
-          onPress={pressHandler}
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            // position: 'absolute',
-            // bottom: 10,
-            alignSelf: 'flex-end',
-            justifyContent: 'center',
-            backgroundColor: 'red',
-            borderWidth: 0.5,
-            borderRadius: 20,
-          }}>
-          <Icon name="arrow-back-outline" size={20} color="white" />
-        </TouchableOpacity>
       </View>
-      {/* </View> */}
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          right: '5%',
+          bottom: '5%',
+          backgroundColor: '#ff6200',
+          borderRadius: 40,
+          padding: 10,
+        }}>
+        <Icon2 name="edit" size={25} color="white" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

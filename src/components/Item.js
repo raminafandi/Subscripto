@@ -35,7 +35,8 @@ const Item = ({ navigation, colorStyle, ...props }) => {
             color: props.color,
             iconName: props.iconName,
             description: props.description,
-            method: props.method
+            method: props.method,
+            id: props.id
           });
         }}>
         <Icon2
