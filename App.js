@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import AddScreen from './src/screens/AddScreen';
 import DebugScreen from './src/screens/DebugScreen';
+import DetailsScreen from './src/screens/DetailsScreen';
 import {WidgetContext, WidgetProvider} from './src/context/WidgetContext';
 import {ThemeContext, ThemeProvider} from './src/context/ThemeContext';
 import {AppearanceProvider} from 'react-native-appearance';
@@ -17,6 +18,7 @@ const MyStack = () => (
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Debug" component={DebugScreen} />
     <Stack.Screen name="Add" component={AddScreen} />
+    <Stack.Screen name="Details" component={DetailsScreen} />
   </Stack.Navigator>
 );
 

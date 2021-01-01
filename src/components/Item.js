@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Modal,
@@ -9,14 +9,14 @@ import {
   Dimensions,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
-import { useTheme } from '../context/ThemeContext';
+import {useTheme} from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Fontisto'
+import Icon2 from 'react-native-vector-icons/Fontisto';
 
-const Item = ({ colorStyle, ...props }) => {
-  const { colors, isDark } = useTheme();
+const Item = ({navigation, colorStyle, ...props}) => {
+  const {colors, isDark} = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
-
+  // const { } = route.params;
   return (
     <View>
       <TouchableOpacity
@@ -24,12 +24,18 @@ const Item = ({ colorStyle, ...props }) => {
           styles.container,
           {
             backgroundColor: colors.widgetBackground,
-          }
+          },
         ]}
         onPress={() => {
-          setModalVisible(true);
+          navigation.navigate('Details');
+          // setModalVisible(true);
         }}>
-        <Icon2  name={props.iconName.toLowerCase()} size={30} style={styles.icons} color='#000'/>
+        <Icon2
+          name={props.iconName.toLowerCase()}
+          size={30}
+          style={styles.icons}
+          color="#000"
+        />
         <View
           style={{
             flexDirection: 'column',
@@ -62,7 +68,7 @@ const Item = ({ colorStyle, ...props }) => {
               </ProgressCircle> */}
         </View>
       </TouchableOpacity>
-      <Modal
+      {/* <Modal
         animationType={'fade'}
         transparent={true}
         visible={modalVisible}
@@ -102,11 +108,11 @@ const Item = ({ colorStyle, ...props }) => {
             </View>
             <View style={styles.modalButtons}>
               <TouchableOpacity
-                style={[styles.modalButton, { backgroundColor: 'orange' }]}>
+                style={[styles.modalButton, {backgroundColor: 'orange'}]}>
                 <Icon name="edit" size={32} color="black" />
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.modalButton, { backgroundColor: 'red' }]}>
+                style={[styles.modalButton, {backgroundColor: 'red'}]}>
                 <Icon name="delete" size={32} color="black" />
               </TouchableOpacity>
             </View>
@@ -119,7 +125,7 @@ const Item = ({ colorStyle, ...props }) => {
             </Text>
           </View>
         </View>
-      </Modal>
+      </Modal> */}
     </View>
   );
 };
@@ -139,11 +145,11 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     alignSelf: 'center',
-    textAlign:'center',
-    textAlignVertical:'center',
-    margin:10,
-    borderRadius:10,
-    backgroundColor:'#F7F7F9'
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    margin: 10,
+    borderRadius: 10,
+    backgroundColor: '#F7F7F9',
   },
   progessDate: {
     position: 'absolute',

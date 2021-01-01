@@ -122,6 +122,7 @@ const HomeScreen = ({navigation}) => {
                 billing_period={item.billingPeriod}
                 color={item.color}
                 iconName={item.iconName}
+                navigation={navigation}
               />
             ))}
           </ScrollView>
@@ -167,8 +168,8 @@ const styles = StyleSheet.create({
     right: 50,
     borderRadius: 20,
     zIndex: 2,
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   settingsButton: {
