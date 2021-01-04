@@ -3,11 +3,12 @@ export const lightColors = {
   primary: '#ffc371',
   widgetBackground: '#FFFFFF',
   placeholderColor: '#495057',
-  text: '#000',
+  text: 'black',
   error: '#D32F2F',
   button: 'red',
   icon: '#fff',
   topInfo: '#fff',
+  placeholder: '#f8f9fa',
 };
 
 export const darkColors = {
@@ -20,4 +21,5 @@ export const darkColors = {
   button: '#000',
   icon: '#fff',
   topInfo: '#202124',
+  placeholder: '#30455e',
 };

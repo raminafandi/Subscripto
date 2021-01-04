@@ -88,7 +88,7 @@ const AddScreen = ({navigation}) => {
               <Picker
                 selectedValue={values.iconName}
                 itemStyle={styles.pickerItemStyle}
-                style={styles.pickerStyle}
+                style={[styles.pickerStyle, {color: colors.text}]}
                 dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('iconName', itemValue)
@@ -99,27 +99,35 @@ const AddScreen = ({navigation}) => {
                 <Picker.Item label={'Other'} value={'Other'} />
               </Picker>
 
-              <View style={styles.tInputWrapper}>
+              <View
+                style={[
+                  styles.tInputWrapper,
+                  {backgroundColor: colors.placeholder},
+                ]}>
                 <TextInput
                   value={values.name}
                   onChangeText={handleChange('name')}
                   placeholderTextColor="#adb5bd"
                   placeholder="Name"
-                  style={styles.textInputStyle}
+                  style={{color: colors.text}}
                   onBlur={() => setFieldTouched('name')}
                 />
               </View>
               {touched.name && errors.name && (
                 <Text style={styles.error}>{errors.name}</Text>
               )}
-              <View style={styles.tInputWrapper}>
+              <View
+                style={[
+                  styles.tInputWrapper,
+                  {backgroundColor: colors.placeholder},
+                ]}>
                 <TextInput
                   value={values.amount}
                   onChangeText={handleChange('amount')}
                   onBlur={() => setFieldTouched('amount')}
                   placeholder="Amount"
                   placeholderTextColor="#adb5bd"
-                  style={styles.textInputStyle}
+                  style={{color: colors.text}}
                 />
               </View>
               {touched.amount && errors.amount && (
@@ -128,7 +136,7 @@ const AddScreen = ({navigation}) => {
               <Picker
                 selectedValue={values.currency}
                 itemStyle={styles.pickerItemStyle}
-                style={styles.pickerStyle}
+                style={[styles.pickerStyle, {color: colors.text}]}
                 dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('currency', itemValue)
@@ -140,21 +148,27 @@ const AddScreen = ({navigation}) => {
                   />
                 ))}
               </Picker>
-              <View style={styles.tInputWrapper}>
+              <View
+                style={[
+                  styles.tInputWrapper,
+                  {backgroundColor: colors.placeholder},
+                ]}>
                 <TextInput
                   value={values.description}
                   onChangeText={handleChange('description')}
                   placeholder="Description"
                   onBlur={() => setFieldTouched('description')}
-                  style={styles.textInputStyle}
+                  style={{color: colors.text}}
                   placeholderTextColor="#adb5bd"
                   multiline
                 />
               </View>
               <TouchableWithoutFeedback onPress={() => setShow(true)}>
                 <View style={styles.dateContainer}>
-                  <Text style={styles.dateText}>Date</Text>
-                  <Text style={styles.dateText}>
+                  <Text style={[styles.dateText, {color: colors.text}]}>
+                    Date
+                  </Text>
+                  <Text style={[styles.dateText, {color: colors.text}]}>
                     {new Date(values.billingDate).toISOString().slice(0, 10)}
                   </Text>
                 </View>
@@ -181,7 +195,7 @@ const AddScreen = ({navigation}) => {
               <Picker
                 selectedValue={values.period}
                 itemStyle={styles.pickerItemStyle}
-                style={styles.pickerStyle}
+                style={[styles.pickerStyle, {color: colors.text}]}
                 dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('period', itemValue)
@@ -194,7 +208,7 @@ const AddScreen = ({navigation}) => {
               <Picker
                 selectedValue={values.method}
                 itemStyle={styles.pickerItemStyle}
-                style={styles.pickerStyle}
+                style={[styles.pickerStyle, {color: colors.text}]}
                 dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('method', itemValue)
@@ -251,7 +265,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   pickerStyle: {
-    color: '#ffffff',
+    // color: 'black',
     // backgroundColor: 'red',
     height: hsize(50),
     width: '100%',
@@ -265,14 +279,14 @@ const styles = StyleSheet.create({
   },
   tInputWrapper: {
     borderColor: '#343a40',
-    backgroundColor: '#30455e',
+    // backgroundColor: '#30455e',
     alignSelf: 'center',
     borderBottomWidth: 1,
     borderRadius: 5,
     width: '100%',
     height: hsize(44),
     justifyContent: 'center',
-    // marginBottom: 14,
+    marginVertical: hsize(7),
     paddingStart: wsize(5),
   },
   confirmButton: {
