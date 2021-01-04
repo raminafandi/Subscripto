@@ -81,32 +81,42 @@ const DetailsScreen = ({route, navigation}) => {
           </View>
         </ImageBackground>
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Amount</Text>
-          <Text style={styles.tabText2}>
+          <Text style={[styles.tabText1, {color: colors.text}]}>Amount</Text>
+          <Text style={[styles.tabText2, {color: colors.text}]}>
             {amount} {currency}
           </Text>
         </View>
 
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Method</Text>
-          <Text style={styles.tabText2}>{method}</Text>
+          <Text style={[styles.tabText1, {color: colors.text}]}>Method</Text>
+          <Text style={[styles.tabText2, {color: colors.text}]}>{method}</Text>
         </View>
 
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Description</Text>
-          <Text style={styles.tabText2}>{description}</Text>
+          <Text style={[styles.tabText1, {color: colors.text}]}>
+            Description
+          </Text>
+          <Text style={[styles.tabText2, {color: colors.text}]}>
+            {description}
+          </Text>
         </View>
 
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Billing date</Text>
-          <Text style={styles.tabText2}>
+          <Text style={[styles.tabText1, {color: colors.text}]}>
+            Billing date
+          </Text>
+          <Text style={[styles.tabText2, {color: colors.text}]}>
             {new Date(billing_date).toISOString().slice(0, 10)}
           </Text>
         </View>
 
         <View style={styles.tab}>
-          <Text style={styles.tabText1}>Billing period</Text>
-          <Text style={styles.tabText2}>{billing_period}</Text>
+          <Text style={[styles.tabText1, {color: colors.text}]}>
+            Billing period
+          </Text>
+          <Text style={[styles.tabText2, {color: colors.text}]}>
+            {billing_period}
+          </Text>
         </View>
       </View>
       <TouchableOpacity style={styles.icon2}>
