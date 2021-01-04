@@ -3,10 +3,13 @@ import {
   TextInput,
   Text,
   Button,
+  KeyboardAvoidingView,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView,
   View,
+  // KeyboardAvoidingView,
 } from 'react-native';
 
 import * as yup from 'yup';
@@ -70,59 +73,27 @@ const AddScreen = ({navigation}) => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <View style={{flex: 1, backgroundColor: colors.background}}>
-            <View
-              style={{
-                paddingTop: 60,
-                marginTop: 40,
-              }}>
-              <TouchableOpacity
-                onPress={pressHandler}
-                style={{
-                  position: 'absolute',
-                  left: '5%',
-                  top: '5%',
-                  backgroundColor: '#ff6200',
-                  borderRadius: 40,
-                  padding: 10,
-                }}>
+          <ScrollView
+            style={[styles.container, {backgroundColor: colors.background}]}>
+            <View style={styles.headerContainer}>
+              <TouchableOpacity onPress={pressHandler} style={styles.arrowBack}>
                 <Icon name="arrow-back-outline" size={25} color="white" />
               </TouchableOpacity>
             </View>
             <View
-              style={{
-                flex: 8,
-                backgroundColor: '#fff',
-                borderRadius: 30,
-                // borderBottomRightRadius: 50,
-                backgroundColor: colors.widgetBackground,
-                margin: 10,
-                paddingHorizontal: 20,
-                paddingVertical: 40,
-              }}>
+              style={[
+                styles.mainContainer,
+                {backgroundColor: colors.widgetBackground},
+              ]}>
               <Picker
                 selectedValue={values.iconName}
-                itemStyle={{
-                  backgroundColor: 'grey',
-                  color: 'blue',
-                  fontFamily: 'Ebrima',
-                  fontSize: 17,
-                }}
-                // mode={'dropdown'}
-                style={{
-                  color: '#ffffff',
-                  // backgroundColor: 'red',
-                  height: 50,
-                  width: '100%',
-                }}
+                itemStyle={styles.pickerItemStyle}
+                style={styles.pickerStyle}
+                dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('iconName', itemValue)
                 }>
-                <Picker.Item
-                  label={'Netflix'}
-                  value={'Netflix'}
-                  style={{backgroundColor: 'red'}}
-                />
+                <Picker.Item label={'Netflix'} value={'Netflix'} />
                 <Picker.Item label={'Spotify'} value={'Spotify'} />
                 <Picker.Item label={'Amazon Prime'} value={'Amazon Prime'} />
                 <Picker.Item label={'Other'} value={'Other'} />
@@ -134,12 +105,12 @@ const AddScreen = ({navigation}) => {
                   onChangeText={handleChange('name')}
                   placeholderTextColor="#adb5bd"
                   placeholder="Name"
-                  style={{color: 'white'}}
+                  style={styles.textInputStyle}
                   onBlur={() => setFieldTouched('name')}
                 />
               </View>
               {touched.name && errors.name && (
-                <Text style={{fontSize: 10, color: 'red'}}>{errors.name}</Text>
+                <Text style={styles.error}>{errors.name}</Text>
               )}
               <View style={styles.tInputWrapper}>
                 <TextInput
@@ -147,16 +118,18 @@ const AddScreen = ({navigation}) => {
                   onChangeText={handleChange('amount')}
                   onBlur={() => setFieldTouched('amount')}
                   placeholder="Amount"
+                  placeholderTextColor="#adb5bd"
+                  style={styles.textInputStyle}
                 />
               </View>
               {touched.amount && errors.amount && (
-                <Text style={{fontSize: 14, color: 'red'}}>
-                  {errors.amount}
-                </Text>
+                <Text style={styles.error}>{errors.amount}</Text>
               )}
               <Picker
                 selectedValue={values.currency}
-                style={{height: 50, width: '100%'}}
+                itemStyle={styles.pickerItemStyle}
+                style={styles.pickerStyle}
+                dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('currency', itemValue)
                 }>
@@ -173,13 +146,15 @@ const AddScreen = ({navigation}) => {
                   onChangeText={handleChange('description')}
                   placeholder="Description"
                   onBlur={() => setFieldTouched('description')}
+                  style={styles.textInputStyle}
+                  placeholderTextColor="#adb5bd"
                   multiline
                 />
               </View>
               <TouchableWithoutFeedback onPress={() => setShow(true)}>
-                <View style={{marginLeft: 6}}>
-                  <Text>Date</Text>
-                  <Text>
+                <View style={styles.dateContainer}>
+                  <Text style={styles.dateText}>Date</Text>
+                  <Text style={styles.dateText}>
                     {new Date(values.billingDate).toISOString().slice(0, 10)}
                   </Text>
                 </View>
@@ -190,7 +165,7 @@ const AddScreen = ({navigation}) => {
                   value={new Date()}
                   mode={'date'}
                   is24Hour={true}
-                  display="default"
+                  display="calendar"
                   onChange={(event) => {
                     setShow(false);
                     if (event.nativeEvent['timestamp']) {
@@ -205,7 +180,9 @@ const AddScreen = ({navigation}) => {
 
               <Picker
                 selectedValue={values.period}
-                style={{height: 50, width: '100%'}}
+                itemStyle={styles.pickerItemStyle}
+                style={styles.pickerStyle}
+                dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('period', itemValue)
                 }>
@@ -216,7 +193,9 @@ const AddScreen = ({navigation}) => {
 
               <Picker
                 selectedValue={values.method}
-                style={{height: 50, width: '100%'}}
+                itemStyle={styles.pickerItemStyle}
+                style={styles.pickerStyle}
+                dropdownIconColor={colors.text}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('method', itemValue)
                 }>
@@ -234,24 +213,55 @@ const AddScreen = ({navigation}) => {
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
+          </ScrollView>
         )}
       </Formik>
     </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
-  confirmButton: {
-    padding: 10,
-    backgroundColor: '#ff6200',
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 25,
+  container: {
+    flex: 1,
   },
-  headerText: {
+  headerContainer: {
+    paddingTop: hsize(60),
+    marginTop: hsize(40),
+  },
+  arrowBack: {
+    position: 'absolute',
+    left: '5%',
+    top: '5%',
+    backgroundColor: '#ff6200',
+    borderRadius: 40,
+    padding: wsize(10),
+  },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: wsize(30),
+    // borderBottomRightRadius: 50,
+    margin: wsize(16),
+    paddingHorizontal: wsize(20),
+    paddingVertical: hsize(20),
+  },
+  pickerItemStyle: {
+    backgroundColor: 'grey',
+    color: 'blue',
+    fontFamily: 'Ebrima',
     fontSize: 17,
-    marginLeft: 3,
+  },
+  pickerStyle: {
+    color: '#ffffff',
+    // backgroundColor: 'red',
+    height: hsize(50),
+    width: '100%',
+  },
+  textInputStyle: {color: 'white'},
+  error: {
+    fontSize: 14,
+    color: 'red',
+    marginVertical: hsize(10),
+    marginHorizontal: wsize(4),
   },
   tInputWrapper: {
     borderColor: '#343a40',
@@ -260,10 +270,25 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 5,
     width: '100%',
-    height: 40,
+    height: hsize(44),
     justifyContent: 'center',
-    marginBottom: 14,
-    paddingStart: 17,
+    // marginBottom: 14,
+    paddingStart: wsize(5),
   },
+  confirmButton: {
+    padding: wsize(8),
+    backgroundColor: '#ff6200',
+    borderRadius: hsize(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: hsize(25),
+  },
+  dateContainer: {
+    marginHorizontal: wsize(6),
+    marginVertical: hsize(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  dateText: {color: 'white', fontSize: 16},
 });
 export default AddScreen;

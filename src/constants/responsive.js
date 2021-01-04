@@ -5,5 +5,5 @@ export const window = {
   height: Dimensions.get('window').height,
 };
 
-export const wsize = (size) => (size / 1080) * window.width;
-export const hsize = (size) => (size / 2220) * window.height;
+export const wsize = (size) => (size / 375) * window.width;
+export const hsize = (size) => (size / 812) * window.height;
