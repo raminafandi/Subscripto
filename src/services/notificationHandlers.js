@@ -8,14 +8,20 @@ export const handlelocalNotification = (title, message) => {
   });
 };
 
-export const handlelocalNotificationScheduled = (title, message, id) => {
+export const handlelocalNotificationScheduled = (
+  title,
+  message,
+  id,
+  date,
+  repeatType,
+) => {
   console.log(title);
   PushNotification.localNotificationSchedule({
     id: id,
     title: title,
     message: message,
-    date: new Date(Date.now() + 5 * 1000), // in 60 secs
-    repeatType: 'month',
+    date: new Date(date), // in 60 secs
+    repeatType: repeatType,
   });
 };
 

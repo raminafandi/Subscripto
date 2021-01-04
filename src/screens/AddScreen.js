@@ -18,6 +18,7 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {WidgetContext} from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../context/ThemeContext';
+import {wsize, hsize} from '../constants/responsive';
 
 const AddScreen = ({navigation}) => {
   const {colors, isDark} = useTheme();
@@ -27,7 +28,7 @@ const AddScreen = ({navigation}) => {
     navigation.goBack();
   };
   return (
-    <SafeAreaView style={{flex: 1, marginTop: 20}}>
+    <SafeAreaView style={{flex: 1, marginTop: hsize(20)}}>
       <Formik
         initialValues={{
           amount: '',
@@ -92,7 +93,7 @@ const AddScreen = ({navigation}) => {
               style={{
                 flex: 8,
                 backgroundColor: '#fff',
-                borderRadius: 40,
+                borderRadius: 30,
                 // borderBottomRightRadius: 50,
                 backgroundColor: colors.widgetBackground,
                 margin: 10,
@@ -101,11 +102,27 @@ const AddScreen = ({navigation}) => {
               }}>
               <Picker
                 selectedValue={values.iconName}
-                style={{height: 50, width: '100%'}}
+                itemStyle={{
+                  backgroundColor: 'grey',
+                  color: 'blue',
+                  fontFamily: 'Ebrima',
+                  fontSize: 17,
+                }}
+                // mode={'dropdown'}
+                style={{
+                  color: '#ffffff',
+                  // backgroundColor: 'red',
+                  height: 50,
+                  width: '100%',
+                }}
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('iconName', itemValue)
                 }>
-                <Picker.Item label={'Netflix'} value={'Netflix'} />
+                <Picker.Item
+                  label={'Netflix'}
+                  value={'Netflix'}
+                  style={{backgroundColor: 'red'}}
+                />
                 <Picker.Item label={'Spotify'} value={'Spotify'} />
                 <Picker.Item label={'Amazon Prime'} value={'Amazon Prime'} />
                 <Picker.Item label={'Other'} value={'Other'} />
@@ -115,7 +132,9 @@ const AddScreen = ({navigation}) => {
                 <TextInput
                   value={values.name}
                   onChangeText={handleChange('name')}
+                  placeholderTextColor="#adb5bd"
                   placeholder="Name"
+                  style={{color: 'white'}}
                   onBlur={() => setFieldTouched('name')}
                 />
               </View>
@@ -236,7 +255,7 @@ const styles = StyleSheet.create({
   },
   tInputWrapper: {
     borderColor: '#343a40',
-    backgroundColor: '#fafafa',
+    backgroundColor: '#30455e',
     alignSelf: 'center',
     borderBottomWidth: 1,
     borderRadius: 5,

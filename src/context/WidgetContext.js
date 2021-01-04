@@ -87,11 +87,7 @@ const WidgetProvider = ({children, ...props}) => {
         paymentMethod,
         notificationId,
       };
-      handlelocalNotificationScheduled(
-        name,
-        'Your subscription will be renewed in 1 days.',
-        notificationId,
-      );
+
       // console.log(newWidget);
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
       if (arr) {
@@ -101,8 +97,16 @@ const WidgetProvider = ({children, ...props}) => {
       }
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
       // console.log(arr);
+      handlelocalNotificationScheduled(
+        name,
+        'Your subscription will be renewed in 1 days.',
+        notificationId,
+        billingDate,
+        'month',
+      );
       return newWidget;
     } catch (e) {
+      console.log(e);
       alert('Failed to create data ');
     }
   };
