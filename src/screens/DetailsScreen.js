@@ -119,7 +119,21 @@ const DetailsScreen = ({route, navigation}) => {
           </Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.icon2}>
+      <TouchableOpacity
+        style={styles.icon2}
+        onPress={() => {
+          navigation.navigate('Edit', {
+            name,
+            amount,
+            currency,
+            billing_date,
+            billing_period,
+            iconName,
+            description,
+            method,
+            id,
+          });
+        }}>
         <Icon2 name="edit" size={25} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
