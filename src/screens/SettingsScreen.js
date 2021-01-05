@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  Linking,
   StyleSheet,
   ScrollView,
   Switch,
@@ -81,7 +82,7 @@ quick-contacts-mail
         </View>
         <View style={styles.border} />
         <View style={styles.switchContainer}>
-          <View style={styles.switchLeftContainer}>
+          <TouchableOpacity style={styles.switchLeftContainer}>
             <Icon
               name="feedback"
               size={24}
@@ -89,10 +90,12 @@ quick-contacts-mail
               style={styles.icon}
             />
             <Text style={{color: colors.text}}>Leave Feedback</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.border} />
-        <View style={styles.switchContainer}>
+        <TouchableOpacity
+          style={styles.switchContainer}
+          onPress={() => Linking.openURL('mailto:raminefendi@gmail.com')}>
           <View style={styles.switchLeftContainer}>
             <Icon
               name="mail"
@@ -102,7 +105,7 @@ quick-contacts-mail
             />
             <Text style={{color: colors.text}}>Contact us</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View style={styles.border} />
       </ScrollView>
     </SafeAreaView>
