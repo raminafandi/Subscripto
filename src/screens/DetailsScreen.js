@@ -164,8 +164,8 @@ const styles = StyleSheet.create({
   },
   tab: {
     flexDirection: 'column',
-    borderBottomWidth: 1,
     justifyContent: 'space-around',
+    borderBottomWidth: 1,
     borderBottomColor: 'grey',
     height: 65,
     padding: 5,

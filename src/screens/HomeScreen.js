@@ -134,7 +134,8 @@ const HomeScreen = ({navigation}) => {
 
       <TouchableWithoutFeedback
         onPress={() => {
-          navigation.navigate('Debug');
+          // navigation.navigate('Debug');
+          navigation.navigate('Settings');
         }}>
         <Text style={[styles.settingsButton, {backgroundColor: colors.button}]}>
           Set
