@@ -65,7 +65,7 @@ const HomeScreen = ({navigation}) => {
               textAlign: 'center',
               fontWeight: 'bold',
             }}>
-            18.5$
+            {widgetContext.getTotalAmount()}$
           </Text>
           <Text style={{fontSize: 20, color: colors.text, textAlign: 'center'}}>
             Total Amount

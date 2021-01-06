@@ -8,16 +8,17 @@ import {
 } from '../services/notificationHandlers';
 
 const WidgetContext = React.createContext({
-  getAllWidgets: () => {},
-  getWidgetById: () => {},
-  createWidget: () => {},
-  clearStorage: () => {},
-  updateWidgetById: () => {},
-  deleteWidgetById: () => {},
+  getAllWidgets: () => { },
+  getWidgetById: () => { },
+  createWidget: () => { },
+  clearStorage: () => { },
+  updateWidgetById: () => { },
+  deleteWidgetById: () => { },
+  getTotalAmount: () => { },
 });
 
 //   updateWidgetById: () => {},
-const WidgetProvider = ({children, ...props}) => {
+const WidgetProvider = ({ children, ...props }) => {
   const STORAGE_KEY = '@user_widgets';
 
   function guidGenerator() {
@@ -164,6 +165,12 @@ const WidgetProvider = ({children, ...props}) => {
     }
   };
 
+  const getTotalAmount = () => {
+    // api endpoint
+    // https://v6.exchangerate-api.com/v6/b81c5ef566e5055329f8bebb/latest/USD
+    return 110;
+  };
+
   return (
     <WidgetContext.Provider
       value={{
@@ -173,10 +180,11 @@ const WidgetProvider = ({children, ...props}) => {
         createWidget: createWidget,
         deleteWidgetById: deleteWidgetById,
         clearStorage: clearStorage,
+        getTotalAmount: getTotalAmount,
       }}>
       {children}
     </WidgetContext.Provider>
   );
 };
 
-export {WidgetContext, WidgetProvider};
+export { WidgetContext, WidgetProvider };
