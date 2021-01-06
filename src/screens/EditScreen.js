@@ -53,9 +53,12 @@ const EditScreen = ({navigation, route}) => {
           method: method,
           currency: currency,
           iconName: iconName,
+          id: id,
         }}
+        //update notification id when changing billingdate
         onSubmit={(values) => {
-          widgetContext.createWidget(
+          widgetContext.updateWidgetById(
+            values.id,
             values.name,
             values.amount,
             values.currency,

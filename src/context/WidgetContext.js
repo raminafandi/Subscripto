@@ -120,7 +120,7 @@ const WidgetProvider = ({children, ...props}) => {
     iconName,
     description,
     paymentMethod,
-    notificationId,
+    // notificationId,
   ) => {
     try {
       let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
@@ -134,7 +134,8 @@ const WidgetProvider = ({children, ...props}) => {
           arr[elem].iconName = iconName;
           arr[elem].description = description;
           arr[elem].paymentMethod = paymentMethod;
-          arr[elem].notificationId = notificationId;
+          // arr[elem].notificationId = notificationId;
+          //update notification id when changing billingdate
         }
       }
       console.log('elem', arr);

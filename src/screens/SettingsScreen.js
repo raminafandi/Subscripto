@@ -14,7 +14,7 @@ import {
 import {WidgetContext} from '../context/WidgetContext';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import Border from '../components/Border';
 import {useTheme} from '../context/ThemeContext';
 import {
   handlelocalNotification,
@@ -67,7 +67,7 @@ quick-contacts-mail
           </View>
           <Switch value={isDark} onValueChange={toggleScheme} />
         </View>
-        <View style={styles.border} />
+        <Border />
         <View style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>
             <Icon
@@ -80,7 +80,7 @@ quick-contacts-mail
           </View>
           <Switch value={isDark} onValueChange={toggleScheme} />
         </View>
-        <View style={styles.border} />
+        <Border />
         <View style={styles.switchContainer}>
           <TouchableOpacity style={styles.switchLeftContainer}>
             <Icon
@@ -92,7 +92,7 @@ quick-contacts-mail
             <Text style={{color: colors.text}}>Leave Feedback</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.border} />
+        <Border />
         <TouchableOpacity
           style={styles.switchContainer}
           onPress={() => Linking.openURL('mailto:raminefendi@gmail.com')}>
@@ -106,7 +106,7 @@ quick-contacts-mail
             <Text style={{color: colors.text}}>Contact us</Text>
           </View>
         </TouchableOpacity>
-        <View style={styles.border} />
+        <Border />
       </ScrollView>
     </SafeAreaView>
   );
@@ -141,13 +141,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  border: {
-    width: '85%',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'grey',
   },
 });
 export default SettingsScreen;

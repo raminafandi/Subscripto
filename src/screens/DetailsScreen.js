@@ -14,6 +14,7 @@ import {WidgetContext} from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import {wsize, hsize} from '../constants/responsive';
+import Border from '../components/Border';
 
 const DetailsScreen = ({route, navigation}) => {
   const {colors, isDark} = useTheme();
@@ -86,11 +87,12 @@ const DetailsScreen = ({route, navigation}) => {
             {amount} {currency}
           </Text>
         </View>
-
+        <Border />
         <View style={styles.tab}>
           <Text style={[styles.tabText1, {color: colors.text}]}>Method</Text>
           <Text style={[styles.tabText2, {color: colors.text}]}>{method}</Text>
         </View>
+        <Border />
 
         <View style={styles.tab}>
           <Text style={[styles.tabText1, {color: colors.text}]}>
@@ -100,6 +102,7 @@ const DetailsScreen = ({route, navigation}) => {
             {description}
           </Text>
         </View>
+        <Border />
 
         <View style={styles.tab}>
           <Text style={[styles.tabText1, {color: colors.text}]}>
@@ -109,6 +112,7 @@ const DetailsScreen = ({route, navigation}) => {
             {new Date(billing_date).toISOString().slice(0, 10)}
           </Text>
         </View>
+        <Border />
 
         <View style={styles.tab}>
           <Text style={[styles.tabText1, {color: colors.text}]}>
@@ -118,6 +122,7 @@ const DetailsScreen = ({route, navigation}) => {
             {billing_period}
           </Text>
         </View>
+        <Border />
       </View>
       <TouchableOpacity
         style={styles.icon2}
@@ -179,8 +184,8 @@ const styles = StyleSheet.create({
   tab: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    // borderBottomWidth: 1,
+    // borderBottomColor: 'grey',
     height: 65,
     padding: 5,
   },
