@@ -165,10 +165,15 @@ const WidgetProvider = ({ children, ...props }) => {
     }
   };
 
-  const getTotalAmount = () => {
+  const getTotalAmount = async () => {
     // api endpoint
     // https://v6.exchangerate-api.com/v6/b81c5ef566e5055329f8bebb/latest/USD
-    return 110;
+    
+    // get all items
+    // sum their amount with respect currency  multiplication => USD
+    // convert to chosen currency division
+    // return total amount
+    return 120;
   };
 
   return (

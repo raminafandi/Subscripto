@@ -19,10 +19,15 @@ const HomeScreen = ({navigation}) => {
   const {colors, isDark} = useTheme();
   const widgetContext = useContext(WidgetContext);
   const [items, setItems] = useState([]);
+  const [amount, setAmount] = useState(0);
 
   useEffect(() => {
     widgetContext.getAllWidgets().then((items) => setItems(items));
   }, [items]);
+
+  useEffect(()=> {
+    widgetContext.getTotalAmount().then((amount)=> setAmount(amount))
+  },[])
 
   return (
     <SafeAreaView
@@ -65,7 +70,7 @@ const HomeScreen = ({navigation}) => {
               textAlign: 'center',
               fontWeight: 'bold',
             }}>
-            {widgetContext.getTotalAmount()}$
+            {amount}$
           </Text>
           <Text style={{fontSize: 20, color: colors.text, textAlign: 'center'}}>
             Total Amount
