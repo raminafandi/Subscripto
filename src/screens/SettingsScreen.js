@@ -14,6 +14,7 @@ import {
 import {WidgetContext} from '../context/WidgetContext';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import Border from '../components/Border';
 import {useTheme} from '../context/ThemeContext';
 import {
@@ -31,17 +32,10 @@ const SettingsScreen = ({navigation}) => {
   const toggleScheme = () => {
     isDark ? setScheme('light') : setScheme('dark');
   };
-  /*
-MaterialIcons
-feedback
-notifications
-Rasim Mammadoff12:35 AM
-nightlight-round
-Rasim Mammadoff12:49 AM
-https://www.peterboni.net/img/2013-06-24-ios-7-userxlistview/app-7-list-view-lots.png
-Rasim Mammadoff1:21 AM
-quick-contacts-mail
- */
+  const pressHandler = () => {
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
       <ScrollView style={[styles.container]}>
@@ -51,9 +45,20 @@ quick-contacts-mail
           // colors={['#ff5f6d', '#ffc371']}
           colors={['#FF5357', '#F56E44']}
           style={styles.headerContainer}>
-          <Text style={[styles.headerText, {color: colors.text}]}>
-            Settings
-          </Text>
+          <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
+            <Icon2 name="arrow-back-outline" size={25} color="white" />
+          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'center',
+            }}>
+            <Text style={[styles.headerText, {color: colors.text}]}>
+              Settings
+            </Text>
+          </View>
         </LinearGradient>
         <View style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>
@@ -119,12 +124,27 @@ const styles = StyleSheet.create({
     paddingTop: hsize(50),
     paddingVertical: hsize(20),
     marginBottom: hsize(10),
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  iconBack: {
+    // position: 'absolute',
+    // left: '5%',
+    // top: '5%',
+    backgroundColor: '#ff6200',
+    borderRadius: 40,
+    padding: wsize(10),
+    marginLeft: wsize(10),
+  },
   headerText: {
+    marginLeft: wsize(90),
     fontSize: 22,
     fontWeight: 'bold',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   icon: {
     paddingRight: 10,

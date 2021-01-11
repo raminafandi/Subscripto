@@ -25,9 +25,11 @@ const HomeScreen = ({navigation}) => {
     widgetContext.getAllWidgets().then((items) => setItems(items));
   }, [items]);
 
-  useEffect(()=> {
-    widgetContext.getTotalAmount().then((amount)=> setAmount(amount))
-  },[])
+  useEffect(() => {
+    widgetContext.getTotalAmount().then((amount) => {
+      return setAmount(amount);
+    });
+  }, []);
 
   return (
     <SafeAreaView

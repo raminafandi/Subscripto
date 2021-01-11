@@ -46,6 +46,7 @@ const DetailsScreen = ({route, navigation}) => {
     Netflix:
       'https://file.mk.co.kr/meet/2020/01/image_listtop_2020_53348_1579145243.jpg',
     Spotify: 'https://www.scdn.co/i/_global/open-graph-default.png ',
+    Amazon_Prime: '',
   };
 
   const {
