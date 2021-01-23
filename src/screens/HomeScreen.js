@@ -26,7 +26,7 @@ const HomeScreen = ({navigation}) => {
   }, [items]);
 
   useEffect(() => {
-    widgetContext.getTotalAmount().then((amount) => {
+    widgetContext.getTotalAmount('USD').then((amount) => {
       return setAmount(amount);
     });
   }, []);

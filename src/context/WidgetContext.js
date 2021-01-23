@@ -8,17 +8,17 @@ import {
 } from '../services/notificationHandlers';
 
 const WidgetContext = React.createContext({
-  getAllWidgets: () => {},
-  getWidgetById: () => {},
-  createWidget: () => {},
-  clearStorage: () => {},
-  updateWidgetById: () => {},
-  deleteWidgetById: () => {},
-  getTotalAmount: () => {},
+  getAllWidgets: () => { },
+  getWidgetById: () => { },
+  createWidget: () => { },
+  clearStorage: () => { },
+  updateWidgetById: () => { },
+  deleteWidgetById: () => { },
+  getTotalAmount: () => { },
 });
 
 //   updateWidgetById: () => {},
-const WidgetProvider = ({children, ...props}) => {
+const WidgetProvider = ({ children, ...props }) => {
   const STORAGE_KEY = '@user_widgets';
 
   function guidGenerator() {
@@ -165,21 +165,24 @@ const WidgetProvider = ({children, ...props}) => {
     }
   };
 
-  const getTotalAmount = () => {
-    // api endpoint
-    // https://v6.exchangerate-api.com/v6/b81c5ef566e5055329f8bebb/latest/USD
+  // return rate respect to dollar
+  const getRate = (from, to) => {
+    if (from == to) {
+      return 1
+    }
+    fetch('http://www.floatrates.com/daily/usd.json').then(res => res.json()).then(data => {console.log(data[from.toLowerCase()].rate) })
+  }
 
-    // get all items+
-    // sum their amount with respect currency  multiplication => USD
-    // convert to chosen currency division
-    // return total amount
-    let ret;
+  const getTotalAmount = (to) => {
+    let ret = 0.0;
     return getAllWidgets().then((items) => {
-      ret = items
-        .map((item) => item.amount)
-        .reduce((a, b) => {
-          return parseFloat(a) + parseFloat(b);
-        }, 0);
+      items.map(item => {
+        // get rates
+        let rate = getRate(item.currency, to)
+
+        // multiply and add to find total amount in dollar
+        ret += rate * parseFloat(item.amount)
+      })
       return ret;
     });
   };
@@ -200,4 +203,4 @@ const WidgetProvider = ({children, ...props}) => {
   );
 };
 
-export {WidgetContext, WidgetProvider};
+export { WidgetContext, WidgetProvider };
