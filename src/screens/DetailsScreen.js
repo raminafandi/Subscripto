@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   Text,
   StyleSheet,
@@ -15,6 +15,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import {wsize, hsize} from '../constants/responsive';
 import Border from '../components/Border';
+import {subnames} from '../utils/subnames';
+import {sub} from 'react-native-reanimated';
 
 const DetailsScreen = ({route, navigation}) => {
   const {colors, isDark} = useTheme();
@@ -44,9 +46,8 @@ const DetailsScreen = ({route, navigation}) => {
 
   const uris = {
     Netflix:
-      'https://file.mk.co.kr/meet/2020/01/image_listtop_2020_53348_1579145243.jpg',
+      'https://www.nvidia.com/content/dam/en-zz/Solutions/gfn/webassets/geforce-now-og-no-text-1200x630.jpg',
     Spotify: 'https://www.scdn.co/i/_global/open-graph-default.png ',
-    Amazon_Prime: '',
   };
 
   const {
@@ -60,13 +61,30 @@ const DetailsScreen = ({route, navigation}) => {
     method,
     id,
   } = route.params;
+
+  const getPhoto = async () => {
+    for (var i = 0; i < subnames.length; i++) {
+      if (subnames[i].value === iconName) {
+        console.log(subnames[i].image);
+        return subnames[i].image;
+      }
+    }
+  };
+
+  const [imageName, setImageName] = useState('');
+
+  useEffect(() => {
+    getPhoto().then((image) => setImageName(image));
+    console.log(imageName);
+  }, []);
+
   return (
     <SafeAreaView
       style={[styles.container, {backgroundColor: colors.background}]}>
       <View>
         <ImageBackground
           source={{
-            uri: uris[iconName],
+            uri: imageName,
           }}
           style={styles.imgBack}>
           <View style={{backgroundColor: 'rgba(0,0,0,0.6)', height: 250}}>
@@ -74,7 +92,6 @@ const DetailsScreen = ({route, navigation}) => {
             <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
               <Icon name="arrow-back-outline" size={25} color="white" />
             </TouchableOpacity>
-
             <TouchableOpacity
               onPress={() => deleteWidget(id)}
               style={styles.deleteIcon}>
@@ -181,6 +198,7 @@ const styles = StyleSheet.create({
   imgBack: {
     width: '100%',
     height: 250,
+    backgroundColor: 'white',
   },
   tab: {
     flexDirection: 'column',

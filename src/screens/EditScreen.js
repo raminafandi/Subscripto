@@ -22,6 +22,7 @@ import {WidgetContext} from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../context/ThemeContext';
 import {wsize, hsize} from '../constants/responsive';
+import {subnames} from '../utils/subnames';
 
 const EditScreen = ({navigation, route}) => {
   const {colors, isDark} = useTheme();
@@ -107,10 +108,9 @@ const EditScreen = ({navigation, route}) => {
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('iconName', itemValue)
                 }>
-                <Picker.Item label={'Netflix'} value={'Netflix'} />
-                <Picker.Item label={'Spotify'} value={'Spotify'} />
-                <Picker.Item label={'Amazon Prime'} value={'Amazon Prime'} />
-                <Picker.Item label={'Other'} value={'Other'} />
+                {subnames.map((item) => (
+                  <Picker.Item label={item.label} value={item.value} />
+                ))}
               </Picker>
 
               <View

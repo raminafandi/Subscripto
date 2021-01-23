@@ -17,6 +17,7 @@ import {Formik} from 'formik';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Picker} from '@react-native-picker/picker';
 import {currencies} from '../utils/currencies';
+import {subnames} from '../utils/subnames';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {WidgetContext} from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -93,12 +94,10 @@ const AddScreen = ({navigation}) => {
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('iconName', itemValue)
                 }>
-                <Picker.Item label={'Netflix'} value={'Netflix'} />
-                <Picker.Item label={'Spotify'} value={'Spotify'} />
-                <Picker.Item label={'Amazon Prime'} value={'Amazon Prime'} />
-                <Picker.Item label={'Other'} value={'Other'} />
+                {subnames.map((item) => (
+                  <Picker.Item label={item.label} value={item.value} />
+                ))}
               </Picker>
-
               <View
                 style={[
                   styles.tInputWrapper,
