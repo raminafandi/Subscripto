@@ -6,19 +6,20 @@ import {
   handleCancelLocalNotificationScheduled,
   handlelocalNotificationScheduled,
 } from '../services/notificationHandlers';
+import axios from 'axios';
 
 const WidgetContext = React.createContext({
-  getAllWidgets: () => { },
-  getWidgetById: () => { },
-  createWidget: () => { },
-  clearStorage: () => { },
-  updateWidgetById: () => { },
-  deleteWidgetById: () => { },
-  getTotalAmount: () => { },
+  getAllWidgets: () => {},
+  getWidgetById: () => {},
+  createWidget: () => {},
+  clearStorage: () => {},
+  updateWidgetById: () => {},
+  deleteWidgetById: () => {},
+  getTotalAmount: () => {},
 });
 
 //   updateWidgetById: () => {},
-const WidgetProvider = ({ children, ...props }) => {
+const WidgetProvider = ({children, ...props}) => {
   const STORAGE_KEY = '@user_widgets';
 
   function guidGenerator() {
@@ -166,25 +167,22 @@ const WidgetProvider = ({ children, ...props }) => {
   };
 
   // return rate respect to dollar
-  const getRate = (from, to) => {
+  const getRate = async (from, to) => {
     if (from == to) {
-      return 1
+      return 1;
     }
-    fetch('http://www.floatrates.com/daily/usd.json').then(res => res.json()).then(data => {console.log(data[from.toLowerCase()].rate) })
-  }
+    const res = await axios.get('http://www.floatrates.com/daily/usd.json');
+    return res.data[from.toLowerCase()].rate;
+  };
 
-  const getTotalAmount = (to) => {
-    let ret = 0.0;
-    return getAllWidgets().then((items) => {
-      items.map(item => {
-        // get rates
-        let rate = getRate(item.currency, to)
-
-        // multiply and add to find total amount in dollar
-        ret += rate * parseFloat(item.amount)
-      })
-      return ret;
-    });
+  const getTotalAmount = async (to) => {
+    const items = await getAllWidgets();
+    let sum = 0.0;
+    for (var i = 0; i < items.length; i++) {
+      let rate = await getRate(items[i].currency, to);
+      sum += parseFloat(rate) * parseFloat(items[i].amount);
+    }
+    return sum.toFixed(2);
   };
 
   return (
@@ -203,4 +201,4 @@ const WidgetProvider = ({ children, ...props }) => {
   );
 };
 
-export { WidgetContext, WidgetProvider };
+export {WidgetContext, WidgetProvider};

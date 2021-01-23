@@ -29,7 +29,7 @@ const HomeScreen = ({navigation}) => {
     widgetContext.getTotalAmount('USD').then((amount) => {
       return setAmount(amount);
     });
-  }, []);
+  }, [items]);
 
   return (
     <SafeAreaView
