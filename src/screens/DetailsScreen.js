@@ -16,7 +16,6 @@ import Icon2 from 'react-native-vector-icons/AntDesign';
 import {wsize, hsize} from '../constants/responsive';
 import Border from '../components/Border';
 import {subnames} from '../utils/subnames';
-import {sub} from 'react-native-reanimated';
 
 const DetailsScreen = ({route, navigation}) => {
   const {colors, isDark} = useTheme();
@@ -42,12 +41,6 @@ const DetailsScreen = ({route, navigation}) => {
       ],
       {cancelable: true},
     );
-  };
-
-  const uris = {
-    Netflix:
-      'https://www.nvidia.com/content/dam/en-zz/Solutions/gfn/webassets/geforce-now-og-no-text-1200x630.jpg',
-    Spotify: 'https://www.scdn.co/i/_global/open-graph-default.png ',
   };
 
   const {
@@ -165,24 +158,24 @@ const DetailsScreen = ({route, navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    marginTop: hsize(20),
   },
   confirmButton: {
     width: '100%',
     height: '100%',
-    padding: 10,
+    padding: wsize(10),
     backgroundColor: '#FF5357',
     justifyContent: 'center',
     alignItems: 'center',
   },
   name: {
     color: 'white',
-    marginTop: 200,
-    marginVertical: 10,
-    marginLeft: 10,
+    marginTop: hsize(200),
+    marginVertical: hsize(10),
+    marginLeft: wsize(10),
     fontSize: 20,
     fontWeight: 'bold',
-    paddingHorizontal: 14,
+    paddingHorizontal: wsize(14),
   },
   buttonBottom: {
     position: 'absolute',
@@ -192,56 +185,57 @@ const styles = StyleSheet.create({
   },
   actionButtonIcon: {
     fontSize: 20,
-    height: 22,
+    height: hsize(22),
     color: 'white',
   },
   imgBack: {
     width: '100%',
-    height: 250,
+    height: hsize(250),
     backgroundColor: 'white',
+    marginBottom: hsize(20),
   },
   tab: {
     flexDirection: 'column',
     justifyContent: 'space-around',
     // borderBottomWidth: 1,
     // borderBottomColor: 'grey',
-    height: 65,
-    padding: 5,
+    height: hsize(85),
+    padding: wsize(15),
   },
   tabText1: {
     color: 'white',
     fontSize: 14,
-    marginLeft: 10,
+    marginLeft: wsize(14),
   },
   tabText2: {
     color: 'white',
     fontSize: 17,
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginLeft: wsize(14),
   },
   iconBack: {
     position: 'absolute',
     left: '5%',
     top: '5%',
     backgroundColor: '#ff6200',
-    borderRadius: 40,
-    padding: 10,
+    borderRadius: wsize(40),
+    padding: wsize(10),
   },
   icon2: {
     position: 'absolute',
     right: '5%',
     bottom: '5%',
     backgroundColor: '#ff6200',
-    borderRadius: 40,
-    padding: 10,
+    borderRadius: wsize(40),
+    padding: wsize(10),
   },
   deleteIcon: {
     position: 'absolute',
     right: '5%',
     top: '5%',
     backgroundColor: '#ff6200',
-    borderRadius: 40,
-    padding: 10,
+    borderRadius: wsize(40),
+    padding: wsize(10),
   },
 });
 export default DetailsScreen;
