@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Modal,
@@ -9,16 +9,16 @@ import {
   Dimensions,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
-import { useTheme } from '../context/ThemeContext';
+import {useTheme} from '../context/ThemeContext';
 import Icon2 from 'react-native-vector-icons/Fontisto';
 
-const Item = ({ navigation, colorStyle, ...props }) => {
-  const { colors, isDark } = useTheme();
+const Item = ({navigation, colorStyle, ...props}) => {
+  const {colors, isDark} = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   // const { } = route.params;
   return (
     <View>
-        <TouchableOpacity
+      <TouchableOpacity
         style={[
           styles.container,
           {
@@ -36,7 +36,7 @@ const Item = ({ navigation, colorStyle, ...props }) => {
             iconName: props.iconName,
             description: props.description,
             method: props.method,
-            id: props.id
+            id: props.id,
           });
         }}>
         <Icon2
@@ -66,15 +66,15 @@ const Item = ({ navigation, colorStyle, ...props }) => {
           </Text>
         </View>
         <View style={styles.progessDate}>
-          {/* <ProgressCircle
-                percent={80}
-                radius={30}
-                borderWidth={8}
-                color="#3399FF"
-                shadowColor="#246890"
-                bgColor={colors.widgetBackground}>
-                <Text style={{ fontSize: 18, color: colors.text }}>{'24d'}</Text>
-              </ProgressCircle> */}
+          <ProgressCircle
+            percent={80}
+            radius={30}
+            borderWidth={8}
+            color="#3399FF"
+            shadowColor="#246890"
+            bgColor={colors.widgetBackground}>
+            <Text style={{fontSize: 18, color: colors.text}}>{'24d'}</Text>
+          </ProgressCircle>
         </View>
       </TouchableOpacity>
       {/* <Modal
