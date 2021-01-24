@@ -112,6 +112,20 @@ const SettingsScreen = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <Border />
+        <TouchableOpacity
+          style={styles.switchContainer}
+          onPress={() => navigation.navigate('Backup')}>
+          <View style={styles.switchLeftContainer}>
+            <Icon
+              name="mail"
+              size={24}
+              color={colors.text}
+              style={styles.icon}
+            />
+            <Text style={{color: colors.text}}>Backup & Restore</Text>
+          </View>
+        </TouchableOpacity>
+        <Border />
       </ScrollView>
     </SafeAreaView>
   );

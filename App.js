@@ -8,6 +8,7 @@ import DebugScreen from './src/screens/DebugScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
 import EditScreen from './src/screens/EditScreen';
+import BackupScreen from './src/screens/BackupScreen';
 import {WidgetContext, WidgetProvider} from './src/context/WidgetContext';
 import {ThemeContext, ThemeProvider} from './src/context/ThemeContext';
 import {AppearanceProvider} from 'react-native-appearance';
@@ -23,6 +24,7 @@ const MyStack = () => (
     <Stack.Screen name="Settings" component={SettingsScreen} />
     <Stack.Screen name="Details" component={DetailsScreen} />
     <Stack.Screen name="Edit" component={EditScreen} />
+    <Stack.Screen name="Backup" component={BackupScreen} />
   </Stack.Navigator>
 );
 

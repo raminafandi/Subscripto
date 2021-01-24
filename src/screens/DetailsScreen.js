@@ -80,7 +80,8 @@ const DetailsScreen = ({route, navigation}) => {
             uri: imageName,
           }}
           style={styles.imgBack}>
-          <View style={{backgroundColor: 'rgba(0,0,0,0.6)', height: 250}}>
+          <View
+            style={{backgroundColor: 'rgba(0,0,0,0.6)', height: hsize(250)}}>
             <Text style={styles.name}>{name}</Text>
             <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
               <Icon name="arrow-back-outline" size={25} color="white" />
