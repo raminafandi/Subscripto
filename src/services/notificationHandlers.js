@@ -15,7 +15,8 @@ export const handlelocalNotificationScheduled = (
   date,
   repeatType,
 ) => {
-  console.log(title);
+  console.log(date - Date.now());
+
   PushNotification.localNotificationSchedule({
     id: id,
     title: title,

@@ -190,7 +190,7 @@ const WidgetProvider = ({children, ...props}) => {
     let sum = 0.0;
     for (var i = 0; i < items.length; i++) {
       let rate = await getRate(items[i].currency, to);
-      sum += parseFloat(rate) * parseFloat(items[i].amount);
+      sum += (1 / parseFloat(rate)) * parseFloat(items[i].amount);
     }
     return sum.toFixed(2);
   };
