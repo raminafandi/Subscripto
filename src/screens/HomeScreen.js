@@ -14,6 +14,8 @@ import {WidgetContext} from '../context/WidgetContext';
 import {useTheme} from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/Entypo';
 import LinearGradient from 'react-native-linear-gradient';
+import {wsize, hsize} from '../constants/responsive';
+
 
 const HomeScreen = ({navigation}) => {
   const {colors, isDark} = useTheme();
@@ -56,7 +58,7 @@ const HomeScreen = ({navigation}) => {
         <View
           style={{
             width: '70%',
-            height: 140,
+            height: hsize(140),
             backgroundColor: colors.widgetBackground,
             alignSelf: 'center',
             borderBottomRightRadius: 30,
@@ -67,14 +69,14 @@ const HomeScreen = ({navigation}) => {
           }}>
           <Text
             style={{
-              fontSize: 55,
+              fontSize: wsize(55),
               color: colors.text,
               textAlign: 'center',
               fontWeight: 'bold',
             }}>
             {amount}$
           </Text>
-          <Text style={{fontSize: 20, color: colors.text, textAlign: 'center'}}>
+          <Text style={{fontSize: wsize(20), color: colors.text, textAlign: 'center'}}>
             Total Amount
           </Text>
         </View>
@@ -83,14 +85,14 @@ const HomeScreen = ({navigation}) => {
             position: 'absolute',
             bottom: 0,
             backgroundColor: '#202835',
-            width: '40%',
+            width: wsize(150),
             borderTopRightRadius: 30,
           }}>
           <Text
             style={{
-              padding: 15,
+              padding: wsize(15),
               fontWeight: 'bold',
-              fontSize: 17,
+              fontSize: wsize(17),
               color: '#fff',
             }}>
             Subscriptions
@@ -159,24 +161,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  appName: {
-    margin: 22,
-    fontSize: 40,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-
   items: {
     flex: 2,
   },
 
   addButton: {
-    width: 65,
-    height: 65,
-    padding: 10,
+    width: wsize(65),
+    height: hsize(70),
+    padding: wsize(10),
     position: 'absolute',
-    top: -35,
-    right: 50,
+    top: hsize(-35),
+    right: wsize(50),
     borderRadius: 20,
     zIndex: 2,
     justifyContent: 'center',
@@ -189,7 +184,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     borderTopRightRadius: 80,
-    padding: 30,
+    padding: wsize(30),
     fontSize: 20,
     color: 'white',
   },
