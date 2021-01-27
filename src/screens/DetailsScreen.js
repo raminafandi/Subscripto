@@ -118,15 +118,21 @@ const DetailsScreen = ({ route, navigation }) => {
         </View>
         <Border />
 
-        <View style={styles.tab}>
-          <Text style={[styles.tabText1, { color: colors.text }]}>
-            Description
+        {description ?
+          <>
+            <View style={styles.tab}>
+              <Text style={[styles.tabText1, { color: colors.text }]}>
+                Description
           </Text>
-          <Text style={[styles.tabText2, { color: colors.text }]}>
-            {description}
-          </Text>
-        </View>
-        <Border />
+              <Text style={[styles.tabText2, { color: colors.text }]}>
+                {description}
+              </Text>
+            </View>
+            <Border />
+          </>
+          :
+          <></>
+        }
 
         <View style={styles.tab}>
           <Text style={[styles.tabText1, { color: colors.text }]}>

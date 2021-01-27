@@ -67,7 +67,7 @@ const EditScreen = ({navigation, route}) => {
             values.period,
             values.iconName,
             values.description,
-            values.paymentMethod,
+            values.method,
           );
           navigation.navigate('Home');
         }}
