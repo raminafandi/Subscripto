@@ -53,7 +53,7 @@ const AddScreen = ({navigation}) => {
             values.period,
             values.iconName,
             values.description,
-            values.paymentMethod,
+            values.method,
           );
           navigation.navigate('Home');
         }}
@@ -126,6 +126,7 @@ const AddScreen = ({navigation}) => {
                   onBlur={() => setFieldTouched('amount')}
                   placeholder="Amount"
                   placeholderTextColor="#adb5bd"
+                  keyboardType='numeric'
                   style={{color: colors.text}}
                 />
               </View>
