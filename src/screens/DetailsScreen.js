@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Text,
   StyleSheet,
@@ -9,16 +9,16 @@ import {
   View,
   Alert,
 } from 'react-native';
-import {useTheme} from '../context/ThemeContext';
-import {WidgetContext} from '../context/WidgetContext';
+import { useTheme } from '../context/ThemeContext';
+import { WidgetContext } from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
-import {wsize, hsize} from '../constants/responsive';
+import { wsize, hsize } from '../constants/responsive';
 import Border from '../components/Border';
-import {subnames} from '../utils/subnames';
+import { subnames } from '../utils/subnames';
 
-const DetailsScreen = ({route, navigation}) => {
-  const {colors, isDark} = useTheme();
+const DetailsScreen = ({ route, navigation }) => {
+  const { colors, isDark } = useTheme();
   const widgetContext = useContext(WidgetContext);
 
   const pressHandler = () => {
@@ -37,9 +37,9 @@ const DetailsScreen = ({route, navigation}) => {
             navigation.goBack();
           },
         },
-        {text: 'Cancel'},
+        { text: 'Cancel' },
       ],
-      {cancelable: true},
+      { cancelable: true },
     );
   };
 
@@ -73,7 +73,7 @@ const DetailsScreen = ({route, navigation}) => {
 
   return (
     <SafeAreaView
-      style={[styles.container, {backgroundColor: colors.background}]}>
+      style={[styles.container, { backgroundColor: colors.background }]}>
       <View>
         <ImageBackground
           source={{
@@ -81,77 +81,77 @@ const DetailsScreen = ({route, navigation}) => {
           }}
           style={styles.imgBack}>
           <View
-            style={{backgroundColor: 'rgba(0,0,0,0.6)', height: hsize(250)}}>
+            style={{ backgroundColor: 'rgba(0,0,0,0.6)', height: hsize(250) }}>
             <Text style={styles.name}>{name}</Text>
             <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
               <Icon name="arrow-back-outline" size={25} color="white" />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => deleteWidget(id)}
-              style={styles.deleteIcon}>
-              <Icon2 name="delete" size={25} color="white" />
+              style={styles.icon2}
+              onPress={() => {
+                navigation.navigate('Edit', {
+                  name,
+                  amount,
+                  currency,
+                  billing_date,
+                  billing_period,
+                  iconName,
+                  description,
+                  method,
+                  id,
+                });
+              }}>
+              <Icon2 name="edit" size={25} color="white" />
             </TouchableOpacity>
           </View>
         </ImageBackground>
         <View style={styles.tab}>
-          <Text style={[styles.tabText1, {color: colors.text}]}>Amount</Text>
-          <Text style={[styles.tabText2, {color: colors.text}]}>
+          <Text style={[styles.tabText1, { color: colors.text }]}>Amount</Text>
+          <Text style={[styles.tabText2, { color: colors.text }]}>
             {amount} {currency}
           </Text>
         </View>
         <Border />
         <View style={styles.tab}>
-          <Text style={[styles.tabText1, {color: colors.text}]}>Method</Text>
-          <Text style={[styles.tabText2, {color: colors.text}]}>{method}</Text>
+          <Text style={[styles.tabText1, { color: colors.text }]}>Method</Text>
+          <Text style={[styles.tabText2, { color: colors.text }]}>{method}</Text>
         </View>
         <Border />
 
         <View style={styles.tab}>
-          <Text style={[styles.tabText1, {color: colors.text}]}>
+          <Text style={[styles.tabText1, { color: colors.text }]}>
             Description
           </Text>
-          <Text style={[styles.tabText2, {color: colors.text}]}>
+          <Text style={[styles.tabText2, { color: colors.text }]}>
             {description}
           </Text>
         </View>
         <Border />
 
         <View style={styles.tab}>
-          <Text style={[styles.tabText1, {color: colors.text}]}>
+          <Text style={[styles.tabText1, { color: colors.text }]}>
             Billing date
           </Text>
-          <Text style={[styles.tabText2, {color: colors.text}]}>
+          <Text style={[styles.tabText2, { color: colors.text }]}>
             {new Date(billing_date).toISOString().slice(0, 10)}
           </Text>
         </View>
         <Border />
 
         <View style={styles.tab}>
-          <Text style={[styles.tabText1, {color: colors.text}]}>
+          <Text style={[styles.tabText1, { color: colors.text }]}>
             Billing period
           </Text>
-          <Text style={[styles.tabText2, {color: colors.text}]}>
+          <Text style={[styles.tabText2, { color: colors.text }]}>
             {billing_period}
           </Text>
         </View>
         <Border />
       </View>
       <TouchableOpacity
-        style={styles.icon2}
-        onPress={() => {
-          navigation.navigate('Edit', {
-            name,
-            amount,
-            currency,
-            billing_date,
-            billing_period,
-            iconName,
-            description,
-            method,
-            id,
-          });
-        }}>
-        <Icon2 name="edit" size={25} color="white" />
+        onPress={() => deleteWidget(id)}
+        style={styles.deleteIcon}>
+        <Icon2 name="delete" size={25} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -223,15 +223,15 @@ const styles = StyleSheet.create({
   icon2: {
     position: 'absolute',
     right: wsize(15),
-    bottom: hsize(25),
+    top: hsize(25),
     backgroundColor: '#ff6200',
     borderRadius: wsize(40),
     padding: wsize(10),
   },
   deleteIcon: {
     position: 'absolute',
-    right: wsize(15),
-    top: hsize(25),
+    right: wsize(164),
+    bottom: hsize(20),
     backgroundColor: '#ff6200',
     borderRadius: wsize(40),
     padding: wsize(10),
