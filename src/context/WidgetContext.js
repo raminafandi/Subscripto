@@ -13,6 +13,7 @@ const WidgetContext = React.createContext({
   getWidgetById: () => {},
   createWidget: () => {},
   clearStorage: () => {},
+  restoreWidgets: () => {},
   updateWidgetById: () => {},
   deleteWidgetById: () => {},
   getTotalAmount: () => {},
@@ -61,6 +62,15 @@ const WidgetProvider = ({children, ...props}) => {
       return element;
     } catch (e) {
       alert('Failed to find data from storage');
+    }
+  };
+
+  const restoreWidgets = async (arr) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      return true;
+    } catch (e) {
+      alert('Failed to restore data from storage');
     }
   };
 
@@ -180,7 +190,7 @@ const WidgetProvider = ({children, ...props}) => {
     let sum = 0.0;
     for (var i = 0; i < items.length; i++) {
       let rate = await getRate(items[i].currency, to);
-      sum += parseFloat(rate) * parseFloat(items[i].amount);
+      sum += (1 / parseFloat(rate)) * parseFloat(items[i].amount);
     }
     return sum.toFixed(2);
   };
@@ -195,6 +205,7 @@ const WidgetProvider = ({children, ...props}) => {
         deleteWidgetById: deleteWidgetById,
         clearStorage: clearStorage,
         getTotalAmount: getTotalAmount,
+        restoreWidgets: restoreWidgets,
       }}>
       {children}
     </WidgetContext.Provider>
