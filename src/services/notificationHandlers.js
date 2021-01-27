@@ -15,9 +15,12 @@ export const handlelocalNotificationScheduled = (
   date,
   repeatType,
 ) => {
+  let nextDate = new Date(date);
 
-  let nextDate = new Date(date)
-  nextDate.setSeconds(nextDate.getSeconds() + repeatType[1])
+  while (nextDate - Date.now() < 0) {
+    nextDate.setSeconds(nextDate.getSeconds() + repeatType[1]);
+    console.log(nextDate);
+  }
 
   PushNotification.localNotificationSchedule({
     id: id,
@@ -29,7 +32,7 @@ export const handlelocalNotificationScheduled = (
 };
 
 export const handleCancelLocalNotificationScheduled = (title, message) => {
-  PushNotification.cancelLocalNotifications({ id: '123' });
+  PushNotification.cancelLocalNotifications({id: '123'});
 };
 
 export const handleCancel = () => {

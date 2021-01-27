@@ -1,13 +1,18 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {View, Alert, Text, TouchableOpacity} from 'react-native';
+import {View, Alert, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {GoogleSignin} from '@react-native-community/google-signin';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {WidgetContext} from '../context/WidgetContext';
+import {wsize, hsize} from '../constants/responsive';
+import {useTheme} from '../context/ThemeContext';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function BackupScreen() {
+export default function BackupScreen({navigation}) {
+  const {colors, isDark} = useTheme();
   const widgetContext = useContext(WidgetContext);
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     widgetContext.getAllWidgets().then((items) => setItems(items));
     GoogleSignin.configure({
@@ -15,13 +20,12 @@ export default function BackupScreen() {
         '759783871498-enna1b975s687kip03n289a0h53s5m34.apps.googleusercontent.com',
     });
   }, []);
+
   async function onGoogleButtonPress() {
     // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
-
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     return auth()
       .signInWithCredential(googleCredential)
@@ -62,10 +66,8 @@ export default function BackupScreen() {
   async function onRestore() {
     // Get the users ID token
     const {idToken} = await GoogleSignin.signIn();
-
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     return auth()
       .signInWithCredential(googleCredential)
@@ -98,21 +100,65 @@ export default function BackupScreen() {
         console.error('GoogleSignIn to firebase Failed ' + error);
       });
   }
-
+  const pressHandler = () => {
+    navigation.goBack();
+  };
   return (
-    <View style={{flex: 1, marginTop: 30}}>
+    <View style={[styles.container, {backgroundColor: colors.background}]}>
+      <TouchableOpacity onPress={pressHandler} style={styles.arrowBack}>
+        <Icon name="arrow-back-outline" size={25} color="white" />
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           onGoogleButtonPress();
-        }}>
-        <Text>Back Up with Google</Text>
+        }}
+        style={styles.button}>
+        <Text
+          style={[styles.txt, {color: colors.text}]}
+          style={[styles.txt, {color: colors.text}]}>
+          Back Up with Google
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           onRestore();
-        }}>
-        <Text>Restore</Text>
+        }}
+        style={styles.button}>
+        <Text style={[styles.txt, {color: colors.text}]}>
+          Restore with Google
+        </Text>
       </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  arrowBack: {
+    position: 'absolute',
+    left: '5%',
+    top: '5%',
+    backgroundColor: '#ff6200',
+    borderRadius: 40,
+    padding: wsize(10),
+  },
+  button: {
+    paddingHorizontal: wsize(30),
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: hsize(15),
+    backgroundColor: '#ff6200',
+    width: wsize(300),
+    marginBottom: hsize(15),
+    borderRadius: wsize(20),
+  },
+  txt: {
+    fontWeight: 'bold',
+    fontSize: 17,
+  },
+});

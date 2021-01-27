@@ -33,6 +33,7 @@ const SettingsScreen = ({navigation}) => {
     isDark ? setScheme('light') : setScheme('dark');
   };
   const pressHandler = () => {
+    console.log('asdasd');
     navigation.goBack();
   };
 
@@ -50,7 +51,7 @@ const SettingsScreen = ({navigation}) => {
           </TouchableOpacity>
           <View
             style={{
-              flex:1,
+              flex: 1,
             }}>
             <Text style={[styles.headerText, {color: colors.text}]}>
               Settings

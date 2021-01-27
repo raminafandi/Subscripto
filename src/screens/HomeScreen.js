@@ -16,7 +16,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import LinearGradient from 'react-native-linear-gradient';
 import {wsize, hsize} from '../constants/responsive';
 
-
 const HomeScreen = ({navigation}) => {
   const {colors, isDark} = useTheme();
   const widgetContext = useContext(WidgetContext);
@@ -76,7 +75,12 @@ const HomeScreen = ({navigation}) => {
             }}>
             {amount}$
           </Text>
-          <Text style={{fontSize: wsize(20), color: colors.text, textAlign: 'center'}}>
+          <Text
+            style={{
+              fontSize: wsize(20),
+              color: colors.text,
+              textAlign: 'center',
+            }}>
             Total Amount
           </Text>
         </View>
@@ -123,9 +127,10 @@ const HomeScreen = ({navigation}) => {
             style={{padding: 10, paddingTop: 30}}>
             {items.reverse().map((item, i) => (
               <Item
-                lastItem = {items.length-1 == i ?  true:false}
+                lastItem={items.length - 1 == i ? true : false}
                 colorStyle={{backgroundColor: colors.widgetBackground}}
                 id={item.id}
+                key={item.id}
                 currency={item.currency}
                 name={item.name}
                 amount={item.amount}
@@ -144,8 +149,8 @@ const HomeScreen = ({navigation}) => {
 
       <TouchableWithoutFeedback
         onPress={() => {
-          navigation.navigate('Debug');
-          // navigation.navigate('Settings');
+          // navigation.navigate('Debug');
+          navigation.navigate('Settings');
         }}>
         <Text style={[styles.settingsButton, {backgroundColor: colors.button}]}>
           Set
