@@ -50,10 +50,7 @@ const SettingsScreen = ({navigation}) => {
           </TouchableOpacity>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'center',
+              flex:1,
             }}>
             <Text style={[styles.headerText, {color: colors.text}]}>
               Settings
@@ -143,22 +140,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconBack: {
-    // position: 'absolute',
-    // left: '5%',
-    // top: '5%',
+    position: 'absolute',
+    left: wsize(5),
+    top: hsize(35),
     backgroundColor: '#ff6200',
     borderRadius: 40,
     padding: wsize(10),
     marginLeft: wsize(10),
   },
   headerText: {
-    marginLeft: wsize(90),
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
   },
   icon: {
     paddingRight: 10,
