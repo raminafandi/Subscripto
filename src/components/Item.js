@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Modal,
@@ -9,11 +9,12 @@ import {
   Dimensions,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
-import {useTheme} from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 import Icon2 from 'react-native-vector-icons/Fontisto';
+import { hsize } from '../constants/responsive';
 
-const Item = ({navigation, colorStyle, ...props}) => {
-  const {colors, isDark} = useTheme();
+const Item = ({ navigation, colorStyle, ...props }) => {
+  const { colors, isDark } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   // const { } = route.params;
   return (
@@ -24,6 +25,7 @@ const Item = ({navigation, colorStyle, ...props}) => {
           {
             backgroundColor: colors.widgetBackground,
           },
+          props.lastItem && {marginBottom:hsize(60)}
         ]}
         onPress={() => {
           navigation.navigate('Details', {
@@ -73,7 +75,7 @@ const Item = ({navigation, colorStyle, ...props}) => {
             color="#3399FF"
             shadowColor="#246890"
             bgColor={colors.widgetBackground}>
-            <Text style={{fontSize: 18, color: colors.text}}>{'24d'}</Text>
+            <Text style={{ fontSize: 18, color: colors.text }}>{'24d'}</Text>
           </ProgressCircle>
         </View>
       </TouchableOpacity>

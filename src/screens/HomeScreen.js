@@ -123,6 +123,7 @@ const HomeScreen = ({navigation}) => {
             style={{padding: 10, paddingTop: 30}}>
             {items.reverse().map((item, i) => (
               <Item
+                lastItem = {items.length-1 == i ?  true:false}
                 colorStyle={{backgroundColor: colors.widgetBackground}}
                 id={item.id}
                 currency={item.currency}
