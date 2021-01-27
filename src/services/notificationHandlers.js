@@ -15,19 +15,21 @@ export const handlelocalNotificationScheduled = (
   date,
   repeatType,
 ) => {
-  console.log(date - Date.now());
+
+  let nextDate = new Date(date)
+  nextDate.setSeconds(nextDate.getSeconds() + repeatType[1])
 
   PushNotification.localNotificationSchedule({
     id: id,
     title: title,
     message: message,
-    date: new Date(date), // in 60 secs
-    repeatType: repeatType,
+    date: nextDate,
+    repeatType: repeatType[0],
   });
 };
 
 export const handleCancelLocalNotificationScheduled = (title, message) => {
-  PushNotification.cancelLocalNotifications({id: '123'});
+  PushNotification.cancelLocalNotifications({ id: '123' });
 };
 
 export const handleCancel = () => {

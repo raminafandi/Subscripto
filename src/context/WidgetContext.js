@@ -7,6 +7,7 @@ import {
   handlelocalNotificationScheduled,
 } from '../services/notificationHandlers';
 import axios from 'axios';
+import {repeatType} from '../utils/repeattype'
 
 const WidgetContext = React.createContext({
   getAllWidgets: () => {},
@@ -108,13 +109,12 @@ const WidgetProvider = ({children, ...props}) => {
         arr = [newWidget];
       }
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-      // console.log(arr);
       handlelocalNotificationScheduled(
         name,
         'Your subscription will be renewed in 1 days.',
         notificationId,
         billingDate,
-        'month',
+        repeatType[billingPeriod],
       );
       return newWidget;
     } catch (e) {
