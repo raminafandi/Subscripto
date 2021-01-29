@@ -38,17 +38,18 @@ const SettingsScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
-      <ScrollView style={[styles.container]}>
-        <LinearGradient
+    <SafeAreaView
+      style={[styles.container, {backgroundColor: colors.background}]}>
+      {/* <ScrollView style={[]}> */}
+      <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
+        <Icon2 name="arrow-back-outline" size={25} color="white" />
+      </TouchableOpacity>
+      {/* <LinearGradient
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
           // colors={['#ff5f6d', '#ffc371']}
           colors={['#FF5357', '#F56E44']}
           style={styles.headerContainer}>
-          <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
-            <Icon2 name="arrow-back-outline" size={25} color="white" />
-          </TouchableOpacity>
           <View
             style={{
               flex: 1,
@@ -57,8 +58,8 @@ const SettingsScreen = ({navigation}) => {
               Settings
             </Text>
           </View>
-        </LinearGradient>
-        <View style={styles.switchContainer}>
+        </LinearGradient> */}
+      {/* <View style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>
             <Icon
               name="notifications"
@@ -70,7 +71,8 @@ const SettingsScreen = ({navigation}) => {
           </View>
           <Switch value={isDark} onValueChange={toggleScheme} />
         </View>
-        <Border />
+        <Border /> */}
+      <View style={{marginTop: hsize(100)}}>
         <View style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>
             <Icon
@@ -115,7 +117,7 @@ const SettingsScreen = ({navigation}) => {
           onPress={() => navigation.navigate('Backup')}>
           <View style={styles.switchLeftContainer}>
             <Icon
-              name="mail"
+              name="backup"
               size={24}
               color={colors.text}
               style={styles.icon}
@@ -124,30 +126,24 @@ const SettingsScreen = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <Border />
-      </ScrollView>
+      </View>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 30,
   },
-  headerContainer: {
-    paddingTop: hsize(50),
-    paddingVertical: hsize(20),
-    marginBottom: hsize(10),
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
+
   iconBack: {
     position: 'absolute',
-    left: wsize(5),
-    top: hsize(35),
+    left: '5%',
+    top: '2%',
     backgroundColor: '#ff6200',
     borderRadius: 40,
     padding: wsize(10),
-    marginLeft: wsize(10),
   },
   headerText: {
     fontSize: 22,

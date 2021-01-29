@@ -253,12 +253,12 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     paddingTop: hsize(60),
-    marginTop: hsize(40),
+    marginTop: hsize(30),
   },
   arrowBack: {
     position: 'absolute',
     left: '5%',
-    top: '5%',
+    top: '2%',
     backgroundColor: '#ff6200',
     borderRadius: 40,
     padding: wsize(10),

@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   arrowBack: {
     position: 'absolute',
     left: '5%',
-    top: '5%',
+    top: '2%',
     backgroundColor: '#ff6200',
     borderRadius: 40,
     padding: wsize(10),

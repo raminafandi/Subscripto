@@ -196,7 +196,7 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     
-    implementation 'com.android.support:multidex:1.0.3' //enter the latest version
+    implementation 'com.android.support:multidex:2.0.1' //enter the latest version
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
@@ -222,6 +222,9 @@ dependencies {
 android {
     defaultConfig {
         multiDexEnabled true
+        aaptOptions{
+            noCompress "tflite","model"
+        }
     }
 }
 // Run this once to be able to run the application with BUCK

@@ -13,6 +13,7 @@ import Item from '../components/Item';
 import {WidgetContext} from '../context/WidgetContext';
 import {useTheme} from '../context/ThemeContext';
 import Icon from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import {wsize, hsize} from '../constants/responsive';
 
@@ -54,6 +55,13 @@ const HomeScreen = ({navigation}) => {
         // colors={['#ff5f6d', '#ffc371']}
         colors={['#FF5357', '#F56E44']}
         style={styles.top}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Settings');
+          }}
+          style={[styles.settingsButton, {backgroundColor: '#202835'}]}>
+          <Icon2 name="ios-settings-sharp" size={30} color="white" />
+        </TouchableOpacity>
         <View
           style={{
             width: '70%',
@@ -146,16 +154,6 @@ const HomeScreen = ({navigation}) => {
           </ScrollView>
         </View>
       </View>
-
-      <TouchableWithoutFeedback
-        onPress={() => {
-          // navigation.navigate('Debug');
-          navigation.navigate('Settings');
-        }}>
-        <Text style={[styles.settingsButton, {backgroundColor: colors.button}]}>
-          Set
-        </Text>
-      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 };
@@ -185,14 +183,16 @@ const styles = StyleSheet.create({
   },
 
   settingsButton: {
-    opacity: 0,
+    width: wsize(50),
+    height: hsize(55),
+    padding: wsize(10),
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-    borderTopRightRadius: 80,
-    padding: wsize(30),
-    fontSize: 20,
-    color: 'white',
+    top: hsize(40),
+    right: wsize(4),
+    borderRadius: 25,
+    // zIndex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 export default HomeScreen;
