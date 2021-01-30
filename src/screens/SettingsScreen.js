@@ -126,6 +126,35 @@ const SettingsScreen = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <Border />
+        <TouchableOpacity
+          style={styles.switchContainer}
+          onPress={() => navigation.navigate('Privacy')}>
+          <View style={styles.switchLeftContainer}>
+            <Icon
+              name="policy"
+              size={24}
+              color={colors.text}
+              style={styles.icon}
+            />
+            <Text style={{color: colors.text}}>Privacy Policy</Text>
+          </View>
+        </TouchableOpacity>
+        <Border />
+        <TouchableOpacity
+          style={styles.switchContainer}
+          onPress={() => navigation.navigate('TermsandConditions')}>
+          <View style={styles.switchLeftContainer}>
+            <Icon
+              name="rule"
+              size={24}
+              color={colors.text}
+              style={styles.icon}
+            />
+            <Text style={{color: colors.text}}>Terms & Conditions</Text>
+          </View>
+        </TouchableOpacity>
+        <Border />
+        {/* </View> */}
       </View>
       {/* </ScrollView> */}
     </SafeAreaView>
