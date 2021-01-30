@@ -35,11 +35,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: colors.background,
-        position: 'relative',
-      }}>
+      style={[styles.container, {backgroundColor: colors.background}]}>
       <StatusBar
         barStyle="dark-content"
         hidden={false}
@@ -49,86 +45,60 @@ const HomeScreen = ({navigation}) => {
 
       {/* Top */}
       {/* <View style={[styles.top, { backgroundColor: colors.primary }]}> */}
-      <LinearGradient
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
-        // colors={['#ff5f6d', '#ffc371']}
-        colors={['#FF5357', '#F56E44']}
-        style={styles.top}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Settings');
-          }}
-          style={[styles.settingsButton, {backgroundColor: '#202835'}]}>
-          <Icon2 name="ios-settings-sharp" size={30} color="white" />
-        </TouchableOpacity>
-        <View
-          style={{
-            width: '70%',
-            height: hsize(140),
-            backgroundColor: colors.widgetBackground,
-            alignSelf: 'center',
-            borderBottomRightRadius: 30,
-            borderTopLeftRadius: 30,
-            justifyContent: 'center',
-            borderColor: 'red',
-            elevation: 50,
-          }}>
-          <Text
-            style={{
-              fontSize: wsize(55),
-              color: colors.text,
-              textAlign: 'center',
-              fontWeight: 'bold',
-            }}>
-            {amount}$
-          </Text>
-          <Text
-            style={{
-              fontSize: wsize(20),
-              color: colors.text,
-              textAlign: 'center',
-            }}>
-            Total Amount
-          </Text>
-        </View>
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            backgroundColor: '#202835',
-            width: wsize(150),
-            borderTopRightRadius: 30,
-          }}>
-          <Text
-            style={{
-              padding: wsize(15),
-              fontWeight: 'bold',
-              fontSize: wsize(17),
-              color: '#fff',
-            }}>
-            Subscriptions
-          </Text>
-        </View>
-      </LinearGradient>
+      <View style={styles.topContainer}>
+        <LinearGradient
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          // colors={['#ff5f6d', '#ffc371']}
+          colors={['#FF5357', '#F56E44']}
+          style={styles.top}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Settings');
+            }}
+            style={[styles.settingsButton, {backgroundColor: '#202835'}]}>
+            <Icon2 name="ios-settings-sharp" size={wsize(20)} color="white" />
+          </TouchableOpacity>
+          <View
+            style={[
+              styles.totalAmountContainer,
+              {backgroundColor: colors.widgetBackground},
+            ]}>
+            <View style={styles.amountContainer}>
+              <Text style={[styles.amount, {color: colors.text}]}>
+                {amount}
+              </Text>
+              <View style={styles.currencyContainer}>
+                <Text style={[styles.currency, {color: colors.text}]}>USD</Text>
+              </View>
+            </View>
+            <Text
+              style={{
+                fontSize: wsize(20),
+                color: colors.text,
+                textAlign: 'center',
+              }}>
+              Total Amount
+            </Text>
+          </View>
+          <View style={styles.subscriptionContainer}>
+            <Text style={styles.subscriptionText}>Subscriptions</Text>
+          </View>
+        </LinearGradient>
+      </View>
       {/* </View> */}
 
       {/* Items */}
       <View style={[styles.items, {backgroundColor: '#F56E44'}]}>
         <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.background,
-            borderTopRightRadius: 30,
-            position: 'relative',
-          }}>
+          style={[styles.itemContinerog, {backgroundColor: colors.background}]}>
           {/* Button */}
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('Add');
             }}
             style={[styles.addButton, {backgroundColor: '#202835'}]}>
-            <Icon name="plus" size={40} color={colors.icon} />
+            <Icon name="plus" size={wsize(20)} color={colors.icon} />
           </TouchableOpacity>
           <ScrollView
             showsVerticalScrollIndicator={false}
@@ -159,40 +129,93 @@ const HomeScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  top: {
-    flex: 1.3,
+  container: {
+    flex: 1,
     position: 'relative',
+  },
+  topContainer: {
+    height: hsize(360),
+  },
+  top: {
+    flex: 1,
     justifyContent: 'center',
   },
-
-  items: {
-    flex: 2,
+  totalAmountContainer: {
+    width: '70%',
+    height: hsize(140),
+    alignSelf: 'center',
+    borderBottomRightRadius: 30,
+    borderTopLeftRadius: 30,
+    justifyContent: 'center',
+    borderColor: 'red',
+    elevation: 50,
   },
-
+  amount: {
+    fontSize: wsize(40),
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  currencyContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginBottom: hsize(10),
+  },
+  currency: {
+    fontSize: wsize(20),
+    textAlign: 'center',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  items: {
+    flex: 1,
+  },
+  itemContinerog: {
+    flex: 1,
+    borderTopRightRadius: 30,
+    position: 'relative',
+  },
   addButton: {
-    width: wsize(65),
-    height: hsize(70),
+    width: 70,
+    height: 70,
     padding: wsize(10),
     position: 'absolute',
     top: hsize(-35),
     right: wsize(50),
-    borderRadius: 20,
-    zIndex: 2,
+    borderRadius: 100,
+    zIndex: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },
-
+  amountContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    // alignItems: 'center',
+  },
   settingsButton: {
-    width: wsize(50),
-    height: hsize(55),
+    width: 70,
+    height: 70,
     padding: wsize(10),
     position: 'absolute',
     top: hsize(40),
     right: wsize(4),
-    borderRadius: 25,
+    borderRadius: wsize(150),
     // zIndex: 2,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  subscriptionContainer: {
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: '#202835',
+    width: wsize(150),
+    borderTopRightRadius: 30,
+  },
+  subscriptionText: {
+    padding: wsize(15),
+    fontWeight: 'bold',
+    fontSize: wsize(17),
+    color: '#fff',
   },
 });
 export default HomeScreen;

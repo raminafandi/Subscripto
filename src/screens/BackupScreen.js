@@ -81,6 +81,12 @@ export default function BackupScreen({navigation}) {
             if (doc.exists) {
               docRef.get().then(async (data) => {
                 await widgetContext.restoreWidgets(data._data.data);
+                Alert.alert(
+                  'Success',
+                  'The data restored successfully', // <- this part is optional, you can pass an empty string
+                  [{text: 'Okay'}],
+                  {cancelable: true},
+                );
               });
               return user;
             } else {
