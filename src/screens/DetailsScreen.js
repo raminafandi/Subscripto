@@ -68,7 +68,6 @@ const DetailsScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     getPhoto().then((image) => setImageName(image));
-    console.log(imageName);
   }, []);
 
   return (
@@ -76,9 +75,7 @@ const DetailsScreen = ({ route, navigation }) => {
       style={[styles.container, { backgroundColor: colors.background }]}>
       <View>
         <ImageBackground
-          source={{
-            uri: imageName,
-          }}
+          source={imageName}
           style={styles.imgBack}>
           <View
             style={{ backgroundColor: 'rgba(0,0,0,0.6)', height: hsize(250) }}>
