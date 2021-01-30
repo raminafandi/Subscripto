@@ -11,7 +11,7 @@ import {
 import ProgressCircle from 'react-native-progress-circle';
 import {useTheme} from '../context/ThemeContext';
 import Icon2 from 'react-native-vector-icons/Fontisto';
-import {hsize} from '../constants/responsive';
+import {hsize, wsize} from '../constants/responsive';
 
 const Item = ({navigation, colorStyle, ...props}) => {
   const {colors, isDark} = useTheme();
@@ -43,7 +43,7 @@ const Item = ({navigation, colorStyle, ...props}) => {
         }}>
         <Icon2
           name={props.iconName.toLowerCase()}
-          size={30}
+          size={wsize(30)}
           style={styles.icons}
           color="#000"
         />
@@ -54,14 +54,14 @@ const Item = ({navigation, colorStyle, ...props}) => {
           }}>
           <Text
             style={{
-              fontSize: 15,
+              fontSize: wsize(15),
               color: colors.text,
             }}>
             {props.name}
           </Text>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: wsize(10),
               color: colors.text,
             }}>
             {props.amount} {props.currency} / {props.billing_period}
@@ -75,7 +75,9 @@ const Item = ({navigation, colorStyle, ...props}) => {
             color="#3399FF"
             shadowColor="#246890"
             bgColor={colors.widgetBackground}>
-            <Text style={{fontSize: 14, color: colors.text}}>{'24d'}</Text>
+            <Text style={{fontSize: wsize(14), color: colors.text}}>
+              {'24d'}
+            </Text>
           </ProgressCircle>
         </View>
       </TouchableOpacity>
