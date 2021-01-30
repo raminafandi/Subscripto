@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   StyleSheet,
   Modal,
@@ -9,14 +9,30 @@ import {
   Dimensions,
 } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
-import {useTheme} from '../context/ThemeContext';
-import Icon2 from 'react-native-vector-icons/Fontisto';
-import {hsize, wsize} from '../constants/responsive';
+import { useTheme } from '../context/ThemeContext';
+import { hsize, wsize } from '../constants/responsive';
+import { subnames } from '../utils/subnames';
 
-const Item = ({navigation, colorStyle, ...props}) => {
-  const {colors, isDark} = useTheme();
+
+const Item = ({ navigation, colorStyle, ...props }) => {
+  const { colors, isDark } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
-  // const { } = route.params;
+
+  const getLogo = async () => {
+    for (var i = 0; i < subnames.length; i++) {
+      if (subnames[i].value === props.iconName) {
+        console.log(subnames[i])
+        return subnames[i].icon;
+      }
+    }
+  };
+
+  const [iconName, setIconName] = useState('');
+
+  useEffect(() => {
+    getLogo().then((icon) => setIconName(icon));
+  }, []);
+
   return (
     <View>
       <TouchableOpacity
@@ -25,7 +41,7 @@ const Item = ({navigation, colorStyle, ...props}) => {
           {
             backgroundColor: colors.widgetBackground,
           },
-          props.lastItem && {marginBottom: hsize(60)},
+          props.lastItem && { marginBottom: hsize(60) },
         ]}
         onPress={() => {
           navigation.navigate('Details', {
@@ -41,12 +57,12 @@ const Item = ({navigation, colorStyle, ...props}) => {
             id: props.id,
           });
         }}>
-        <Icon2
-          name={props.iconName.toLowerCase()}
-          size={wsize(30)}
-          style={styles.icons}
-          color="#000"
-        />
+        <View style={styles.iconContainer}>
+          <Image
+            source={iconName}
+            style={styles.icon}
+          />
+        </View>
         <View
           style={{
             flexDirection: 'column',
@@ -75,7 +91,7 @@ const Item = ({navigation, colorStyle, ...props}) => {
             color="#3399FF"
             shadowColor="#246890"
             bgColor={colors.widgetBackground}>
-            <Text style={{fontSize: wsize(14), color: colors.text}}>
+            <Text style={{ fontSize: wsize(14), color: colors.text }}>
               {'24d'}
             </Text>
           </ProgressCircle>
@@ -154,15 +170,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     zIndex: 2,
   },
-  icons: {
+  iconContainer: {
     width: 60,
     height: 60,
-    alignSelf: 'center',
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 10,
     borderRadius: 10,
     backgroundColor: '#F7F7F9',
+  },
+  icon: {
+    width: 50,
+    height: 50
+
   },
   progessDate: {
     position: 'absolute',
