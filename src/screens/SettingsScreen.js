@@ -12,18 +12,10 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {WidgetContext} from '../context/WidgetContext';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Border from '../components/Border';
 import {useTheme} from '../context/ThemeContext';
-import {
-  handlelocalNotification,
-  handleCancel,
-  handleCancelLocalNotificationScheduled,
-  handlelocalNotificationScheduled,
-} from '../services/notificationHandlers';
-
 import {wsize, hsize} from '../constants/responsive';
 
 const SettingsScreen = ({navigation}) => {
@@ -44,34 +36,6 @@ const SettingsScreen = ({navigation}) => {
       <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
         <Icon2 name="arrow-back-outline" size={25} color="white" />
       </TouchableOpacity>
-      {/* <LinearGradient
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          // colors={['#ff5f6d', '#ffc371']}
-          colors={['#FF5357', '#F56E44']}
-          style={styles.headerContainer}>
-          <View
-            style={{
-              flex: 1,
-            }}>
-            <Text style={[styles.headerText, {color: colors.text}]}>
-              Settings
-            </Text>
-          </View>
-        </LinearGradient> */}
-      {/* <View style={styles.switchContainer}>
-          <View style={styles.switchLeftContainer}>
-            <Icon
-              name="notifications"
-              size={24}
-              color={colors.text}
-              style={styles.icon}
-            />
-            <Text style={{color: colors.text}}>Receive Notifications</Text>
-          </View>
-          <Switch value={isDark} onValueChange={toggleScheme} />
-        </View>
-        <Border /> */}
       <View style={{marginTop: hsize(100)}}>
         <View style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>

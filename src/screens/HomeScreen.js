@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableWithoutFeedback,
+  TouchableHighlight,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
@@ -52,13 +53,13 @@ const HomeScreen = ({navigation}) => {
           // colors={['#ff5f6d', '#ffc371']}
           colors={['#FF5357', '#F56E44']}
           style={styles.top}>
-          <TouchableOpacity
+          <TouchableHighlight
             onPress={() => {
               navigation.navigate('Settings');
             }}
             style={[styles.settingsButton, {backgroundColor: '#202835'}]}>
             <Icon2 name="ios-settings-sharp" size={wsize(20)} color="white" />
-          </TouchableOpacity>
+          </TouchableHighlight>
           <View
             style={[
               styles.totalAmountContainer,
@@ -93,13 +94,13 @@ const HomeScreen = ({navigation}) => {
         <View
           style={[styles.itemContinerog, {backgroundColor: colors.background}]}>
           {/* Button */}
-          <TouchableOpacity
+          <TouchableHighlight
             onPress={() => {
               navigation.navigate('Add');
             }}
             style={[styles.addButton, {backgroundColor: '#202835'}]}>
             <Icon name="plus" size={wsize(20)} color={colors.icon} />
-          </TouchableOpacity>
+          </TouchableHighlight>
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{padding: 10, paddingTop: 30}}>
