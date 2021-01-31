@@ -57,6 +57,34 @@ const SettingsScreen = ({navigation}) => {
         </View>
         <Border />
         <View style={styles.switchContainer}>
+          <View style={styles.switchLeftContainer}>
+            <Icon3
+              name="money"
+              size={24}
+              color={colors.text}
+              style={styles.icon}
+            />
+            <Picker
+              selectedValue={currency}
+              itemStyle={styles.pickerItemStyle}
+              style={[styles.pickerStyle, {color: colors.text}]}
+              dropdownIconColor={colors.text}
+              onValueChange={(itemValue, itemIndex) => {
+                setCurrency(itemValue);
+                AsyncStorage.setItem('currency', itemValue);
+              }}>
+              {currencies.map((item) => (
+                <Picker.Item
+                  label={item.value + ' - ' + item.label}
+                  value={item.value}
+                  key={item.value}
+                />
+              ))}
+            </Picker>
+          </View>
+        </View>
+        <Border />
+        <View style={styles.switchContainer}>
           <TouchableOpacity style={styles.switchLeftContainer}>
             <Icon
               name="feedback"
@@ -70,7 +98,7 @@ const SettingsScreen = ({navigation}) => {
         <Border />
         <TouchableOpacity
           style={styles.switchContainer}
-          onPress={() => Linking.openURL('mailto:raminefendi@gmail.com')}>
+          onPress={() => Linking.openURL('mailto:okitotech@gmail.com')}>
           <View style={styles.switchLeftContainer}>
             <Icon
               name="mail"
@@ -124,34 +152,7 @@ const SettingsScreen = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <Border />
-        <View style={styles.switchContainer}>
-          <View style={styles.switchLeftContainer}>
-            <Icon3
-              name="money"
-              size={24}
-              color={colors.text}
-              style={styles.icon}
-            />
-            <Picker
-              selectedValue={currency}
-              itemStyle={styles.pickerItemStyle}
-              style={[styles.pickerStyle, {color: colors.text}]}
-              dropdownIconColor={colors.text}
-              onValueChange={(itemValue, itemIndex) => {
-                setCurrency(itemValue);
-                AsyncStorage.setItem('currency', itemValue);
-              }}>
-              {currencies.map((item) => (
-                <Picker.Item
-                  label={item.value + ' - ' + item.label}
-                  value={item.value}
-                  key={item.value}
-                />
-              ))}
-            </Picker>
-          </View>
-        </View>
-        <Border />
+
         {/* </View> */}
       </View>
       {/* </ScrollView> */}
