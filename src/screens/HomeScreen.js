@@ -23,7 +23,7 @@ const HomeScreen = ({navigation}) => {
   const widgetContext = useContext(WidgetContext);
   const [items, setItems] = useState([]);
   const [amount, setAmount] = useState(0);
-  const [currency,setCurrency] = useState()
+  const [currency, setCurrency] = useState();
 
   useEffect(() => {
     widgetContext.getAllWidgets().then((items) => setItems(items));
@@ -34,7 +34,7 @@ const HomeScreen = ({navigation}) => {
       return setAmount(amount);
     });
 
-    widgetContext.getCurrency().then((val)=>setCurrency(val))
+    widgetContext.getCurrency().then((val) => setCurrency(val));
   }, [items]);
 
   return (
@@ -61,7 +61,7 @@ const HomeScreen = ({navigation}) => {
               navigation.navigate('Settings');
             }}
             style={[styles.settingsButton, {backgroundColor: '#202835'}]}>
-            <Icon2 name="ios-settings-sharp" size={wsize(20)} color="white" />
+            <Icon2 name="ios-settings-sharp" size={wsize(16)} color="white" />
           </TouchableHighlight>
           <View
             style={[
@@ -73,7 +73,9 @@ const HomeScreen = ({navigation}) => {
                 {amount}
               </Text>
               <View style={styles.currencyContainer}>
-                <Text style={[styles.currency, {color: colors.text}]}>{currency}</Text>
+                <Text style={[styles.currency, {color: colors.text}]}>
+                  {currency}
+                </Text>
               </View>
             </View>
             <Text
@@ -102,7 +104,7 @@ const HomeScreen = ({navigation}) => {
               navigation.navigate('Add');
             }}
             style={[styles.addButton, {backgroundColor: '#202835'}]}>
-            <Icon name="plus" size={wsize(20)} color={colors.icon} />
+            <Icon name="plus" size={wsize(16)} color={colors.icon} />
           </TouchableHighlight>
           <ScrollView
             showsVerticalScrollIndicator={false}
@@ -180,8 +182,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   addButton: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     padding: wsize(10),
     position: 'absolute',
     top: hsize(-35),
@@ -197,8 +199,8 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
   settingsButton: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     padding: wsize(10),
     position: 'absolute',
     top: hsize(40),

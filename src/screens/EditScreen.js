@@ -109,7 +109,11 @@ const EditScreen = ({navigation, route}) => {
                   setFieldValue('iconName', itemValue)
                 }>
                 {subnames.map((item) => (
-                  <Picker.Item label={item.label} value={item.value} />
+                  <Picker.Item
+                    label={item.label}
+                    value={item.value}
+                    key={item.value}
+                  />
                 ))}
               </Picker>
 
@@ -159,6 +163,7 @@ const EditScreen = ({navigation, route}) => {
                   <Picker.Item
                     label={item.value + ' - ' + item.label}
                     value={item.value}
+                    key={item.value}
                   />
                 ))}
               </Picker>
@@ -214,9 +219,13 @@ const EditScreen = ({navigation, route}) => {
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('period', itemValue)
                 }>
-                <Picker.Item label={'Daily'} value={'Daily'} />
-                <Picker.Item label={'Weekly'} value={'Weekly'} />
-                <Picker.Item label={'Monthly'} value={'Monthly'} />
+                <Picker.Item label={'Daily'} value={'Daily'} key={'Daily'} />
+                <Picker.Item label={'Weekly'} value={'Weekly'} key={'Weekly'} />
+                <Picker.Item
+                  label={'Monthly'}
+                  value={'Monthly'}
+                  key={'Monthly'}
+                />
               </Picker>
 
               <Picker
@@ -227,8 +236,8 @@ const EditScreen = ({navigation, route}) => {
                 onValueChange={(itemValue, itemIndex) =>
                   setFieldValue('method', itemValue)
                 }>
-                <Picker.Item label={'By Card'} value={'By Card'} />
-                <Picker.Item label={'By Cash'} value={'By Cash'} />
+                <Picker.Item label={'By Card'} value={'By Card'} key={'Card'} />
+                <Picker.Item label={'By Cash'} value={'By Cash'} key={'Cash'} />
               </Picker>
               <View style={{flex: 1}}>
                 <TouchableOpacity

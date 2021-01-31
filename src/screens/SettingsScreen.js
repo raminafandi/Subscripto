@@ -1,53 +1,48 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
-  TextInput,
-  Button,
   Linking,
   StyleSheet,
-  ScrollView,
   Switch,
   SafeAreaView,
 } from 'react-native';
-import { WidgetContext } from '../context/WidgetContext';
+import {WidgetContext} from '../context/WidgetContext';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-import Icon3 from 'react-native-vector-icons/FontAwesome'
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Border from '../components/Border';
-import { useTheme } from '../context/ThemeContext';
-import { wsize, hsize } from '../constants/responsive';
-import { Picker } from '@react-native-picker/picker';
-import { currencies } from '../utils/currencies';
+import {useTheme} from '../context/ThemeContext';
+import {wsize, hsize} from '../constants/responsive';
+import {Picker} from '@react-native-picker/picker';
+import {currencies} from '../utils/currencies';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
-const SettingsScreen = ({ navigation }) => {
-  const { setScheme, colors, isDark } = useTheme();
+const SettingsScreen = ({navigation}) => {
+  const {setScheme, colors, isDark} = useTheme();
   const widgetContext = useContext(WidgetContext);
   const toggleScheme = () => {
     isDark ? setScheme('light') : setScheme('dark');
   };
   const pressHandler = () => {
-    console.log('asdasd');
     navigation.goBack();
   };
 
-  const [currency, setCurrency] = useState('USD')
+  const [currency, setCurrency] = useState('USD');
 
   useEffect(() => {
-    widgetContext.getCurrency().then(val => setCurrency(val))
-  },[])
+    widgetContext.getCurrency().then((val) => setCurrency(val));
+  }, []);
 
   return (
     <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}>
+      style={[styles.container, {backgroundColor: colors.background}]}>
       {/* <ScrollView style={[]}> */}
       <TouchableOpacity onPress={pressHandler} style={styles.iconBack}>
         <Icon2 name="arrow-back-outline" size={25} color="white" />
       </TouchableOpacity>
-      <View style={{ marginTop: hsize(100) }}>
+      <View style={{marginTop: hsize(100)}}>
         <View style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>
             <Icon
@@ -56,7 +51,7 @@ const SettingsScreen = ({ navigation }) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={[{ color: colors.text }]}>Change theme</Text>
+            <Text style={[{color: colors.text}]}>Change theme</Text>
           </View>
           <Switch value={isDark} onValueChange={toggleScheme} />
         </View>
@@ -69,7 +64,7 @@ const SettingsScreen = ({ navigation }) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={{ color: colors.text }}>Leave Feedback</Text>
+            <Text style={{color: colors.text}}>Leave Feedback</Text>
           </TouchableOpacity>
         </View>
         <Border />
@@ -83,7 +78,7 @@ const SettingsScreen = ({ navigation }) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={{ color: colors.text }}>Contact us</Text>
+            <Text style={{color: colors.text}}>Contact us</Text>
           </View>
         </TouchableOpacity>
         <Border />
@@ -97,7 +92,7 @@ const SettingsScreen = ({ navigation }) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={{ color: colors.text }}>Backup & Restore</Text>
+            <Text style={{color: colors.text}}>Backup & Restore</Text>
           </View>
         </TouchableOpacity>
         <Border />
@@ -111,7 +106,7 @@ const SettingsScreen = ({ navigation }) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={{ color: colors.text }}>Privacy Policy</Text>
+            <Text style={{color: colors.text}}>Privacy Policy</Text>
           </View>
         </TouchableOpacity>
         <Border />
@@ -125,7 +120,7 @@ const SettingsScreen = ({ navigation }) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={{ color: colors.text }}>Terms & Conditions</Text>
+            <Text style={{color: colors.text}}>Terms & Conditions</Text>
           </View>
         </TouchableOpacity>
         <Border />
@@ -140,18 +135,17 @@ const SettingsScreen = ({ navigation }) => {
             <Picker
               selectedValue={currency}
               itemStyle={styles.pickerItemStyle}
-              style={[styles.pickerStyle, { color: colors.text }]}
+              style={[styles.pickerStyle, {color: colors.text}]}
               dropdownIconColor={colors.text}
               onValueChange={(itemValue, itemIndex) => {
-                setCurrency(itemValue)
-                AsyncStorage.setItem('currency', itemValue)
-              }
-              }>
-
+                setCurrency(itemValue);
+                AsyncStorage.setItem('currency', itemValue);
+              }}>
               {currencies.map((item) => (
                 <Picker.Item
                   label={item.value + ' - ' + item.label}
                   value={item.value}
+                  key={item.value}
                 />
               ))}
             </Picker>
