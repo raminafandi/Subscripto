@@ -186,6 +186,9 @@ const WidgetProvider = ({children, ...props}) => {
   };
 
   const getTotalAmount = async (to) => {
+    let currency = await AsyncStorage.getItem('currency')
+    if(currency == null)
+      currency = 'USD'
     const items = await getAllWidgets();
     let sum = 0.0;
     for (var i = 0; i < items.length; i++) {
