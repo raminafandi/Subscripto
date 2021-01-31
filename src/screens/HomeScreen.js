@@ -23,6 +23,7 @@ const HomeScreen = ({navigation}) => {
   const widgetContext = useContext(WidgetContext);
   const [items, setItems] = useState([]);
   const [amount, setAmount] = useState(0);
+  const [currency,setCurrency] = useState()
 
   useEffect(() => {
     widgetContext.getAllWidgets().then((items) => setItems(items));
@@ -32,6 +33,8 @@ const HomeScreen = ({navigation}) => {
     widgetContext.getTotalAmount('USD').then((amount) => {
       return setAmount(amount);
     });
+
+    widgetContext.getCurrency().then((val)=>setCurrency(val))
   }, [items]);
 
   return (
@@ -70,7 +73,7 @@ const HomeScreen = ({navigation}) => {
                 {amount}
               </Text>
               <View style={styles.currencyContainer}>
-                <Text style={[styles.currency, {color: colors.text}]}>USD</Text>
+                <Text style={[styles.currency, {color: colors.text}]}>{currency}</Text>
               </View>
             </View>
             <Text

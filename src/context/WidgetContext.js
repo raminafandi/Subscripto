@@ -7,21 +7,22 @@ import {
   handlelocalNotificationScheduled,
 } from '../services/notificationHandlers';
 import axios from 'axios';
-import {repeatType} from '../utils/repeattype'
+import { repeatType } from '../utils/repeattype'
 
 const WidgetContext = React.createContext({
-  getAllWidgets: () => {},
-  getWidgetById: () => {},
-  createWidget: () => {},
-  clearStorage: () => {},
-  restoreWidgets: () => {},
-  updateWidgetById: () => {},
-  deleteWidgetById: () => {},
-  getTotalAmount: () => {},
+  getAllWidgets: () => { },
+  getWidgetById: () => { },
+  createWidget: () => { },
+  clearStorage: () => { },
+  restoreWidgets: () => { },
+  updateWidgetById: () => { },
+  deleteWidgetById: () => { },
+  getTotalAmount: () => { },
+  getCurrency: () => { },
 });
 
 //   updateWidgetById: () => {},
-const WidgetProvider = ({children, ...props}) => {
+const WidgetProvider = ({ children, ...props }) => {
   const STORAGE_KEY = '@user_widgets';
 
   function guidGenerator() {
@@ -181,21 +182,44 @@ const WidgetProvider = ({children, ...props}) => {
     if (from == to) {
       return 1;
     }
-    const res = await axios.get('http://www.floatrates.com/daily/usd.json');
-    return res.data[from.toLowerCase()].rate;
+    // check exist or not
+    let oneWeek = 86400*1000*7
+    let updateDate = await AsyncStorage.getItem('rates')
+    if (updateDate == null | parseInt(updateDate) - Date.now() > oneWeek) {
+      let res = await axios.get('http://www.floatrates.com/daily/usd.json');
+      await AsyncStorage.setItem('rates', JSON.stringify(res.data))
+      await AsyncStorage.setItem('updateDate', JSON.stringify(Date.now()))
+      return res.data[from.toLowerCase()].rate;
+    }
+    const res =JSON.parse(await AsyncStorage.getItem('rates'))
+    return res[from.toLowerCase()].rate
+    
   };
 
-  const getTotalAmount = async (to) => {
+  const getCurrency = async () => {
     let currency = await AsyncStorage.getItem('currency')
-    if(currency == null)
-      currency = 'USD'
+    if (currency)
+      return currency
+    return 'USD'
+  }
+
+  const getTotalAmount = async (to) => {
     const items = await getAllWidgets();
     let sum = 0.0;
+
     for (var i = 0; i < items.length; i++) {
       let rate = await getRate(items[i].currency, to);
       sum += (1 / parseFloat(rate)) * parseFloat(items[i].amount);
     }
-    return sum.toFixed(2);
+
+    let currency = await getCurrency()
+
+    if (currency == 'USD') {
+      return sum.toFixed(2)
+    }
+
+    let newRate = await getRate(currency, to)
+    return (sum * parseFloat(newRate)).toFixed(2);
   };
 
   return (
@@ -209,10 +233,11 @@ const WidgetProvider = ({children, ...props}) => {
         clearStorage: clearStorage,
         getTotalAmount: getTotalAmount,
         restoreWidgets: restoreWidgets,
+        getCurrency: getCurrency,
       }}>
       {children}
     </WidgetContext.Provider>
   );
 };
 
-export {WidgetContext, WidgetProvider};
+export { WidgetContext, WidgetProvider };

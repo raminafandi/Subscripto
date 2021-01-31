@@ -36,6 +36,10 @@ const SettingsScreen = ({ navigation }) => {
 
   const [currency, setCurrency] = useState('USD')
 
+  useEffect(() => {
+    widgetContext.getCurrency().then(val => setCurrency(val))
+  },[])
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}>
@@ -140,7 +144,7 @@ const SettingsScreen = ({ navigation }) => {
               dropdownIconColor={colors.text}
               onValueChange={(itemValue, itemIndex) => {
                 setCurrency(itemValue)
-                AsyncStorage.setItem('currency',itemValue)
+                AsyncStorage.setItem('currency', itemValue)
               }
               }>
 
