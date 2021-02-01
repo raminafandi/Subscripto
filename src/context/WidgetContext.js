@@ -186,7 +186,7 @@ const WidgetProvider = ({ children, ...props }) => {
     let oneWeek = 86400*1000*7
     let updateDate = await AsyncStorage.getItem('rates')
     if (updateDate == null | parseInt(updateDate) - Date.now() > oneWeek) {
-      let res = await axios.get('http://www.floatrates.com/daily/usd.json');
+      let res = await axios.get('https://www.floatrates.com/daily/usd.json');
       await AsyncStorage.setItem('rates', JSON.stringify(res.data))
       await AsyncStorage.setItem('updateDate', JSON.stringify(Date.now()))
       return res.data[from.toLowerCase()].rate;
