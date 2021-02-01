@@ -28,7 +28,6 @@ export const handlelocalNotificationScheduled = (
     message: message,
     date: nextDate,
     repeatType: repeatType[0],
-    allowWhileIdle,
   });
 };
 

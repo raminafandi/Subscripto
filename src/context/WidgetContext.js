@@ -119,7 +119,7 @@ const WidgetProvider = ({ children, ...props }) => {
       );
       return newWidget;
     } catch (e) {
-      console.log(e);
+      console.log('Catch error',e);
       alert('Failed to create data ');
     }
   };
