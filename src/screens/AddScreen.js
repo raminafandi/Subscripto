@@ -95,7 +95,7 @@ const AddScreen = ({navigation}) => {
                   setFieldValue('iconName', itemValue)
                 }>
                 {subnames.map((item) => (
-                  <Picker.Item label={item.label} value={item.value} />
+                  <Picker.Item label={item.label} value={item.value} key={item.value} />
                 ))}
               </Picker>
               <View
@@ -143,6 +143,7 @@ const AddScreen = ({navigation}) => {
                 }>
                 {currencies.map((item) => (
                   <Picker.Item
+                    key={item.value}
                     label={item.value + ' - ' + item.label}
                     value={item.value}
                   />
