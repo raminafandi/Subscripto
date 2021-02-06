@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Linking,
   StyleSheet,
+  Alert,
   Switch,
   SafeAreaView,
 } from 'react-native';
@@ -85,7 +86,15 @@ const SettingsScreen = ({navigation}) => {
         </View>
         <Border />
         <View style={styles.switchContainer}>
-          <TouchableOpacity style={styles.switchLeftContainer}>
+          <TouchableOpacity
+            style={styles.switchLeftContainer}
+            onPress={() =>
+              Linking.openURL(
+                `market://details?id=com.subscripto`,
+              ).catch((err) =>
+                Alert.alert('Please check for Google Play Store'),
+              )
+            }>
             <Icon
               name="feedback"
               size={24}
@@ -96,9 +105,7 @@ const SettingsScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <Border />
-        <TouchableOpacity
-          style={styles.switchContainer}
-          onPress={() => Linking.openURL('mailto:okitotech@gmail.com')}>
+        <TouchableOpacity style={styles.switchContainer}>
           <View style={styles.switchLeftContainer}>
             <Icon
               name="mail"
