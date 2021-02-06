@@ -105,7 +105,9 @@ const SettingsScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <Border />
-        <TouchableOpacity style={styles.switchContainer}>
+        <TouchableOpacity
+          style={styles.switchContainer}
+          onPress={() => Linking.openURL('mailto:okitotech@gmail.com')}>
           <View style={styles.switchLeftContainer}>
             <Icon
               name="mail"
