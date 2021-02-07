@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   subscriptionText: {
     padding: wsize(15),
     fontWeight: 'bold',
-    fontSize: wsize(17),
+    fontSize: wsize(14),
     color: '#fff',
   },
 });

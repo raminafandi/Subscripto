@@ -101,7 +101,7 @@ const SettingsScreen = ({navigation}) => {
               color={colors.text}
               style={styles.icon}
             />
-            <Text style={{color: colors.text}}>Leave Feedback</Text>
+            <Text style={{color: colors.text}}>Rate Our App</Text>
           </TouchableOpacity>
         </View>
         <Border />

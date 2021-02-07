@@ -7,22 +7,22 @@ import {
   handlelocalNotificationScheduled,
 } from '../services/notificationHandlers';
 import axios from 'axios';
-import { repeatType } from '../utils/repeattype'
+import {repeatType} from '../utils/repeattype';
 
 const WidgetContext = React.createContext({
-  getAllWidgets: () => { },
-  getWidgetById: () => { },
-  createWidget: () => { },
-  clearStorage: () => { },
-  restoreWidgets: () => { },
-  updateWidgetById: () => { },
-  deleteWidgetById: () => { },
-  getTotalAmount: () => { },
-  getCurrency: () => { },
+  getAllWidgets: () => {},
+  getWidgetById: () => {},
+  createWidget: () => {},
+  clearStorage: () => {},
+  restoreWidgets: () => {},
+  updateWidgetById: () => {},
+  deleteWidgetById: () => {},
+  getTotalAmount: () => {},
+  getCurrency: () => {},
 });
 
 //   updateWidgetById: () => {},
-const WidgetProvider = ({ children, ...props }) => {
+const WidgetProvider = ({children, ...props}) => {
   const STORAGE_KEY = '@user_widgets';
 
   function guidGenerator() {
@@ -110,16 +110,26 @@ const WidgetProvider = ({ children, ...props }) => {
         arr = [newWidget];
       }
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-      handlelocalNotificationScheduled(
-        name,
-        'Your subscription will be renewed in 1 days.',
-        notificationId,
-        billingDate,
-        repeatType[billingPeriod],
-      );
+      if (billingPeriod === 'Daily') {
+        handlelocalNotificationScheduled(
+          name,
+          'Your subscription will be renewed in 1 hour.',
+          notificationId,
+          billingDate,
+          repeatType[billingPeriod],
+        );
+      } else {
+        handlelocalNotificationScheduled(
+          name,
+          'Your subscription will be renewed in 1 day.',
+          notificationId,
+          billingDate,
+          repeatType[billingPeriod],
+        );
+      }
       return newWidget;
     } catch (e) {
-      console.log('Catch error',e);
+      console.log('Catch error', e);
       alert('Failed to create data ');
     }
   };
@@ -183,25 +193,23 @@ const WidgetProvider = ({ children, ...props }) => {
       return 1;
     }
     // check exist or not
-    let oneWeek = 86400*1000*7
-    let updateDate = await AsyncStorage.getItem('rates')
-    if (updateDate == null | parseInt(updateDate) - Date.now() > oneWeek) {
+    let oneWeek = 86400 * 1000 * 7;
+    let updateDate = await AsyncStorage.getItem('rates');
+    if ((updateDate == null) | (parseInt(updateDate) - Date.now() > oneWeek)) {
       let res = await axios.get('https://www.floatrates.com/daily/usd.json');
-      await AsyncStorage.setItem('rates', JSON.stringify(res.data))
-      await AsyncStorage.setItem('updateDate', JSON.stringify(Date.now()))
+      await AsyncStorage.setItem('rates', JSON.stringify(res.data));
+      await AsyncStorage.setItem('updateDate', JSON.stringify(Date.now()));
       return res.data[from.toLowerCase()].rate;
     }
-    const res =JSON.parse(await AsyncStorage.getItem('rates'))
-    return res[from.toLowerCase()].rate
-    
+    const res = JSON.parse(await AsyncStorage.getItem('rates'));
+    return res[from.toLowerCase()].rate;
   };
 
   const getCurrency = async () => {
-    let currency = await AsyncStorage.getItem('currency')
-    if (currency)
-      return currency
-    return 'USD'
-  }
+    let currency = await AsyncStorage.getItem('currency');
+    if (currency) return currency;
+    return 'USD';
+  };
 
   const getTotalAmount = async (to) => {
     const items = await getAllWidgets();
@@ -212,13 +220,13 @@ const WidgetProvider = ({ children, ...props }) => {
       sum += (1 / parseFloat(rate)) * parseFloat(items[i].amount);
     }
 
-    let currency = await getCurrency()
+    let currency = await getCurrency();
 
     if (currency == 'USD') {
-      return sum.toFixed(2)
+      return sum.toFixed(2);
     }
 
-    let newRate = await getRate(currency, to)
+    let newRate = await getRate(currency, to);
     return (sum * parseFloat(newRate)).toFixed(2);
   };
 
@@ -240,4 +248,4 @@ const WidgetProvider = ({ children, ...props }) => {
   );
 };
 
-export { WidgetContext, WidgetProvider };
+export {WidgetContext, WidgetProvider};
