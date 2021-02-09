@@ -61,7 +61,7 @@ const HomeScreen = ({navigation}) => {
               navigation.navigate('Settings');
             }}
             style={[styles.settingsButton, {backgroundColor: '#202835'}]}>
-            <Icon2 name="ios-settings-sharp" size={wsize(16)} color="white" />
+            <Icon2 name="ios-settings-sharp" size={wsize(24)} color="white" />
           </TouchableHighlight>
           <View
             style={[
@@ -104,7 +104,7 @@ const HomeScreen = ({navigation}) => {
               navigation.navigate('Add');
             }}
             style={[styles.addButton, {backgroundColor: '#202835'}]}>
-            <Icon name="plus" size={wsize(16)} color={colors.icon} />
+            <Icon name="plus" size={wsize(24)} color={colors.icon} />
           </TouchableHighlight>
           <ScrollView
             showsVerticalScrollIndicator={false}
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     height: hsize(360),
+    zIndex: -1,
   },
   top: {
     flex: 1,
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     top: hsize(-35),
     right: wsize(50),
     borderRadius: 100,
-    zIndex: 9,
+    zIndex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

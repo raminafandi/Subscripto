@@ -106,18 +106,26 @@ const Item = ({navigation, colorStyle, ...props}) => {
         <View style={styles.progessDate}>
           <ProgressCircle
             percent={percentage}
-            radius={wsize(20)}
-            borderWidth={5}
+            radius={wsize(24)}
+            borderWidth={2}
             color="#ff6200"
             shadowColor="#6c757d"
             bgColor={colors.widgetBackground}>
             <Text
               style={{
-                fontSize: wsize(11),
+                fontSize: wsize(12),
                 textAlign: 'center',
                 color: colors.text,
               }}>
-              {days} days
+              {days}
+            </Text>
+            <Text
+              style={{
+                fontSize: wsize(9),
+                textAlign: 'center',
+                color: colors.text,
+              }}>
+              days
             </Text>
           </ProgressCircle>
         </View>

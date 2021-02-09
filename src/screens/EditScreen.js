@@ -244,7 +244,12 @@ const EditScreen = ({navigation, route}) => {
                   style={styles.confirmButton}
                   onPress={handleSubmit}>
                   <Text
-                    style={{color: '#fff', fontSize: 30, fontWeight: 'bold'}}>
+                    style={{
+                      color: '#fff',
+                      fontSize: wsize(20),
+                      letterSpacing: 2,
+                      fontWeight: 'bold',
+                    }}>
                     Confirm
                   </Text>
                 </TouchableOpacity>
