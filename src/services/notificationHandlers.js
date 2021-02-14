@@ -21,18 +21,29 @@ export const handlelocalNotificationScheduled = (
     nextDate.setSeconds(nextDate.getSeconds() + repeatType[1]);
     console.log(nextDate);
   }
-
   PushNotification.localNotificationSchedule({
     id: id,
     title: title,
     message: message,
     date: nextDate,
     repeatType: repeatType[0],
+    vibrate: true, // (optional) default: true
+    priority: 'max', // (optional) set notification priority, default: high
+    allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
   });
 };
 
-export const handleCancelLocalNotificationScheduled = (title, message) => {
-  PushNotification.cancelLocalNotifications({id: '123'});
+export const handleCancelLocalNotificationScheduled = async (notId) => {
+  PushNotification.cancelLocalNotifications({id: notId});
+  console.log('done');
+  return notId;
+};
+
+export const getAllScheduledNotifications = (callback) => {
+  console.log(
+    'notifivations:',
+    PushNotification.getScheduledLocalNotifications(callback),
+  );
 };
 
 export const handleCancel = () => {

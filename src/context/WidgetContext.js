@@ -5,6 +5,7 @@ import {
   handleCancel,
   handleCancelLocalNotificationScheduled,
   handlelocalNotificationScheduled,
+  getAllScheduledNotifications,
 } from '../services/notificationHandlers';
 import axios from 'axios';
 import {repeatType} from '../utils/repeattype';
@@ -157,25 +158,48 @@ const WidgetProvider = ({children, ...props}) => {
           arr[elem].iconName = iconName;
           arr[elem].description = description;
           arr[elem].paymentMethod = paymentMethod;
-          // arr[elem].notificationId = notificationId;
+
           //update notification id when changing billingdate
+          // getAllScheduledNotifications();
+          console.log('elem', arr);
+          await handleCancelLocalNotificationScheduled(
+            arr[elem].notificationId,
+          );
+          if (billingPeriod === 'Daily') {
+            handlelocalNotificationScheduled(
+              name,
+              'Your subscription will be renewed in 1 hour.',
+              arr[elem].notificationId,
+              billingDate,
+              repeatType[billingPeriod],
+            );
+          } else {
+            handlelocalNotificationScheduled(
+              name,
+              'Your subscription will be renewed in 1 day.',
+              arr[elem].notificationId,
+              billingDate,
+              repeatType[billingPeriod],
+            );
+          }
         }
       }
-      console.log('elem', arr);
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
       return arr;
     } catch (e) {
-      alert('Failed to update data from storage');
+      alert('Failed to update data from storage', e);
     }
   };
   const deleteWidgetById = async (idToRemove) => {
     try {
-      let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY)).filter(
-        (item) => item.id !== idToRemove,
-      );
+      let arr = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
+      let item = arr.filter((item) => item.id === idToRemove);
+      let notId = item[0].notificationId;
+      arr = arr.filter((item) => item.id !== idToRemove);
+      handleCancelLocalNotificationScheduled(notId);
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
     } catch (e) {
-      alert('Failed to delete data from storage');
+      alert('Failed to delete data from storage', e);
     }
   };
   const clearStorage = async () => {
